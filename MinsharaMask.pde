@@ -5,6 +5,7 @@ import processing.video.*;
 //create Capture
 Capture cam;
 Capture screenshotCam;
+int count = 0;
 
 private int[][] currentImage,screenshotImage;
 
@@ -34,9 +35,11 @@ void draw() {
   for(int x = 0; x < width; x++){
    for(int y = 0; y < height; y++){
      currentImage[x][y] = get(x,y);
+     set(x,y,currentImage[x][y] / count);
    }
   }
   
+         
   image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
   
   rect(0,0,width/6,height/6);
@@ -45,6 +48,7 @@ void draw() {
 Boolean screenshotStopped = false;
 
 void mouseClicked() {
+  count += 1000;
   if(screenshotStopped){
     screenshotCam.start();
   } else {
