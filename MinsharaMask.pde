@@ -6,8 +6,8 @@ import processing.video.*;
 Capture cam;
 
 void setup() {
-  size(1280,960);
-  //fullScreen();
+  //size(1280,960);
+  fullScreen();
   cam = new Capture(this,width,height);
   cam.start();
 }
@@ -17,4 +17,8 @@ void draw() {
     cam.read();
   }
   image(cam,0,0);
+}
+
+void mouseClicked() {
+  ellipse(0,0,50,50);
 }
