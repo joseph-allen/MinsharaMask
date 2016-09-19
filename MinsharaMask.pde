@@ -6,7 +6,10 @@ import processing.video.*;
 Capture cam;
 Capture screenshotCam;
 
+private int[][] currentImage,screenshotImage;
+
 void setup() {
+  currentImage = new int[width][height];
   //size(1260,960);
   fullScreen();
   cam = new Capture(this,width,height);
@@ -26,6 +29,14 @@ void draw() {
   fill(get(500,500));
   
   image(cam,0,0);
+  
+  //fill array of pixel values
+  for(int x = 0; x < width; x++){
+   for(int y = 0; y < height; y++){
+     currentImage[x][y] = get(x,y);
+   }
+  }
+  
   image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
   
   rect(0,0,width/6,height/6);
@@ -38,8 +49,13 @@ void mouseClicked() {
     screenshotCam.start();
   } else {
     screenshotCam.stop();
+    screenshotImage = new int[width][height];
+    //fill array of pixel values
+    for(int x = 0; x < width; x++){
+     for(int y = 0; y < height; y++){
+       screenshotImage[x][y] = get(x,y);
+     }
+    }
   }
-  
   screenshotStopped = !screenshotStopped;
-  print(screenshotStopped);
 }
