@@ -4,21 +4,35 @@ import processing.video.*;
 
 //create Capture
 Capture cam;
+Capture screenshotCam;
 
 void setup() {
-  //size(1280,960);
+  //size(1260,960);
   fullScreen();
   cam = new Capture(this,width,height);
   cam.start();
+  screenshotCam = new Capture(this,width,height);
+  screenshotCam.start();
 }
 
 void draw() {
   if(cam.available()) {
     cam.read();
   }
+  if(screenshotCam.available()) {
+    screenshotCam.read();
+  }
+
   image(cam,0,0);
+  image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
 }
 
+Boolean screenshotStopped = false;
+
 void mouseClicked() {
-  ellipse(0,0,50,50);
+  if(screenshotStopped){
+    screenshotCam.start();
+  } else {
+    screenshotCam.stop();
+  }
 }
