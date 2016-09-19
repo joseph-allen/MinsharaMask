@@ -6,8 +6,9 @@ import processing.video.*;
 Capture cam;
 
 void setup() {
-  sullscreen();
-  cam = new Capture(this, 320, 240, 30);
+  size(1280,960);
+  //fullScreen();
+  cam = new Capture(this,width,height);
   cam.start();
 }
 
@@ -15,5 +16,5 @@ void draw() {
   if(cam.available()) {
     cam.read();
   }
-  image(cam, random(width), random(height));
+  image(cam,0,0);
 }
