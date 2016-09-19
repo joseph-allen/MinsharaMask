@@ -22,9 +22,13 @@ void draw() {
   if(screenshotCam.available()) {
     screenshotCam.read();
   }
-
+  
+  fill(get(500,500));
+  
   image(cam,0,0);
   image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
+  
+  rect(0,0,width/6,height/6);
 }
 
 Boolean screenshotStopped = false;
@@ -35,4 +39,7 @@ void mouseClicked() {
   } else {
     screenshotCam.stop();
   }
+  
+  screenshotStopped = !screenshotStopped;
+  print(screenshotStopped);
 }
