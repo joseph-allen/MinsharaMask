@@ -5,7 +5,7 @@ import processing.video.*;
 //create Capture
 Capture cam;
 Capture screenshotCam;
-int count = 0;
+int count = 1;
 
 private int[][] currentImage,screenshotImage;
 
