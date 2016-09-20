@@ -16,6 +16,7 @@ void setup() {
   screenshotCam = new Capture(this,width,height);
   screenshotCam.start();
   screenshotImage = new int[width*height];
+  loadPixels();
 }
 
 void draw() {
@@ -23,17 +24,39 @@ void draw() {
     cam.read();
       //fill array of pixel values pixels[]
   cam.loadPixels();
-    for (int i = 0; i < width*height; i++) { // For each pixel in the video frame...
-       cam.pixels[i] = abs(cam.pixels[i] - screenshotImage[i]);
+  
+    int movesum = 0;
+    for (int i = 0; i < width*height; i++) {
+       color currentColor = cam.pixels[i];
+       color screenshotColor = screenshotImage[i];
+       
+       float currR = red(currentColor);
+       float currG = green(currentColor);
+       float currB = blue(currentColor);
+
+       float screenshotR = red(screenshotColor);
+       float screenshotG = green(screenshotColor);
+       float screenshotB = blue(screenshotColor);
+       
+       float diffR = abs(currR - screenshotR);
+       float diffG = abs(currG - screenshotG);
+       float diffB = int(abs(currB - screenshotB));
+       movesum += diffR + diffG + diffB;
+         
+       pixels[i] = color(diffR,diffG,diffB);
+       
+       //250 a temporary tolerence?
+       if (diffR + diffG + diffB > 250) {
+         pixels[i] = color(255,255,255);
+       } else {
+         pixels[i] = color(0,0,0);
+       }
     }
+    
+      if(movesum > 0) {
+        updatePixels();
+      }
   }
-  
-  fill(cam.pixels[1]);
-  
-  image(cam,0,0);
-  
-  updatePixels();
-  image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
 }
 
 void mouseClicked() {
