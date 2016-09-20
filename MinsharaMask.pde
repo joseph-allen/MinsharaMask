@@ -6,57 +6,38 @@ import processing.video.*;
 Capture cam;
 Capture screenshotCam;
 
-private int[][] currentImage,screenshotImage;
+private int[] screenshotImage;
 
 void setup() {
-  currentImage = new int[width][height];
   //size(1260,960);
   fullScreen();
   cam = new Capture(this,width,height);
   cam.start();
   screenshotCam = new Capture(this,width,height);
   screenshotCam.start();
+  screenshotImage = new int[width*height];
 }
 
 void draw() {
   if(cam.available()) {
     cam.read();
-  }
-  if(screenshotCam.available()) {
-    screenshotCam.read();
+      //fill array of pixel values pixels[]
+  cam.loadPixels();
+    for (int i = 0; i < width*height; i++) { // For each pixel in the video frame...
+       cam.pixels[i] = abs(cam.pixels[i] - screenshotImage[i]);
+    }
   }
   
-  fill(get(500,500));
+  fill(cam.pixels[1]);
   
   image(cam,0,0);
   
-  //fill array of pixel values
-  for(int x = 0; x < width; x++){
-   for(int y = 0; y < height; y++){
-     currentImage[x][y] = get(x,y);
-     set(x,y,currentImage[x][y]);
-   }
-  }
-  
+  updatePixels();
   image(screenshotCam,5*width/6,5*height/6,width/6,height/6);
-  rect(0,0,width/6,height/6);
 }
 
-Boolean screenshotStopped = false;
-
 void mouseClicked() {
-
-  if(screenshotStopped){
-    screenshotCam.start();
-  } else {
-    screenshotCam.stop();
-    screenshotImage = new int[width][height];
-    //fill array of pixel values
-    for(int x = 0; x < width; x++){
-     for(int y = 0; y < height; y++){
-       screenshotImage[x][y] = get(x,y);
-     }
+    for(int x = 0; x < width*height; x++){
+      screenshotImage[x] = cam.pixels[x];
     }
-  }
-  screenshotStopped = !screenshotStopped;
 }
