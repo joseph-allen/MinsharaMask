@@ -34,13 +34,23 @@ void draw() {
        float currG = green(currentColor);
        float currB = blue(currentColor);
 
+       float normCurrR = currR / (currR + currG + currB);
+       float normCurrG = currG / (currR + currG + currB);
+       
        float screenshotR = red(screenshotColor);
        float screenshotG = green(screenshotColor);
        float screenshotB = blue(screenshotColor);
        
+       float normScrR = screenshotR / (screenshotR + screenshotG + screenshotB);
+       float normScrG = screenshotG / (screenshotR + screenshotG + screenshotB);
+       
        float diffR = abs(currR - screenshotR);
        float diffG = abs(currG - screenshotG);
        float diffB = int(abs(currB - screenshotB));
+       
+       float normDiffR = abs(normCurrR - normScrR) * 255;
+       float normDiffG = abs(normCurrG - normScrG) * 255;
+
        movesum += diffR + diffG + diffB;
        
        float currIntensity = currR * 0.3 + currG * 0.59 + currB * 0.11;
@@ -51,7 +61,7 @@ void draw() {
          
        //pixels[i] = color(diffR,diffG,diffB);
 
-       if (diffIntensity > comparVal) {
+       if ((normDiffR + normDiffG) / 2 > comparVal) {
          pixels[i] = color(255,100,255);
        } else {
          pixels[i] = color(0,0,0);
