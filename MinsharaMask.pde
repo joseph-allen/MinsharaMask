@@ -5,7 +5,7 @@ import processing.video.*;
 //create Capture
 Capture cam;
 Capture screenshotCam;
-
+float comparVal = 50;
 private int[] screenshotImage;
 
 void setup() {
@@ -48,18 +48,17 @@ void draw() {
        
        float diffIntensity = abs(currIntensity - screenshotIntensity);
        pixels[i] = color(diffR,diffG,diffB);
-       
-       //250 a temporary tolerence?
-       if (diffR + diffG + diffB > 250) {
-         pixels[i] = color(255,255,255);
+         
+       //pixels[i] = color(diffR,diffG,diffB);
+
+       if (diffIntensity > comparVal) {
+         pixels[i] = color(255,100,255);
        } else {
          pixels[i] = color(0,0,0);
        }
     }
     
-      if(movesum > 0) {
-        updatePixels();
-      }
+      updatePixels();
   }
 }
 
@@ -67,4 +66,12 @@ void mouseClicked() {
     for(int x = 0; x < width*height; x++){
       screenshotImage[x] = cam.pixels[x];
     }
+}
+
+void keyPressed() {
+  if (key == 'u') {
+    comparVal += 10;
+  } else {
+    comparVal -= 10;
+  }
 }
