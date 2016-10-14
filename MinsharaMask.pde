@@ -25,7 +25,6 @@ void draw() {
       //fill array of pixel values pixels[]
   cam.loadPixels();
   
-    int movesum = 0;
     for (int i = 0; i < width*height; i++) {
        color currentColor = cam.pixels[i];
        color screenshotColor = screenshotImage[i];
@@ -41,8 +40,6 @@ void draw() {
        float diffR = abs(currR - screenshotR);
        float diffG = abs(currG - screenshotG);
        float diffB = int(abs(currB - screenshotB));
-
-       movesum += diffR + diffG + diffB;
        
        float currIntensity = currR * 0.3 + currG * 0.59 + currB * 0.11;
        float screenshotIntensity = screenshotR * 0.3 + screenshotG * 0.59 + screenshotB * 0.11;
