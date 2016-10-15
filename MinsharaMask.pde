@@ -11,6 +11,7 @@ private int[] screenshotImage;
 void setup() {
   //size(1260,960);
   fullScreen();
+  colorMode(HSB, 360,100,100);
   cam = new Capture(this,width,height);
   cam.start();
   screenshotCam = new Capture(this,width,height);
@@ -29,26 +30,19 @@ void draw() {
        color currentColor = cam.pixels[i];
        color screenshotColor = screenshotImage[i];
        
-       float currR = red(currentColor);
-       float currG = green(currentColor);
-       float currB = blue(currentColor);
+       float currHue = hue(currentColor);
+       float currSaturation = saturation(currentColor);
        
-       float screenshotR = red(screenshotColor);
-       float screenshotG = green(screenshotColor);
-       float screenshotB = blue(screenshotColor);
+       float screenshotHue = hue(screenshotColor);
+       float screenshotSaturation = saturation(screenshotColor);
+  
+       float diffHueSat = abs(currHue * currSaturation - screenshotHue * screenshotSaturation)/36000;
        
-       float diffR = abs(currR - screenshotR);
-       float diffG = abs(currG - screenshotG);
-       float diffB = int(abs(currB - screenshotB));
-       
-       float currIntensity = currR * 0.3 + currG * 0.59 + currB * 0.11;
-       float screenshotIntensity = screenshotR * 0.3 + screenshotG * 0.59 + screenshotB * 0.11;
-       
-       float diffIntensity = abs(currIntensity - screenshotIntensity);
-       pixels[i] = color(diffR,diffG,diffB);
+       //float diffIntensity = abs(currIntensity - screenshotIntensity);
+       //pixels[i] = color(diffR,diffG,diffB);
          
-       if (diffIntensity > comparVal) {
-         pixels[i] = color(255,100,255);
+       if (diffHueSat > comparVal) {
+         pixels[i] = color(360,100,100);
        } else {
          pixels[i] = color(0,0,0);
        }
