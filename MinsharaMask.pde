@@ -5,13 +5,13 @@ import processing.video.*;
 //create Capture
 Capture cam;
 Capture screenshotCam;
-float comparVal = 15;
+float comparVal = 0.15;
 private int[] screenshotImage;
 
 void setup() {
   //size(1260,960);
   fullScreen();
-  colorMode(HSB, 360,100,100);
+  colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
   cam.start();
   screenshotCam = new Capture(this,width,height);
@@ -35,14 +35,17 @@ void draw() {
        
        float screenshotHue = hue(screenshotColor);
        float screenshotSaturation = saturation(screenshotColor);
-  
-       float diffHueSat = abs(currHue * currSaturation - screenshotHue * screenshotSaturation)/36000;
+
+       float saturationDiff = abs(currSaturation - screenshotSaturation);
        
-       //float diffIntensity = abs(currIntensity - screenshotIntensity);
-       //pixels[i] = color(diffR,diffG,diffB);
-         
+       //COSINE RULE
+       double diffHueSat = Math.pow(currSaturation,2) + Math.pow(screenshotSaturation,2) - 2*currSaturation*screenshotSaturation* cos(saturationDiff);
+       
+       //root
+       diffHueSat = sqrt((float)diffHueSat);
+       
        if (diffHueSat > comparVal) {
-         pixels[i] = color(360,100,100);
+         pixels[i] = color(0.5 ,0.5,1);
        } else {
          pixels[i] = color(0,0,0);
        }
@@ -59,10 +62,10 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  print(comparVal);
+  println(comparVal);
   if (key == 'u') {
-    comparVal += 1;
+    comparVal += 0.01;
   } else {
-    comparVal -= 1;
+    comparVal -= 0.01;
   }
 }
