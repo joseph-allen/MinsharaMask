@@ -5,7 +5,7 @@ import processing.video.*;
 //create Capture
 Capture cam;
 Capture screenshotCam;
-float comparVal = 0.15;
+float comparVal = 0.23;
 private int[] screenshotImage;
 
 void setup() {
@@ -36,7 +36,7 @@ void draw() {
        float screenshotHue = hue(screenshotColor);
        float screenshotSaturation = saturation(screenshotColor);
 
-       float saturationDiff = abs(currSaturation - screenshotSaturation);
+       float saturationDiff = abs(currHue - screenshotHue);
        
        //COSINE RULE
        double diffHueSat = Math.pow(currSaturation,2) + Math.pow(screenshotSaturation,2) - 2*currSaturation*screenshotSaturation* cos(saturationDiff);
