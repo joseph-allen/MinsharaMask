@@ -7,10 +7,12 @@ Capture cam;
 Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
+PImage img;
 
 void setup() {
   //size(1260,960);
   fullScreen();
+  img = loadImage("Clown.jpg");
   colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
   cam.start();
@@ -45,7 +47,7 @@ void draw() {
        diffHueSat = sqrt((float)diffHueSat);
        
        if (diffHueSat > comparVal) {
-         pixels[i] = color(0.5 ,0.5,1);
+         pixels[i] = color(0.5 ,1,1);
        } else {
          pixels[i] = color(0,0,0);
        }
