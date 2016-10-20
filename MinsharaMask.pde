@@ -13,9 +13,9 @@ PImage back,front;
 void setup() {
   //size(1260,960);
   fullScreen();
-  back = loadImage("frontmap.png");
+  back = loadImage("tmap2.png");
   back.resize(width,height);
-  front = loadImage("backmap.png");
+  front = loadImage("tmap1.png");
   front.resize(width,height);
   colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
