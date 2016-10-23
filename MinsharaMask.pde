@@ -99,7 +99,7 @@ void draw() {
       text("original", 20, 20);
       text("erode", width/2 + 20, 20);
       text("dilate", 20, height/2 +20);
-      text("dilate then erode", width/2 +20, height/2 +20);
+      text("erode then dilate", width/2 +20, height/2 +20);
   }
 }
 
