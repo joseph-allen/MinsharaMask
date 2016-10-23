@@ -1,12 +1,16 @@
 // Run this program only in the Java mode inside the IDE,
 //import libraries
 import processing.video.*;
+import gab.opencv.*;
 
 //create Capture
 Capture cam;
 Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
+PImage src;
+OpenCV opencv;
+
 
 void setup() {
   //size(1260,960);
@@ -17,6 +21,8 @@ void setup() {
   screenshotCam = new Capture(this,width,height);
   screenshotCam.start();
   screenshotImage = new int[width*height];
+  
+  src = createImage(width,width,HSB);
   loadPixels();
 }
 
@@ -25,6 +31,7 @@ void draw() {
     cam.read();
       //fill array of pixel values pixels[]
   cam.loadPixels();
+ 
   
     for (int i = 0; i < width*height; i++) {
        color currentColor = cam.pixels[i];
@@ -49,8 +56,17 @@ void draw() {
        } else {
          pixels[i] = color(0,0,0);
        }
+       
+       //put pixels into PImage for openCV
+       src.set(i % width, i / width, pixels[i]);
     } 
       updatePixels();
+      
+      opencv = new OpenCV(this, src);
+      opencv.gray();
+      opencv.threshold(100);
+      src = opencv.getSnapshot();
+      image(src, 0, 0);
   }
 }
 
