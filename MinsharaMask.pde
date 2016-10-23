@@ -80,6 +80,7 @@ void draw() {
       // reload un-eroded image and dilate it
       opencv.loadImage(src);
       opencv.dilate();
+      opencv.erode();
       // save dilated version for display
       dilated = opencv.getSnapshot();
       // now erode on top of dilated version to close holes
@@ -98,7 +99,7 @@ void draw() {
       fill(0,255,50);
       text("original", 20, 20);
       text("erode", width/2 + 20, 20);
-      text("dilate", 20, height/2 +20);
+      text("dilate then erode", 20, height/2 +20);
       text("erode then dilate", width/2 +20, height/2 +20);
   }
 }
