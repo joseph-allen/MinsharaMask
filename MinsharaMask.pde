@@ -8,7 +8,7 @@ Capture cam;
 Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
-PImage src;
+PImage src, dilated, eroded, both;
 OpenCV opencv;
 
 
@@ -58,15 +58,48 @@ void draw() {
        }
        
        //put pixels into PImage for openCV
-       src.set(i % width, i / width, pixels[i]);
+       if(i % 2 ==0){
+       src.set(i/2 % width, i/2 / width, pixels[i]);
+       }
     } 
       updatePixels();
       
       opencv = new OpenCV(this, src);
+      // Dilate and Erode both need a binary image
+      // So, we'll make it gray and threshold it.
       opencv.gray();
       opencv.threshold(100);
+
+       // save a snapshot to use in both operations
       src = opencv.getSnapshot();
+    
+      // erode and save snapshot for display
+      opencv.erode();
+      eroded = opencv.getSnapshot();
+    
+      // reload un-eroded image and dilate it
+      opencv.loadImage(src);
+      opencv.dilate();
+      // save dilated version for display
+      dilated = opencv.getSnapshot();
+      // now erode on top of dilated version to close holes
+      opencv.loadImage(src);
+      
+      opencv.erode();
+      opencv.dilate();
+      both = opencv.getSnapshot();
+      src.resize(width/2,height);
       image(src, 0, 0);
+      image(eroded, width/2, 0);
+      image(dilated, 0, height/2);  
+      image(both, width/2, height/2);  
+      
+      textSize(20);
+      fill(0,255,50);
+      text("original", 20, 20);
+      text("erode", width/2 + 20, 20);
+      text("dilate", 20, height/2 +20);
+      text("dilate then erode", width/2 +20, height/2 +20);
   }
 }
 
