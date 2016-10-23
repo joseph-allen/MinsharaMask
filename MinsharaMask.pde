@@ -7,16 +7,10 @@ Capture cam;
 Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
-PImage back,front;
-
 
 void setup() {
   //size(1260,960);
   fullScreen();
-  back = loadImage("tmap2.png");
-  back.resize(width,height);
-  front = loadImage("tmap1.png");
-  front.resize(width,height);
   colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
   cam.start();
@@ -51,11 +45,11 @@ void draw() {
        diffHueSat = sqrt((float)diffHueSat);
        
        if (diffHueSat > comparVal) {
-         pixels[i] = back.pixels[i];
+         pixels[i] = color(0.5,1,1);
        } else {
-         pixels[i] = front.pixels[i];
+         pixels[i] = color(0,0,0);
        }
-    }
+    } 
       updatePixels();
   }
 }
