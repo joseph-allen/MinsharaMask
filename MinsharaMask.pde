@@ -10,6 +10,10 @@ float comparVal = 0.23;
 private int[] screenshotImage;
 PImage src, dilated, eroded, both;
 OpenCV opencv;
+Movie myMovie;
+
+PImage movieFrame;
+
 
 int dilateCount = 1;
 int erodeCount = 1;
@@ -24,7 +28,10 @@ void setup() {
   screenshotCam.start();
   screenshotImage = new int[width*height];
   
+  myMovie = new Movie(this, "fish.mov");
+  myMovie.loop();
   src = createImage(width,width,HSB);
+  movieFrame = createImage(width,height,HSB);
   loadPixels();
 }
 
@@ -33,8 +40,10 @@ void draw() {
     cam.read();
       //fill array of pixel values pixels[]
   cam.loadPixels();
- 
-  
+  //movieFrame.resize(width,height);
+  myMovie.loadPixels();
+
+    
     for (int i = 0; i < width*height; i++) {
        color currentColor = cam.pixels[i];
        color screenshotColor = screenshotImage[i];
@@ -54,67 +63,34 @@ void draw() {
        diffHueSat = sqrt((float)diffHueSat);
        
        if (diffHueSat > comparVal) {
-         pixels[i] = color(0.5,1,1);
+         pixels[i] = movieFrame.pixels[i];
        } else {
          pixels[i] = color(0,0,0);
        }
        
        //put pixels into PImage for openCV
-       if(i % 2 ==0){
-       src.set(i/2 % width, i/2 / width, pixels[i]);
-       }
+       
+       src.set(i % width, i / width, pixels[i]);
+       
+       //movieFrame.set(i % width,i / width, myMovie.pixels[i]);
     } 
       updatePixels();
       
       opencv = new OpenCV(this, src);
-      // Dilate and Erode both need a binary image
-      // So, we'll make it gray and threshold it.
-      opencv.gray();
-      opencv.threshold(100);
 
        // save a snapshot to use in both operations
+      opencv.erode();
+      opencv.dilate();
       src = opencv.getSnapshot();
-    
-      // erode and save snapshot for display
-      for(int i = 0; i < erodeCount; i++){
-        opencv.erode();
-      }
-      
-      eroded = opencv.getSnapshot();
-    
-      // reload un-eroded image and dilate it
-      opencv.loadImage(src);
-      for(int i = 0; i < dilateCount; i++){
-        opencv.dilate();
-      }
-      for(int i = 0; i < erodeCount; i++){
-        opencv.erode();
-      }
-      // save dilated version for display
-      dilated = opencv.getSnapshot();
-      // now erode on top of dilated version to close holes
-      opencv.loadImage(src);
-      
-      for(int i = 0; i < erodeCount; i++){
-        opencv.erode();
-      }
-      for(int i = 0; i < dilateCount; i++){
-        opencv.dilate();
-      }
 
-      both = opencv.getSnapshot();
-      src.resize(width/2,height);
-      image(src, 0, 0);
-      image(eroded, width/2, 0);
-      image(dilated, 0, height/2);  
-      image(both, width/2, height/2);  
+      //src.resize(width,height);
+      image(src, 0, 0); 
       
-      textSize(20);
-      fill(0,255,50);
-      text("original", 20, 20);
-      text("erode", width/2 + 20, 20);
-      text("dilate then erode", 20, height/2 +20);
-      text("erode then dilate", width/2 +20, height/2 +20);
+      for (int i = 0; i < width*height; i++) {
+           pixels[i] = movieFrame.pixels[i];
+      }
+       
+       updatePixels();
   }
 }
 
@@ -135,4 +111,10 @@ void keyPressed() {
   } else {
     comparVal -= 0.01;
   }
+}
+
+void movieEvent( Movie m )
+{
+  myMovie.read();
+  movieFrame = m;
 }
