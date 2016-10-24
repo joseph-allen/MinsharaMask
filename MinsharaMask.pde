@@ -11,6 +11,8 @@ private int[] screenshotImage;
 PImage src, dilated, eroded, both;
 OpenCV opencv;
 
+int dilateCount = 1;
+int erodeCount = 1;
 
 void setup() {
   //size(1260,960);
@@ -74,20 +76,32 @@ void draw() {
       src = opencv.getSnapshot();
     
       // erode and save snapshot for display
-      opencv.erode();
+      for(int i = 0; i < erodeCount; i++){
+        opencv.erode();
+      }
+      
       eroded = opencv.getSnapshot();
     
       // reload un-eroded image and dilate it
       opencv.loadImage(src);
-      opencv.dilate();
-      opencv.erode();
+      for(int i = 0; i < dilateCount; i++){
+        opencv.dilate();
+      }
+      for(int i = 0; i < erodeCount; i++){
+        opencv.erode();
+      }
       // save dilated version for display
       dilated = opencv.getSnapshot();
       // now erode on top of dilated version to close holes
       opencv.loadImage(src);
       
-      opencv.erode();
-      opencv.dilate();
+      for(int i = 0; i < erodeCount; i++){
+        opencv.erode();
+      }
+      for(int i = 0; i < dilateCount; i++){
+        opencv.dilate();
+      }
+
       both = opencv.getSnapshot();
       src.resize(width/2,height);
       image(src, 0, 0);
@@ -114,6 +128,10 @@ void keyPressed() {
   println(comparVal);
   if (key == 'u') {
     comparVal += 0.01;
+  } else if(key == 'd') {
+    dilateCount += 1;
+  } else if(key == 'e'){
+    erodeCount +=1;
   } else {
     comparVal -= 0.01;
   }
