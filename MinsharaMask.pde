@@ -87,7 +87,9 @@ void draw() {
       image(src, 0, 0); 
       
       for (int i = 0; i < width*height; i++) {
+        if(src.pixels[i] != color(0,0,0)){
            pixels[i] = movieFrame.pixels[i];
+        }
       }
        
        updatePixels();
