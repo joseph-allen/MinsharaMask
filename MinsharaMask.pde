@@ -7,16 +7,17 @@ Capture cam;
 Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
-PImage back,front;
+PImage Mask;
 
 
 void setup() {
   //size(1260,960);
   fullScreen();
-  back = loadImage("tmap2.png");
-  back.resize(width,height);
-  front = loadImage("tmap1.png");
-  front.resize(width,height);
+  //back = loadImage("tmap2.png");
+  //back.resize(width,height);
+  //front = loadImage("tmap1.png");
+  //front.resize(width,height);
+  Mask = createImage(width,height,HSB);
   colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
   cam.start();
@@ -30,7 +31,7 @@ void draw() {
   if(cam.available()) {
     cam.read();
       //fill array of pixel values pixels[]
-  cam.loadPixels();
+    cam.loadPixels();
   
     for (int i = 0; i < width*height; i++) {
        color currentColor = cam.pixels[i];
@@ -51,12 +52,20 @@ void draw() {
        diffHueSat = sqrt((float)diffHueSat);
        
        if (diffHueSat > comparVal) {
-         pixels[i] = back.pixels[i];
+         pixels[i] = color(0.5,1,1);
+         Mask.set(i % width, i / width, color(0,1,1));
        } else {
-         pixels[i] = front.pixels[i];
+         pixels[i] = cam.pixels[i];
+         Mask.set(i % width, i / width, color(0,0,0));
        }
+       
+      
+       //
+       
     }
+    
       updatePixels();
+      image(Mask,width/2,height/2);
   }
 }
 
