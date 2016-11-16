@@ -10,10 +10,6 @@ float comparVal = 0.23;
 private int[] screenshotImage;
 PImage Mask;
 OpenCV opencv;
-float v = 1.0 / 9.0;
-float[][] kernel = {{ v, v, v }, 
-                    { v, v, v }, 
-                    { v, v, v }};
 
 
 void setup() {
@@ -67,17 +63,20 @@ void draw() {
     }
     
     updatePixels();
+    Mask.filter(BLUR);
     opencv = new OpenCV(this, Mask);
     //PImage p=cam.get(0,0,width,height);
     //Mask.mask(p);
     opencv.gray();
-    filter(BLUR, 6);
     opencv.threshold(100);
-    opencv.erode();
     opencv.dilate();
+    opencv.erode();
     Mask = opencv.getSnapshot();
+    //mask over video
     blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
-    //image(Mask,width/2,height/2);
+    
+    //whole mask as image
+    //image(Mask,width,height);
   }
 }
 
