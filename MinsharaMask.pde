@@ -1,6 +1,7 @@
 // Run this program only in the Java mode inside the IDE,
 //import libraries
 import processing.video.*;
+import gab.opencv.*;
 
 //create Capture
 Capture cam;
@@ -8,6 +9,11 @@ Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
 PImage Mask;
+OpenCV opencv;
+float v = 1.0 / 9.0;
+float[][] kernel = {{ v, v, v }, 
+                    { v, v, v }, 
+                    { v, v, v }};
 
 
 void setup() {
@@ -52,20 +58,26 @@ void draw() {
        diffHueSat = sqrt((float)diffHueSat);
        
        if (diffHueSat > comparVal) {
-         pixels[i] = color(0.5,1,1);
-         Mask.set(i % width, i / width, color(0,1,1));
+         pixels[i] = cam.pixels[i];
+         Mask.set(i % width, i / width, color(0,0,1));
        } else {
          pixels[i] = cam.pixels[i];
          Mask.set(i % width, i / width, color(0,0,0));
        }
-       
-      
-       //
-       
     }
     
-      updatePixels();
-      image(Mask,width/2,height/2);
+    updatePixels();
+    opencv = new OpenCV(this, Mask);
+    //PImage p=cam.get(0,0,width,height);
+    //Mask.mask(p);
+    opencv.gray();
+    filter(BLUR, 6);
+    opencv.threshold(100);
+    opencv.erode();
+    opencv.dilate();
+    Mask = opencv.getSnapshot();
+    blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
+    //image(Mask,width/2,height/2);
   }
 }
 
