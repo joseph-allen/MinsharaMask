@@ -71,7 +71,7 @@ void draw() {
     
     updatePixels();
     fastblur(Mask, 2);
-    theBlobDetection.computeBlobs(Mask.pixels);
+    theBlobDetection.computeBlobs(cam.pixels);
     drawBlobsAndEdges(true,true);
     opencv = new OpenCV(this, Mask);
     //PImage p=cam.get(0,0,width,height);
