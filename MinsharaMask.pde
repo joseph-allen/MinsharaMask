@@ -11,6 +11,7 @@ Capture screenshotCam;
 float comparVal = 0.23;
 private int[] screenshotImage;
 PImage Mask;
+PImage BigBlobMask;
 OpenCV opencv;
 
 
@@ -22,6 +23,7 @@ void setup() {
   //front = loadImage("tmap1.png");
   //front.resize(width,height);
   Mask = createImage(width,height,HSB);
+  BigBlobMask = createImage(width,height,HSB);
   colorMode(HSB, 1,1,1);
   cam = new Capture(this,width,height);
   cam.start();
@@ -137,11 +139,16 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
       if (drawBlobs)
       {
         strokeWeight(5);
-        stroke(0.3,1,0.6);
+        stroke(random(1),1,0.6);
+        
+        if(b.h + b.w > 0.1){
+          fill(random(1));
         rect(
           b.xMin*width,b.yMin*height,
           b.w*width,b.h*height
           );
+        }
+          
       }
 
     }
