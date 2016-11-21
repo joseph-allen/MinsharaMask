@@ -23,7 +23,7 @@ void setup() {
     //front = loadImage("tmap1.png");
     //front.resize(width,height);
     Mask = createImage(width, height, HSB);
-    BigBlobMask = createImage(width, height, HSB);
+
     colorMode(HSB, 1, 1, 1);
     cam = new Capture(this, width, height);
     cam.start();
@@ -34,7 +34,7 @@ void setup() {
 
     theBlobDetection = new BlobDetection(width, height);
     theBlobDetection.setPosDiscrimination(true);
-    theBlobDetection.setThreshold(0.2 f); // will detect bright areas whose luminosity > 0.2f;
+    theBlobDetection.setThreshold(0.2f); // will detect bright areas whose luminosity > 0.2f;
 
 }
 
@@ -109,6 +109,10 @@ void keyPressed() {
 void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges) {
     noFill();
     Blob b;
+    
+    //clear the mask? is this the best way?
+    BigBlobMask = createImage(width, height, HSB);
+    
     EdgeVertex eA, eB;
     for (int n = 0; n < theBlobDetection.getBlobNb(); n++) {
         b = theBlobDetection.getBlob(n);
@@ -154,7 +158,6 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges) {
 
     }
 
-    BigBlobMask.copy(0, 0, width, height, 0, 0, width, height);
     image(BigBlobMask, 0, 0);
     BigBlobMask.save("outputImage.jpg");
 }
