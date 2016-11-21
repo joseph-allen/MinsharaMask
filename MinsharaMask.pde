@@ -16,12 +16,7 @@ OpenCV opencv;
 
 
 void setup() {
-    //size(1260,960);
     fullScreen();
-    //back = loadImage("tmap2.png");
-    //back.resize(width,height);
-    //front = loadImage("tmap1.png");
-    //front.resize(width,height);
     Mask = createImage(width, height, HSB);
 
     colorMode(HSB, 1, 1, 1);
@@ -34,14 +29,13 @@ void setup() {
 
     theBlobDetection = new BlobDetection(width, height);
     theBlobDetection.setPosDiscrimination(true);
-    theBlobDetection.setThreshold(0.2f); // will detect bright areas whose luminosity > 0.2f;
+    theBlobDetection.setThreshold(0.2f);
 
 }
 
 void draw() {
     if (cam.available()) {
         cam.read();
-        //fill array of pixel values pixels[]
         cam.loadPixels();
 
         for (int i = 0; i < width * height; i++) {
@@ -59,7 +53,6 @@ void draw() {
             //COSINE RULE
             double diffHueSat = Math.pow(currSaturation, 2) + Math.pow(screenshotSaturation, 2) - 2 * currSaturation * screenshotSaturation * cos(saturationDiff);
 
-            //root
             diffHueSat = sqrt((float) diffHueSat);
 
             if (diffHueSat > comparVal) {
@@ -68,8 +61,9 @@ void draw() {
             } else {
                 pixels[i] = cam.pixels[i];
                 Mask.set(i % width, i / width, color(0, 0, 0));
-            }
-        }
+            }//if
+            
+        }//for
 
         updatePixels();
         opencv = new OpenCV(this, Mask);
@@ -89,7 +83,7 @@ void draw() {
 void mouseClicked() {
     for (int x = 0; x < width * height; x++) {
         screenshotImage[x] = cam.pixels[x];
-    }
+    }//for
 }
 
 void keyPressed() {
@@ -98,7 +92,7 @@ void keyPressed() {
         comparVal += 0.01;
     } else {
         comparVal -= 0.01;
-    }
+    }//if
 }
 
 void drawBlob(boolean drawBlobs){
@@ -120,10 +114,10 @@ void drawBlob(boolean drawBlobs){
                         b.xMin * width, b.yMin * height,
                         b.w * width, b.h * height
                     );
-                }
-            }
-        }
-    }
+                }//if
+            }//if
+        }//if
+    }//for
 }
 
 void drawBlobMask(boolean drawBlobs) {
@@ -149,14 +143,13 @@ void drawBlobMask(boolean drawBlobs) {
                         for (int y = Math.round(b.yMin * height); y < Math.round(b.yMax * height); y++) {
                             if(Mask.get(x,y) == color(1,0,1)){
                                BigBlobMask.set(x, y, color(1,0,1));  
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-    }
+                            }//if
+                        }//for y
+                    }//for x
+                }//if
+            }//if
+        }//if
+    }//for
 
     image(BigBlobMask, 0, 0);
     BigBlobMask.save("outputImage.jpg");
