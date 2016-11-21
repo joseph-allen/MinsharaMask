@@ -139,9 +139,14 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
         strokeWeight(5);
         stroke(0.3,1,0.6);
         
-        BigBlobMask.set(Math.round(b.w * width),Math.round(b.h * height),color(255));
         if(b.h + b.w > 0.1){
-          fill(b.h + b.w);
+          fill(1);
+          //Mask of Blobs
+          for(int x = Math.round(b.xMin*width); x< Math.round(b.xMax*width); x++){
+            for(int y = Math.round(b.yMin*height); y< Math.round(b.yMax*height); y++){
+              BigBlobMask.set(x,y,color(255));
+            }
+          }
           
         rect(
           b.xMin*width,b.yMin*height,
@@ -155,7 +160,9 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
 
       }
       
-          image(BigBlobMask,0,0);
+      BigBlobMask.copy(0, 0, width, height, 0, 0, width, height);
+      image(BigBlobMask,0,0);
+      BigBlobMask.save("outputImage.jpg");
 }
 
 void fastblur(PImage img,int radius)
