@@ -71,8 +71,7 @@ void draw() {
     
     updatePixels();
     fastblur(Mask, 2);
-    theBlobDetection.computeBlobs(cam.pixels);
-    drawBlobsAndEdges(true,true);
+    //Mask.filter(BLUR);
     opencv = new OpenCV(this, Mask);
     //PImage p=cam.get(0,0,width,height);
     //Mask.mask(p);
@@ -81,6 +80,8 @@ void draw() {
     opencv.dilate();
     opencv.erode();
     Mask = opencv.getSnapshot();
+    theBlobDetection.computeBlobs(cam.pixels);
+    drawBlobsAndEdges(true,true);
     //mask over video
     blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
     
