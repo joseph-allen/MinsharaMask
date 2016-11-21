@@ -80,7 +80,7 @@ void draw() {
     opencv.dilate();
     opencv.erode();
     Mask = opencv.getSnapshot();
-    theBlobDetection.computeBlobs(cam.pixels);
+    theBlobDetection.computeBlobs(Mask.pixels);
     drawBlobsAndEdges(true,true);
     //mask over video
     blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
