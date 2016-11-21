@@ -70,12 +70,13 @@ void draw() {
     }
     
     updatePixels();
-    fastblur(Mask, 2);
+    //fastblur(Mask, 2);
     //Mask.filter(BLUR);
     opencv = new OpenCV(this, Mask);
     //PImage p=cam.get(0,0,width,height);
     //Mask.mask(p);
     opencv.gray();
+    opencv.blur(6);
     opencv.threshold(100);
     opencv.dilate();
     opencv.erode();
