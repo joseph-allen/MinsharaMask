@@ -86,10 +86,8 @@ void draw() {
     theBlobDetection.computeBlobs(Mask.pixels);
     drawBlobsAndEdges(true,true);
     //mask over video
-    blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
-    
+    //blend(Mask, 0, 0, width, height, 0, 0, width, height, ADD);
     //whole mask as image
-    //image(Mask,width,height);
   }
 }
 
@@ -139,10 +137,12 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
       if (drawBlobs)
       {
         strokeWeight(5);
-        stroke(random(1),1,0.6);
+        stroke(0.3,1,0.6);
         
+        BigBlobMask.set(Math.round(b.w * width),Math.round(b.h * height),color(255));
         if(b.h + b.w > 0.1){
-          fill(random(1));
+          fill(b.h + b.w);
+          
         rect(
           b.xMin*width,b.yMin*height,
           b.w*width,b.h*height
@@ -154,6 +154,8 @@ void drawBlobsAndEdges(boolean drawBlobs, boolean drawEdges)
     }
 
       }
+      
+          image(BigBlobMask,0,0);
 }
 
 void fastblur(PImage img,int radius)
