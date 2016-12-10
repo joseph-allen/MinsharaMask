@@ -13,6 +13,7 @@ private int[] screenshotImage;
 PImage Mask;
 PImage BigBlobMask;
 OpenCV opencv;
+OpenCV opticalFlow;
 
 
 void setup() {
@@ -30,6 +31,8 @@ void setup() {
     theBlobDetection = new BlobDetection(width, height);
     theBlobDetection.setPosDiscrimination(true);
     theBlobDetection.setThreshold(0.2f);
+    
+    opticalFlow = new OpenCV(this, 1280, 800);
 
 }
 
@@ -66,17 +69,25 @@ void draw() {
         }//for
 
         updatePixels();
-        opencv = new OpenCV(this, Mask);
-        opencv.gray();
-        opencv.blur(6);
-        opencv.threshold(100);
-        opencv.dilate();
-        opencv.erode();
-        Mask = opencv.getSnapshot();
-        theBlobDetection.computeBlobs(Mask.pixels);
-        drawBlob(true);
-        drawBlobMask(true);
-        blend(BigBlobMask, 0, 0, width, height, 0, 0, width, height, ADD);
+        
+          cam.read();
+        cam.loadPixels();
+        opticalFlow.calculateOpticalFlow();
+        opticalFlow.drawOpticalFlow();
+        print(opticalFlow.getAverageFlowInRegion(0,0,width/2,height/2));
+        
+        
+        //opencv = new OpenCV(this, Mask);
+        //opencv.gray();
+        //opencv.blur(6);
+        //opencv.threshold(100);
+        //opencv.dilate();
+        //opencv.erode();
+        //Mask = opencv.getSnapshot();
+        //theBlobDetection.computeBlobs(Mask.pixels);
+        //drawBlob(true);
+        //drawBlobMask(true);
+        //blend(BigBlobMask, 0, 0, width, height, 0, 0, width, height, ADD);
     }
 }
 
