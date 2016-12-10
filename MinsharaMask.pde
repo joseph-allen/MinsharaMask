@@ -72,7 +72,7 @@ void draw() {
         
         opticalFlow.loadImage(cam);
         opticalFlow.calculateOpticalFlow();
-        //opticalFlow.drawOpticalFlow();
+        opticalFlow.drawOpticalFlow();
         //PVector opticalFlowArea = opticalFlow.getAverageFlowInRegion(0,0,width/2,height/2);
         //float out = Math.abs(opticalFlowArea.x) 
         //          + Math.abs(opticalFlowArea.y);
@@ -81,7 +81,7 @@ void draw() {
         for(int x = 0; x < width; x += width/10){
           for(int y =0; y < height; y += height/10){
             PVector opticalFlowArea = opticalFlow.getAverageFlowInRegion(x,y,width/10,height/10);
-            if(Math.abs(opticalFlowArea.x) + Math.abs(opticalFlowArea.y) > 0.1){
+            if(Math.abs(opticalFlowArea.x) + Math.abs(opticalFlowArea.y) > 0.01){
                fill(color(0.5,0.5,1)); 
             } else {
               fill(color(0.5,0.5,0)); 
@@ -95,17 +95,17 @@ void draw() {
         //println(out);
         
         
-        //opencv = new OpenCV(this, Mask);
-        //opencv.gray();
-        //opencv.blur(6);
-        //opencv.threshold(100);
-        //opencv.dilate();
-        //opencv.erode();
-        //Mask = opencv.getSnapshot();
-        //theBlobDetection.computeBlobs(Mask.pixels);
-        //drawBlob(true);
-        //drawBlobMask(true);
-        //blend(BigBlobMask, 0, 0, width, height, 0, 0, width, height, ADD);
+        opencv = new OpenCV(this, Mask);
+        opencv.gray();
+        opencv.blur(6);
+        opencv.threshold(100);
+        opencv.dilate();
+        opencv.erode();
+        Mask = opencv.getSnapshot();
+        theBlobDetection.computeBlobs(Mask.pixels);
+        drawBlob(true);
+        drawBlobMask(true);
+        blend(BigBlobMask, 0, 0, width, height, 0, 0, width, height, ADD);
     }
 }
 
