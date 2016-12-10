@@ -70,11 +70,14 @@ void draw() {
 
         updatePixels();
         
-          cam.read();
-        cam.loadPixels();
+        opticalFlow.loadImage(cam);
         opticalFlow.calculateOpticalFlow();
         opticalFlow.drawOpticalFlow();
-        print(opticalFlow.getAverageFlowInRegion(0,0,width/2,height/2));
+        float out = Math.abs(opticalFlow.getAverageFlowInRegion(0,0,width/2,height/2).x) 
+                  + Math.abs(opticalFlow.getAverageFlowInRegion(0,0,width/2,height/2).y);
+        fill(color(0.5,0.5,out));
+        rect(0,0,width/2,height/2);
+        println(out);
         
         
         //opencv = new OpenCV(this, Mask);
