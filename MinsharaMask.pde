@@ -1,5 +1,6 @@
 //Import Libraries
 import processing.video.*;
+import gab.opencv.*;
 
 //create Capture
 Capture liveCam;
@@ -7,6 +8,8 @@ Capture liveCam;
 PImage camCapture, foregroundMask, backgroundMask, screenshot;
 
 float comparVal = 0.25;
+
+OpenCV opencv;
 
 void setup() {
   //scene setup  
@@ -31,7 +34,7 @@ void draw() {
   //set camCapture PImage to be current Frame
   camCapture.set(0,0,liveCam);
   camCapture.loadPixels();
-
+  
   for(int x = 0; x < width * height; x++){
     color currentColor = camCapture.pixels[x];
     color screenshotColor = screenshot.pixels[x];
@@ -55,15 +58,29 @@ void draw() {
       foregroundMask.set(x % width, x / width, color(0,0,1));  
       backgroundMask.set(x % width, x / width, color(0,0,0));
     } else {
-      foregroundMask.set(x % width, x / width, camCapture.pixels[x]);
+      foregroundMask.set(x % width, x / width, color(0,0,0));
+      backgroundMask.set(x % width, x / width, color(0.5,1,1));
     }
   }
 
-  image(camCapture,0,0); 
-  image(foregroundMask,0,0);
-  image(backgroundMask,0,0);
+  opencv = new OpenCV(this, foregroundMask);
+  opencv.blur(6);
+  opencv.threshold(50);
+  opencv.erode();
+  opencv.erode();
+  opencv.erode();
+  opencv.dilate();
+  opencv.dilate();
+  opencv.dilate();
+  foregroundMask = opencv.getSnapshot();
+
+  //image(camCapture,0,0); 
+  //image(backgroundMask,0,0);
+  //image(foregroundMask,0,0);
   //image(screenshot, 0, 0);
-  
+  camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  //camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  image(camCapture,0,0);
 }
 
 void mouseClicked() {
