@@ -31,6 +31,18 @@ void draw() {
     liveCam.read();
   }
   
+  changeDetection1();
+
+  //image(camCapture,0,0); 
+  //image(backgroundMask,0,0);
+  //image(foregroundMask,0,0);
+  //image(screenshot, 0, 0);
+  camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  //camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  image(camCapture,0,0);
+}
+
+void changeDetection1() {
   //set camCapture PImage to be current Frame
   camCapture.set(0,0,liveCam);
   camCapture.loadPixels();
@@ -64,23 +76,17 @@ void draw() {
   }
 
   opencv = new OpenCV(this, foregroundMask);
-  opencv.blur(6);
-  opencv.threshold(50);
-  opencv.erode();
-  opencv.erode();
+  opencv.blur(10);
+  opencv.threshold(20);
   opencv.erode();
   opencv.dilate();
+  opencv.erode();
   opencv.dilate();
+  opencv.erode();
   opencv.dilate();
   foregroundMask = opencv.getSnapshot();
-
-  //image(camCapture,0,0); 
-  //image(backgroundMask,0,0);
-  //image(foregroundMask,0,0);
-  //image(screenshot, 0, 0);
-  camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  //camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  image(camCapture,0,0);
+  opencv.invert();
+  backgroundMask = opencv.getSnapshot();
 }
 
 void mouseClicked() {
