@@ -22,6 +22,11 @@ void setup() {
   foregroundMask = createImage(width,height,HSB);
   backgroundMask = createImage(width,height,HSB);
   
+  opencv = new OpenCV(this, width, height);
+
+  //we need this line for changedetection3
+  opencv.startBackgroundSubtraction(5, 3, 0.5);
+  
   //live Camera start
   liveCam.start();
 }
@@ -31,7 +36,7 @@ void draw() {
     liveCam.read();
   }
   
-  changeDetection1();
+  changeDetection3();
 
   //image(camCapture,0,0); 
   //image(backgroundMask,0,0);
@@ -84,9 +89,64 @@ void changeDetection1() {
   opencv.dilate();
   opencv.erode();
   opencv.dilate();
+  
   foregroundMask = opencv.getSnapshot();
   opencv.invert();
   backgroundMask = opencv.getSnapshot();
+}
+
+//change using built in diff from openCV
+void changeDetection2() {
+  
+  camCapture.set(0,0,liveCam);
+  camCapture.loadPixels();
+
+  opencv = new OpenCV(this, foregroundMask);
+  
+  opencv.loadImage(camCapture);
+  
+  opencv.diff(screenshot);
+  
+  opencv.blur(10);
+  opencv.threshold(20);
+  opencv.erode();
+  opencv.dilate();
+  opencv.erode();
+  opencv.dilate();
+  opencv.erode();
+  opencv.dilate();
+  
+  foregroundMask = opencv.getSnapshot(); 
+  
+  opencv.invert();
+  backgroundMask = opencv.getSnapshot(); 
+}
+
+
+//change using built in diff from openCV
+void changeDetection3() {
+    
+  camCapture.set(0,0,liveCam);
+  camCapture.loadPixels();
+  
+  opencv.loadImage(camCapture);
+  
+  opencv.diff(screenshot);
+  opencv.updateBackground();
+  opencv.blur(10);
+  opencv.threshold(20);
+  opencv.erode();
+  opencv.dilate();
+  opencv.erode();
+  opencv.dilate();
+  opencv.erode();
+  opencv.dilate();
+  
+  foregroundMask = opencv.getSnapshot(); 
+  
+  opencv.invert();
+  backgroundMask = opencv.getSnapshot(); 
+
 }
 
 void mouseClicked() {
