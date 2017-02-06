@@ -7,6 +7,9 @@ Capture liveCam;
 //create PImages
 PImage camCapture, foregroundMask, backgroundMask, screenshot;
 
+//set Color masks for when colors selected
+PImage foregroundColorMask, backgroundColorMask;
+color foregroundColor, backgroundColor;
 float comparVal = 0.25;
 
 OpenCV opencv;
@@ -15,12 +18,25 @@ void setup() {
   //scene setup  
   fullScreen();
   colorMode(HSB,1,1,1);
+  
   liveCam = new Capture(this,width,height);
   
   camCapture = createImage(width,height,HSB);
   screenshot = createImage(width,height,HSB);
   foregroundMask = createImage(width,height,HSB);
   backgroundMask = createImage(width,height,HSB);
+  
+  //color masks
+  foregroundColorMask = createImage(width,height,HSB);
+  backgroundColorMask = createImage(width,height,HSB);
+  
+  foregroundColor = color(0.3,1,1);
+  backgroundColor = color(0.7,1,1);
+  
+  for(int x = 0; x < width*height; x++){
+    foregroundColorMask.set(x % width, x / width, foregroundColor); 
+    backgroundColorMask.set(x % width, x / width, backgroundColor); 
+  }
   
   opencv = new OpenCV(this, width, height);
 
@@ -36,12 +52,17 @@ void draw() {
     liveCam.read();
   }
   
-  changeDetection3();
+  changeDetection1();
 
+  image(foregroundColorMask,0,0);
+  
   //image(camCapture,0,0); 
   //image(backgroundMask,0,0);
   //image(foregroundMask,0,0);
   //image(screenshot, 0, 0);
+  foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
   camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
   //camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
   image(camCapture,0,0);
