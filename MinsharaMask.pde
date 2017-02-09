@@ -89,18 +89,17 @@ void draw() {
   //image(screenshot, 0, 0);
   
   //for colors
-  //foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  //backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
   //for images
-  foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
-  
-  camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  image(camCapture,0,0);
-  image(foregroundImage,0,0);
+  //camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  //image(camCapture,0,0);
+  image(foregroundMask,0,0);
 }
 
 void changeDetection1() {
