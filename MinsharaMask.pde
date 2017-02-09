@@ -7,12 +7,15 @@ Capture liveCam;
 //create PImages
 PImage camCapture, foregroundMask, backgroundMask, screenshot;
 
+//PImage for Actual Image use
+PImage foregroundImage, backgroundImage;
+
 //set Color masks for when colors selected
 PImage foregroundColorMask, backgroundColorMask;
 color foregroundColor, backgroundColor;
 float comparVal = 0.25;
 
-Boolean changeDetection1,changeDetection2,changeDetection3;
+Algorithm algorithmChoice;
 
 OpenCV opencv;
 
@@ -45,10 +48,16 @@ void setup() {
   //we need this line for changedetection3
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
-  //Booleans
-  changeDetection1 = true;
-  changeDetection2 = false;
-  changeDetection3 = false;
+  //Set Alogirthm Choice default
+  algorithmChoice = Algorithm.MINSHARA;
+  
+  //load images
+  foregroundImage = loadImage("data/Image/Front.png");
+  backgroundImage = loadImage("data/Image/Back.png");
+  
+  //resize Images
+  foregroundImage.resize(width, height);
+  backgroundImage.resize(width, height);
   
   //live Camera start
   liveCam.start();
@@ -59,14 +68,18 @@ void draw() {
     liveCam.read();
   }
   
-  if(changeDetection1){
-    changeDetection1();
-  } else if(changeDetection2){
-    changeDetection2();
-  } else {
-    changeDetection3();
+  switch(algorithmChoice) {
+   case OPENCV:
+     changeDetection2();
+     break;
+   
+   case OPENCVBACKGROUND:
+     changeDetection3();
+     break;
+   
+   default:
+     changeDetection1();
   }
-  
 
   image(foregroundColorMask,0,0);
   
@@ -74,12 +87,20 @@ void draw() {
   //image(backgroundMask,0,0);
   //image(foregroundMask,0,0);
   //image(screenshot, 0, 0);
-  foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
+  //for colors
+  //foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
+  //for images
+  foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
   
   camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  //camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  camCapture.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
   image(camCapture,0,0);
+  image(foregroundImage,0,0);
 }
 
 void changeDetection1() {
@@ -186,4 +207,8 @@ void changeDetection3() {
 
 void mouseClicked() {
   screenshot.set(0,0,liveCam);
+}
+
+public enum Algorithm {
+    MINSHARA, OPENCV, OPENCVBACKGROUND
 }
