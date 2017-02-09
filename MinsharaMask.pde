@@ -12,6 +12,8 @@ PImage foregroundColorMask, backgroundColorMask;
 color foregroundColor, backgroundColor;
 float comparVal = 0.25;
 
+Boolean changeDetection1,changeDetection2,changeDetection3;
+
 OpenCV opencv;
 
 void setup() {
@@ -43,6 +45,11 @@ void setup() {
   //we need this line for changedetection3
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
+  //Booleans
+  changeDetection1 = true;
+  changeDetection2 = false;
+  changeDetection3 = false;
+  
   //live Camera start
   liveCam.start();
 }
@@ -52,7 +59,14 @@ void draw() {
     liveCam.read();
   }
   
-  changeDetection1();
+  if(changeDetection1){
+    changeDetection1();
+  } else if(changeDetection2){
+    changeDetection2();
+  } else {
+    changeDetection3();
+  }
+  
 
   image(foregroundColorMask,0,0);
   
