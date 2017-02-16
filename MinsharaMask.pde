@@ -14,6 +14,9 @@ PImage foregroundImage, backgroundImage;
 PImage foregroundFrame, backgroundFrame;
 Movie foregroundMovie, backgroundMovie;
 
+//PImage for Code Use
+PImage foregroundCode, backgroundCode;
+
 //set Color masks for when colors selected
 PImage foregroundColorMask, backgroundColorMask;
 color foregroundColor, backgroundColor;
@@ -42,6 +45,10 @@ void setup() {
   foregroundColor = color(0.3,1,1);
   backgroundColor = color(0.7,1,1);
   
+  //initilise these to null
+  foregroundCode = get();
+  backgroundCode = get();
+
   for(int x = 0; x < width*height; x++){
     foregroundColorMask.set(x % width, x / width, foregroundColor); 
     backgroundColorMask.set(x % width, x / width, backgroundColor); 
@@ -112,19 +119,22 @@ void draw() {
   //backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
   //for videos
-  foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   //backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
   //for live camera
   //foregroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
+  //for coded examples
+  foregroundCode = codeForeground(foregroundCode);
+  backgroundCode = codeBackground(backgroundCode);
+  foregroundMask.blend(foregroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(backgroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
-  //camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD);
   
   //overlay the background and foreground masks
   foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  //image(camCapture,0,0);
   image(foregroundMask,0,0);
 }
 
@@ -228,6 +238,30 @@ void changeDetection3() {
   opencv.invert();
   backgroundMask = opencv.getSnapshot(); 
 
+}
+
+PImage codeForeground(PImage previousImage){
+  PImage newImage;
+  image(previousImage,0,0);
+  //WRITE YOUR CODE FOR THE FOREGROUND BELOW HERE 
+  fill(0.8,1,1);
+  ellipse(random(width),random(height),50,50);
+   
+  //WRITE YOUR CODE FOR THE FOREGROUND ABOVE HERE
+  newImage = get();
+  return newImage;
+}
+
+PImage codeBackground(PImage previousImage){
+  PImage newImage;
+  image(previousImage,0,0);
+  //WRITE YOUR CODE FOR THE FOREGROUND BELOW HERE 
+  fill(0.3,1,1);
+  rect(random(width),random(height),50,50);
+   
+  //WRITE YOUR CODE FOR THE FOREGROUND ABOVE HERE
+  newImage = get();
+  return newImage;
 }
 
 void mouseClicked() {
