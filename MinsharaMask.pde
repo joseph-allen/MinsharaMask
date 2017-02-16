@@ -23,6 +23,8 @@ color foregroundColor, backgroundColor;
 float comparVal = 0.25;
 
 Algorithm algorithmChoice;
+Foreground foregroundChoice;
+Background backgroundChoice;
 
 OpenCV opencv;
 
@@ -62,6 +64,10 @@ void setup() {
   //Set Alogirthm Choice default
   algorithmChoice = Algorithm.MINSHARA;
   
+  //Set Foreground and Background choice defaults
+  foregroundChoice = Foreground.COLOR;
+  backgroundChoice = Background.COLOR;
+  
   //load images
   foregroundImage = loadImage("data/Image/Front.png");
   backgroundImage = loadImage("data/Image/Back.png");
@@ -100,39 +106,58 @@ void draw() {
      break;
    
    default:
+     //case MINSHARA
      changeDetection1();
+  }
+  
+  switch(foregroundChoice) {
+   case COLOR:
+     foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+     break;
+   
+   case IMAGE:
+     foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+     
+   case VIDEO:
+     foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+     
+   case CODE:
+     foregroundCode = codeForeground(foregroundCode);
+     foregroundMask.blend(foregroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+   
+   default:
+     //case CAMERA
+     foregroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  }
+  
+  switch(backgroundChoice) {
+   case COLOR:
+     backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
+     break;
+   
+   case IMAGE:
+     backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+     
+   case VIDEO:
+     backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+     
+   case CODE:
+     backgroundCode = codeForeground(backgroundCode);
+     backgroundMask.blend(backgroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+     break;
+   
+   default:
+     //case CAMERA
+     backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   }
 
   image(foregroundColorMask,0,0);
-  
-  //image(camCapture,0,0); 
-  //image(backgroundMask,0,0);
-  //image(foregroundMask,0,0);
-  //image(screenshot, 0, 0);
-  
-  //for colors
-  //foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  //backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  
-  //for images
-  //foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  //backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  
-  //for videos
-  //foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  //backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  
-  //for live camera
-  //foregroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  //backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  
-  //for coded examples
-  foregroundCode = codeForeground(foregroundCode);
-  backgroundCode = codeBackground(backgroundCode);
-  foregroundMask.blend(foregroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(backgroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  
-  
+
   //overlay the background and foreground masks
   foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
   image(foregroundMask,0,0);
@@ -280,4 +305,12 @@ void movieEvent(Movie m) {
 
 public enum Algorithm {
   MINSHARA, OPENCV, OPENCVBACKGROUND
+}
+
+public enum Foreground {
+  COLOR, IMAGE, VIDEO, CODE, CAMERA
+}
+
+public enum Background {
+  COLOR, IMAGE, VIDEO, CODE, CAMERA
 }
