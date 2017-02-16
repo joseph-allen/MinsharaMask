@@ -11,3 +11,11 @@ If this is your first time using Git, then you can download the .zip as follows.
 You will then need to unzip this project file.
 You will then need to move this unzipped folder into Documents/Processing to access it in Processing.
 You will need to add a Video folder inside data with two videos (you probably shouldn't have to do this I will try to fix it)
+
+##Adding Libraries
+In order to run this project you will need to install some libraries.
+
+In the toolbar go into Sketch/Import Library/Add Library 
+search for OpenCV and install "OpenCV for Processing".
+
+After doing this the project should run, feel free to go into the Issues section of Github and create a new issue if something goes wrong.
