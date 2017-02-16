@@ -96,7 +96,23 @@ void draw() {
     liveCam.read();
   }
   
-  switch(algorithmChoice) {
+  handleAlgorithmChoice();
+  handleForegroundChoice();
+  handleBackgroundChoice();
+
+  generateOutput();
+}
+
+void generateOutput(){
+  //add the foreground and background masks together
+  foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD);
+  
+  //output both masks
+  image(foregroundMask,0,0);
+}
+
+void handleAlgorithmChoice(){
+    switch(algorithmChoice) {
    case OPENCV:
      changeDetection2();
      break;
@@ -109,8 +125,10 @@ void draw() {
      //case MINSHARA
      changeDetection1();
   }
-  
-  switch(foregroundChoice) {
+}
+
+void handleForegroundChoice(){
+    switch(foregroundChoice) {
    case COLOR:
      foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
      break;
@@ -132,8 +150,10 @@ void draw() {
      //case CAMERA
      foregroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   }
-  
-  switch(backgroundChoice) {
+}
+
+void handleBackgroundChoice(){
+   switch(backgroundChoice) {
    case COLOR:
      backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY);
      break;
@@ -154,13 +174,7 @@ void draw() {
    default:
      //case CAMERA
      backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  }
-
-  image(foregroundColorMask,0,0);
-
-  //overlay the background and foreground masks
-  foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
-  image(foregroundMask,0,0);
+  } 
 }
 
 void changeDetection1() {
