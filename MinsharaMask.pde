@@ -62,11 +62,11 @@ void setup() {
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.MINSHARA;
+  algorithmChoice = Algorithm.OPENCVBACKGROUND;
   
   //Set Foreground and Background choice defaults
-  foregroundChoice = Foreground.COLOR;
-  backgroundChoice = Background.COLOR;
+  foregroundChoice = Foreground.CODE;
+  backgroundChoice = Background.CODE;
   
   //load images
   foregroundImage = loadImage("data/Image/Front.png");
@@ -167,7 +167,7 @@ void handleBackgroundChoice(){
      break;
      
    case CODE:
-     backgroundCode = codeForeground(backgroundCode);
+     backgroundCode = codeBackground(backgroundCode);
      backgroundMask.blend(backgroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
      break;
    
