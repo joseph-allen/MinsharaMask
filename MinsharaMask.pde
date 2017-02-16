@@ -10,6 +10,10 @@ PImage camCapture, foregroundMask, backgroundMask, screenshot;
 //PImage for Actual Image use
 PImage foregroundImage, backgroundImage;
 
+//PImage for Video use
+PImage foregroundFrame, backgroundFrame;
+Movie foregroundMovie, backgroundMovie;
+
 //set Color masks for when colors selected
 PImage foregroundColorMask, backgroundColorMask;
 color foregroundColor, backgroundColor;
@@ -59,6 +63,17 @@ void setup() {
   foregroundImage.resize(width, height);
   backgroundImage.resize(width, height);
   
+  //load Movies, this implicitly looks in a data folder
+  foregroundMovie = new Movie(this, "Video/testvideo.mov");
+  foregroundMovie.loop();
+  //mute movie?
+  //foregroundMovie.volume(0);
+  
+  backgroundMovie = new Movie(this, "Video/fish.mov");
+  backgroundMovie.loop();
+  //mute movie?
+  backgroundMovie.volume(0);
+  
   //live Camera start
   liveCam.start();
 }
@@ -89,14 +104,20 @@ void draw() {
   //image(screenshot, 0, 0);
   
   //for colors
-  foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //foregroundMask.blend(foregroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //backgroundMask.blend(backgroundColorMask, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
   //for images
   //foregroundMask.blend(foregroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   //backgroundMask.blend(backgroundImage, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
   
-  //camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
+  //for videos
+  foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
+  //camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD);
+  
+  //overlay the background and foreground masks
   foregroundMask.blend(backgroundMask, 0, 0, width, height, 0, 0, width, height, ADD); 
   //image(camCapture,0,0);
   image(foregroundMask,0,0);
@@ -208,6 +229,16 @@ void mouseClicked() {
   screenshot.set(0,0,liveCam);
 }
 
+// Called every time a new frame is available to read
+void movieEvent(Movie m) {
+  m.read();
+  if (m == foregroundMovie) {
+    foregroundFrame = m;
+  } else if (m == backgroundMovie) {
+    backgroundFrame = m;
+  }
+}
+
 public enum Algorithm {
-    MINSHARA, OPENCV, OPENCVBACKGROUND
+  MINSHARA, OPENCV, OPENCVBACKGROUND
 }
