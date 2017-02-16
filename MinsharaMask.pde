@@ -113,7 +113,12 @@ void draw() {
   
   //for videos
   foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
-  backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  //backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
+  //for live camera
+  //foregroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  backgroundMask.blend(camCapture, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
+  
   
   //camCapture.blend(foregroundMask, 0, 0, width, height, 0, 0, width, height, ADD);
   
