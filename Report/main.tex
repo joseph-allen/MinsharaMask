@@ -25,6 +25,8 @@ In Computer Science we are used to collaboration, it is a fundamental aspect of 
 
 The outcome of this project will be the creation of a product which will allow artists to trivially perform basic change detection with the sole purpose of artistic play. This project will help introduce non-technical artists to programming, inspire a sense of curiosity to delve deeper into the code, and hopefully transition them into mastery of a language.
 
+I started out with a practical focus of creating an algorithm with high accuracy and implementing powerful architecture, but through interviews discovered that artists would rather have a digital playground over high accuracy.
+
 My goal here is to create a project the encourages Artists to be more like Computer Scientist, and vice-versa.
 \end{abstract}
 
@@ -32,14 +34,27 @@ My goal here is to create a project the encourages Artists to be more like Compu
 \begin{abstract}
 Thanks to my Family for carrying me, Georgina for holding my hand, and my friends for making me smile.
 
+
 Thank you for Tim Morris for all your support and guidance throughout this project.
 \end{abstract}
 
 \tableofcontents
+\clearpage
 
 \section{Introduction}
 \subsection{The Current Problem}
+This Project is split into two separate problems. First we have the Image Processing problem of change detection in live video. Second we have the software engineering problem of creating a product for an artist.
+
+In Image Processing change detection is the process of splitting an image up into two separate masks:
+\begin{enumerate}
+  \item The foreground mask, one consisting of objects that are considered to be a change of interest such as objects,shadows and reflections.
+  \item The background mask , consisting of the unchanged or unimportant environment of the scene, this mask can be simply considered the NOT of the foreground mask.
+\end{enumerate}
+
+The other problem lies in creating a usable product for my client, an artist. In this there are problems of over-ambitious goals and requirement changes. While I started the project focusing on the accuracy of my change detection, over time I came to realise that artists do not care about the robustness of the change detection, they care more about the visuals and ease of use of the system with a very experimental way of thinking.
+
 \subsection{Proposed Solution}
+I propose creation of a digital playground in the Processing\cite{PROCESSING} IDE, in a form that is easy to use and install for both technical and non-technical artists. I wish to create a product which will give non-technical artists an introduction to Processing, and at the same time other aspects of programming to guide them to curiosity and then mastery of my tool as well as the Java Programming language.
 \subsection{What is Processing?}
 \subsection{How do we currently do things?}
 \subsection{Aims}
