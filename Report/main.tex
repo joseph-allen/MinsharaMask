@@ -41,8 +41,8 @@ Thank you for Tim Morris for all your support and guidance throughout this proje
 \tableofcontents
 \clearpage
 
-\section{Introduction}
-\subsection{The Current Problem}
+\chapter{Introduction}
+\section{The Current Problem}
 This Project is split into two separate problems. First we have the Image Processing problem of change detection in live video. Second we have the software engineering problem of creating a product for an artist.
 
 In Image Processing change detection is the process of splitting an image up into two separate masks:
@@ -53,57 +53,71 @@ In Image Processing change detection is the process of splitting an image up int
 
 The other problem lies in creating a usable product for my client, an artist. In this there are problems of over-ambitious goals and requirement changes. While I started the project focusing on the accuracy of my change detection, over time I came to realise that artists do not care about the robustness of the change detection, they care more about the visuals and ease of use of the system with a very experimental way of thinking.
 
-\subsection{Proposed Solution}
-I propose creation of a digital playground in the Processing\cite{PROCESSING} IDE, in a form that is easy to use and install for both technical and non-technical artists. I wish to create a product which will give non-technical artists an introduction to Processing, and at the same time other aspects of programming to guide them to curiosity and then mastery of my tool as well as the Java Programming language.
-\subsection{What is Processing?}
-\subsection{How do we currently do things?}
-\subsection{Aims}
-\subsection{Methodology}
+\section{Proposed Solution}
+I propose creation of a digital playground in the Processing\cite{PROCESSING} IDE, in a form that is easy to use and install for both technical and non-technical artists. I wish to create a product which will give non-technical artists an introduction to Processing, and at the same time other aspects of programming to guide them to curiosity and then mastery of my tool as well as the Java Programming language. The plan was originally to implement the SAKBOT architecture\cite{SAKBOT}, however I later discovered that this advantageous architecture did not serve the purpose of this project.
 
-\section{Background RENAME}
-\subsection{Conception}
-\subsubsection{Sarah (Client)}
-\subsubsection{Code as Art}
-\subsubsection{Processing as inspiration}
-\subsection{SAKBOT}
+\section{What is Processing?}
+Processing is, by their own definition, "a flexible software sketchbook and a language for learning how to code within the context of the visual arts."\cite{PROCESSING}. Processing is open source and exists to give artists a simple introduction to using programming to create digital art. I took this project as a source of inspiration for my own, deciding to build my project in Processing and also follow their ethos of inspiring and teaching artists to be more comfortable with digital art and programming.
 
-\section{Change Detection Basics}
-\subsection{Thresholding}
-\subsection{Euclidean Distance between two points}
-\subsection{Color Normalization}
-\subsection{HSB Color Space}
+Daniel Shiffman \cite{SHIFFMAN} is the project lead at the Processing foundation, and he creates some very impressive video tutorials to help get artist started with programming and their use of Processing, I am inspired to do the same and create video tutorials on how to use my project to help overcome the difficulties associated with Processing setup and setting up the project itself.
 
-\section{Change Detection Advanced}
-\subsection{OpenCV}
-\subsubsection{Built in diff}
-\subsubsection{Built in background subtraction}
-\subsubsection{Erosion}
-\subsubsection{Dilation}
-\subsubsection{Optical Flow}
-\subsubsection{Blob Detection}
+\section{How do we currently do things?}
+Collaboration is a common technique to merge two different creative fields together to create something relevant to both fields. This collaboration can occur between two artists but also between two completely unrelated fields to create something meaningful. 
 
-\section{Building an Artistic Product}
-\subsection{Requirements Elicitation}
-\subsubsection{Types of Interview}
-\subsubsection{decision and justification}
-\subsection{Codification}
-\subsection{Requirements}
+An example I discovered while researching with my client was from a show called Sk-interfaces \cite{SKIN}. We met the scientist who created the living skin coat and the piece itself provoked controversial discussions about whether or not the coat itself was "alive". When the exhibit came to its end the artist felt too attached to the project and believed in turning off she was killing a living thing. It is interesting to reflect on this dichotomy between an artistic and emotional approach in contrast to the cold and functional approach of the scientist.
 
-\section{Functionality}
-\subsection{Camera}
-\subsection{Color}
-\subsection{Image}
-\subsection{Video}
-\subsection{Code}
+\section{Aims}
+By the end of this project I hope to have created a product which will help artists introduce themselves to code, inspire a curiosity to do more, and give a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.
 
-\section{Usability}
-\subsection{Read Me}
-\subsection{Tutorials}
+\section{Methodology}
+The Project started out with a Cowboy Coding approach where each week was a spike to see what was possible and help understand the possibilities, in a way fitting the "Trial and Error" approach that artists take, the main focus of this early stage was to gain a more in depth understanding of the trade-offs between frame-rate and increased accuracy of the change detection itself.
 
-\section{Evaluation}
-\subsection{Expectations}
-\subsection{Evolution of project}
-\subsection{What I have learned}
+The second half of the project pivoted to a more structured approach, I now knew what functionality was possible and I used a Kanban\cite{KANBAN} approach since there is only one developer working on this project and this gave me much needed visualisation of the tasks that needed to be completed to make the project a success. This period was one of focusing on Usability and the clients needs over what I ,as a computer scientist, deemed important.
+
+\chapter{Background RENAME}
+\section{Conception}
+\subsection{Sarah (Client)}
+\subsection{Code as Art}
+\subsection{Processing as inspiration}
+\section{SAKBOT}
+
+\chapter{Change Detection Basics}
+\section{Thresholding}
+\section{Euclidean Distance between two points}
+\section{Color Normalization}
+\section{HSB Color Space}
+
+\chapter{Change Detection Advanced}
+\section{OpenCV}
+\subsection{Built in diff}
+\subsection{Built in background subtraction}
+\subsection{Erosion}
+\subsection{Dilation}
+\subsection{Optical Flow}
+\subsection{Blob Detection}
+
+\chapter{Building an Artistic Product}
+\section{Requirements Elicitation}
+\subsection{Types of Interview}
+\subsection{decision and justification}
+\section{Codification}
+\section{Requirements}
+
+\chapter{Functionality}
+\section{Camera}
+\section{Color}
+\section{Image}
+\section{Video}
+\section{Code}
+
+\chapter{Usability}
+\section{Read Me}
+\section{Tutorials}
+
+\chapter{Evaluation}
+\section{Expectations}
+\section{Evolution of project}
+\section{What I have learned}
 
 
 \bibliographystyle{alpha}
