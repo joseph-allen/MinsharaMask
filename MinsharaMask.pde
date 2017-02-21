@@ -62,11 +62,11 @@ void setup() {
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.OPENCVBACKGROUND;
+  algorithmChoice = Algorithm.OPENCV;
   
   //Set Foreground and Background choice defaults
-  foregroundChoice = Foreground.CODE;
-  backgroundChoice = Background.CODE;
+  foregroundChoice = Foreground.VIDEO;
+  backgroundChoice = Background.VIDEO;
   
   //load images
   foregroundImage = loadImage("data/Image/Front.png");
@@ -77,12 +77,12 @@ void setup() {
   backgroundImage.resize(width, height);
   
   //load Movies, this implicitly looks in a data folder
-  foregroundMovie = new Movie(this, "Video/testvideo.mov");
+  foregroundMovie = new Movie(this, "Video/Front.mov");
   foregroundMovie.loop();
   //mute movie?
   //foregroundMovie.volume(0);
   
-  backgroundMovie = new Movie(this, "Video/fish.mov");
+  backgroundMovie = new Movie(this, "Video/Back.mov");
   backgroundMovie.loop();
   //mute movie?
   backgroundMovie.volume(0);
