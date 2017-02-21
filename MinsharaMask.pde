@@ -65,7 +65,7 @@ void setup() {
   algorithmChoice = Algorithm.OPENCV;
   
   //Set Foreground and Background choice defaults
-  foregroundChoice = Foreground.VIDEO;
+  foregroundChoice = Foreground.CAMERA;
   backgroundChoice = Background.VIDEO;
   
   //load images
@@ -86,6 +86,10 @@ void setup() {
   backgroundMovie.loop();
   //mute movie?
   backgroundMovie.volume(0);
+  
+  //set up loops for code
+  codeForegroundSetup();
+  codeBackgroundSetup();
   
   //live Camera start
   liveCam.start();
@@ -279,7 +283,11 @@ void changeDetection3() {
 
 }
 
-PImage codeForeground(PImage previousImage){
+void codeForegroundSetup(){
+   //WRITE YOUR SETUP LOOP HERE 
+}
+
+PImage codeForegroundDraw(PImage previousImage){
   PImage newImage;
   image(previousImage,0,0);
   //WRITE YOUR CODE FOR THE FOREGROUND BELOW HERE 
@@ -291,7 +299,11 @@ PImage codeForeground(PImage previousImage){
   return newImage;
 }
 
-PImage codeBackground(PImage previousImage){
+void codeBackgroundSetup(){
+   //WRITE YOUR SETUP LOOP HERE 
+}
+
+PImage codeBackgroundDraw(PImage previousImage){
   PImage newImage;
   image(previousImage,0,0);
   //WRITE YOUR CODE FOR THE FOREGROUND BELOW HERE 
