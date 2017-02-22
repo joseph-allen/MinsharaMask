@@ -27,7 +27,7 @@ Algorithm algorithmChoice;
 Foreground foregroundChoice;
 Background backgroundChoice;
 
-OpenCV opencv;
+OpenCV opencvBackgroundSubtraction,opencv;
 GSlider sdr;
 GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera; 
 GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera; 
@@ -61,13 +61,13 @@ void setup() {
     backgroundColorMask.set(x % width, x / width, backgroundColor); 
   }
   
-  opencv = new OpenCV(this, width, height);
+  opencvBackgroundSubtraction = new OpenCV(this, width, height);
 
   //we need this line for changedetection3
-  opencv.startBackgroundSubtraction(5, 3, 0.5);
+  opencvBackgroundSubtraction.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.MINSHARA;
+  algorithmChoice = Algorithm.OPENCVBACKGROUND;
   
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.COLOR;
@@ -327,23 +327,23 @@ void changeDetection3() {
   camCapture.set(0,0,liveCam);
   camCapture.loadPixels();
   
-  opencv.loadImage(camCapture);
+  opencvBackgroundSubtraction.loadImage(camCapture);
   
-  opencv.diff(screenshot);
-  opencv.updateBackground();
-  opencv.blur(10);
-  opencv.threshold(20);
-  opencv.erode();
-  opencv.dilate();
-  opencv.erode();
-  opencv.dilate();
-  opencv.erode();
-  opencv.dilate();
+  opencvBackgroundSubtraction.diff(screenshot);
+  opencvBackgroundSubtraction.updateBackground();
+  opencvBackgroundSubtraction.blur(10);
+  opencvBackgroundSubtraction.threshold(20);
+  opencvBackgroundSubtraction.erode();
+  opencvBackgroundSubtraction.dilate();
+  opencvBackgroundSubtraction.erode();
+  opencvBackgroundSubtraction.dilate();
+  opencvBackgroundSubtraction.erode();
+  opencvBackgroundSubtraction.dilate();
   
-  foregroundMask = opencv.getSnapshot(); 
+  foregroundMask = opencvBackgroundSubtraction.getSnapshot(); 
   
-  opencv.invert();
-  backgroundMask = opencv.getSnapshot(); 
+  opencvBackgroundSubtraction.invert();
+  backgroundMask = opencvBackgroundSubtraction.getSnapshot(); 
 
 }
 
