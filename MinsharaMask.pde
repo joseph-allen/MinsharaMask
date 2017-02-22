@@ -29,6 +29,7 @@ Background backgroundChoice;
 
 OpenCV opencv;
 GSlider sdr;
+GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera; 
 
 void setup() {
   //scene setup  
@@ -64,7 +65,7 @@ void setup() {
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.MINSHARA;
+  algorithmChoice = Algorithm.OPENCVBACKGROUND;
   
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.COLOR;
@@ -99,7 +100,28 @@ void setup() {
   liveCam.start();
   
   //set up GUI
-  sdr = new GSlider(this, 55, 80, 200, 100, 15);
+  sdr = new GSlider(this, 55, 20, 100, 50, 25);
+  
+  btnFGColor = new GButton(this, 55, 70, 110, 20);
+  btnFGColor.setText("Color");
+  btnFGColor.addEventHandler(this, "btnFGColorClick");
+  
+  btnFGImage = new GButton(this, 55, 100, 110, 20);
+  btnFGImage.setText("Image");
+  btnFGImage.addEventHandler(this, "btnFGImageClick");
+    
+  btnFGVideo = new GButton(this, 55, 130, 110, 20);
+  btnFGVideo.setText("Video");
+  btnFGVideo.addEventHandler(this, "btnFGVideoClick");
+    
+  btnFGCode = new GButton(this, 55, 160, 110, 20);
+  btnFGCode.setText("Code");
+  btnFGCode.addEventHandler(this, "btnFGCodeClick");
+    
+  btnFGCamera = new GButton(this, 55, 190, 110, 20);
+  btnFGCamera.setText("Camera");
+  btnFGCamera.addEventHandler(this, "btnFGCameraClick");
+
 }
 
 void draw() {
@@ -353,4 +375,24 @@ public enum Background {
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
   if (slider == sdr)  // The slider being configured?
     comparVal = sdr.getValueF();    
+}
+
+public void btnFGColorClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.COLOR;
+}
+
+public void btnFGImageClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.IMAGE;
+}
+
+public void btnFGVideoClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.VIDEO;
+}
+
+public void btnFGCodeClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.CODE;
+}
+
+public void btnFGCameraClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.CAMERA;
 }
