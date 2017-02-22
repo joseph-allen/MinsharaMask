@@ -67,8 +67,8 @@ void setup() {
   algorithmChoice = Algorithm.MINSHARA;
   
   //Set Foreground and Background choice defaults
-  foregroundChoice = Foreground.CAMERA;
-  backgroundChoice = Background.VIDEO;
+  foregroundChoice = Foreground.COLOR;
+  backgroundChoice = Background.CAMERA;
   
   //load images
   foregroundImage = loadImage("data/Image/Front.png");
@@ -81,11 +81,13 @@ void setup() {
   //load Movies, this implicitly looks in a data folder
   foregroundMovie = new Movie(this, "Video/Front.mov");
   foregroundMovie.loop();
+  foregroundMovie.stop();
   //mute movie?
   //foregroundMovie.volume(0);
   
   backgroundMovie = new Movie(this, "Video/Back.mov");
   backgroundMovie.loop();
+  backgroundMovie.stop();
   //mute movie?
   backgroundMovie.volume(0);
   
@@ -147,6 +149,7 @@ void handleForegroundChoice(){
      break;
      
    case VIDEO:
+     foregroundMovie.play();
      foregroundMask.blend(foregroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
      break;
      
@@ -172,6 +175,7 @@ void handleBackgroundChoice(){
      break;
      
    case VIDEO:
+   backgroundMovie.play();
      backgroundMask.blend(backgroundFrame, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
      break;
      
