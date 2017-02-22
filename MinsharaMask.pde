@@ -30,7 +30,7 @@ Background backgroundChoice;
 OpenCV opencv;
 GSlider sdr;
 GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera; 
-
+GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera; 
 void setup() {
   //scene setup  
   fullScreen();
@@ -121,6 +121,26 @@ void setup() {
   btnFGCamera = new GButton(this, 55, 190, 110, 20);
   btnFGCamera.setText("Camera");
   btnFGCamera.addEventHandler(this, "btnFGCameraClick");
+  
+  btnBGColor = new GButton(this, 180, 70, 110, 20);
+  btnBGColor.setText("Color");
+  btnBGColor.addEventHandler(this, "btnBGColorClick");
+  
+  btnBGImage = new GButton(this, 180, 100, 110, 20);
+  btnBGImage.setText("Image");
+  btnBGImage.addEventHandler(this, "btnBGImageClick");
+    
+  btnBGVideo = new GButton(this, 180, 130, 110, 20);
+  btnBGVideo.setText("Video");
+  btnBGVideo.addEventHandler(this, "btnBGVideoClick");
+    
+  btnBGCode = new GButton(this, 180, 160, 110, 20);
+  btnBGCode.setText("Code");
+  btnBGCode.addEventHandler(this, "btnBGCodeClick");
+    
+  btnBGCamera = new GButton(this, 180, 190, 110, 20);
+  btnBGCamera.setText("Camera");
+  btnBGCamera.addEventHandler(this, "btnBGCameraClick");
 
 }
 
@@ -395,4 +415,24 @@ public void btnFGCodeClick(GButton source, GEvent event) {
 
 public void btnFGCameraClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.CAMERA;
+}
+
+public void btnBGColorClick(GButton source, GEvent event) {
+  backgroundChoice = Background.COLOR;
+}
+
+public void btnBGImageClick(GButton source, GEvent event) {
+  backgroundChoice = Background.IMAGE;
+}
+
+public void btnBGVideoClick(GButton source, GEvent event) {
+  backgroundChoice = Background.VIDEO;
+}
+
+public void btnBGCodeClick(GButton source, GEvent event) {
+  backgroundChoice = Background.CODE;
+}
+
+public void btnBGCameraClick(GButton source, GEvent event) {
+  backgroundChoice = Background.CAMERA;
 }
