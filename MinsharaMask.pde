@@ -1,6 +1,7 @@
 //Import Libraries
 import processing.video.*;
 import gab.opencv.*;
+import g4p_controls.*;
 
 //create Capture
 Capture liveCam;
@@ -27,6 +28,7 @@ Foreground foregroundChoice;
 Background backgroundChoice;
 
 OpenCV opencv;
+GSlider sdr;
 
 void setup() {
   //scene setup  
@@ -62,7 +64,7 @@ void setup() {
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.OPENCV;
+  algorithmChoice = Algorithm.MINSHARA;
   
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.CAMERA;
@@ -93,6 +95,9 @@ void setup() {
   
   //live Camera start
   liveCam.start();
+  
+  //set up GUI
+  sdr = new GSlider(this, 55, 80, 200, 100, 15);
 }
 
 void draw() {
@@ -146,7 +151,7 @@ void handleForegroundChoice(){
      break;
      
    case CODE:
-     foregroundCode = codeForeground(foregroundCode);
+     foregroundCode = codeForegroundDraw(foregroundCode);
      foregroundMask.blend(foregroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
      break;
    
@@ -171,7 +176,7 @@ void handleBackgroundChoice(){
      break;
      
    case CODE:
-     backgroundCode = codeBackground(backgroundCode);
+     backgroundCode = codeBackgroundDraw(backgroundCode);
      backgroundMask.blend(backgroundCode, 0, 0, width, height, 0, 0, width, height, MULTIPLY); 
      break;
    
@@ -339,4 +344,9 @@ public enum Foreground {
 
 public enum Background {
   COLOR, IMAGE, VIDEO, CODE, CAMERA
+}
+
+public void handleSliderEvents(GValueControl slider, GEvent event) { 
+  if (slider == sdr)  // The slider being configured?
+    comparVal = sdr.getValueF();    
 }
