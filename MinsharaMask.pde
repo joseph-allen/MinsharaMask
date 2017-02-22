@@ -31,6 +31,8 @@ OpenCV opencv;
 GSlider sdr;
 GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera; 
 GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera; 
+GButton btnMinshara, btnOpenCV, btnOpenCVDiff;
+
 void setup() {
   //scene setup  
   fullScreen();
@@ -65,7 +67,7 @@ void setup() {
   opencv.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.OPENCVBACKGROUND;
+  algorithmChoice = Algorithm.MINSHARA;
   
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.COLOR;
@@ -142,6 +144,17 @@ void setup() {
   btnBGCamera.setText("Camera");
   btnBGCamera.addEventHandler(this, "btnBGCameraClick");
 
+  btnMinshara = new GButton(this, 320, 130, 110, 20);
+  btnMinshara.setText("Minshara");
+  btnMinshara.addEventHandler(this, "btnMinsharaClick");
+    
+  btnOpenCV = new GButton(this, 320, 160, 110, 20);
+  btnOpenCV.setText("OpenCV");
+  btnOpenCV.addEventHandler(this, "btnOpenCVClick");
+    
+  btnOpenCVDiff = new GButton(this, 320, 190, 110, 20);
+  btnOpenCVDiff.setText("OpenCVDiff");
+  btnOpenCVDiff.addEventHandler(this, "btnOpenCVDiffClick");
 }
 
 void draw() {
@@ -435,4 +448,16 @@ public void btnBGCodeClick(GButton source, GEvent event) {
 
 public void btnBGCameraClick(GButton source, GEvent event) {
   backgroundChoice = Background.CAMERA;
+}
+
+public void btnMinsharaClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.MINSHARA;
+}
+
+public void btnOpenCVClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.OPENCV;
+}
+
+public void btnOpenCVDiffClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.OPENCVBACKGROUND;
 }
