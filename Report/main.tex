@@ -59,7 +59,7 @@ I propose creation of a digital playground in the Processing\cite{PROCESSING} ID
 \section{What is Processing?}
 Processing is, by their own definition, "a flexible software sketchbook and a language for learning how to code within the context of the visual arts."\cite{PROCESSING}. Processing is open source and exists to give artists a simple introduction to using programming to create digital art. I took this project as a source of inspiration for my own, deciding to build my project in Processing and also follow their ethos of inspiring and teaching artists to be more comfortable with digital art and programming.
 
-Daniel Shiffman \cite{SHIFFMAN} is the project lead at the Processing foundation, and he creates some very impressive video tutorials to help get artist started with programming and their use of Processing, I am inspired to do the same and create video tutorials on how to use my project to help overcome the difficulties associated with Processing setup and setting up the project itself.
+Daniel Shiffman \cite{SHIFFMAN} is a project lead at the Processing foundation, and he creates some very impressive video tutorials to help get artist started with programming and their use of Processing, I am inspired to do the same and create video tutorials on how to use my project to help overcome the difficulties associated with Processing setup and setting up the project itself.
 
 \section{How do we currently do things?}
 Collaboration is a common technique to merge two different creative fields together to create something relevant to both fields. This collaboration can occur between two artists but also between two completely unrelated fields to create something meaningful. 
@@ -72,14 +72,27 @@ By the end of this project I hope to have created a product which will help arti
 \section{Methodology}
 The Project started out with a Cowboy Coding approach where each week was a spike to see what was possible and help understand the possibilities, in a way fitting the "Trial and Error" approach that artists take, the main focus of this early stage was to gain a more in depth understanding of the trade-offs between frame-rate and increased accuracy of the change detection itself.
 
-The second half of the project pivoted to a more structured approach, I now knew what functionality was possible and I used a Kanban\cite{KANBAN} approach since there is only one developer working on this project and this gave me much needed visualisation of the tasks that needed to be completed to make the project a success. This period was one of focusing on Usability and the clients needs over what I ,as a computer scientist, deemed important.
+The second half of the project pivoted to a more structured approach, I now knew what functionality was possible and I used a Kanban\cite{KANBAN} approach since there is only one developer working on this project(myself) and this gave me much needed visualization of the tasks that needed to be completed to make the project a success. This period was one of focusing on Usability and the clients needs over what I ,as a computer scientist, deemed important. I elicited the requirements necessary here through a semi-structured focus group and a structured questionnaire which I sent to relevant artists.
 
-\chapter{Background RENAME}
+\chapter{Apprehension}
 \section{Conception}
+The thought of somehow creating Digital Art came to me whilst working in my year in industry at a web development agency, I found that the work was intense, but there were long periods of inactivity. In these periods of inactivity I tried to find more personal use of the web language CSS, normally used to style web pages. I focused heavily on using built in transitions to make interesting animations which I later applied to my job in client-work. I made a goal to try to create a CSS only art gallery and went on to give a talk at my job about CSS-only artwork. To understand more about the art world I talked to my good friend Sarah.
+
 \subsection{Sarah (Client)}
-\subsection{Code as Art}
+Sarah is a third year Interactive Art student at the Manchester Metropolitan University. At the time her work was focused heavily on creating Algorithms which generate art??? She spent a lot more time researching programming for Digital Art and introduced me to Processing \cite{PROCESSING}. I would also occasionally try to help her with what she was working on by creating quick and short code demos, from here I realized that programming for an artist would be an interesting topic for my third year project. My main concern was that the over-ambitious and experimental work of an artist would clash with a long-term project that Computer Science anticipates. My goal then became to try to offer something generic for artists that would utilize Image Processing. 
+
 \subsection{Processing as inspiration}
+After my introduction to Processing I decided to try to find a simple list of challenges to hone my skills, what I discovered was that such a list did not exist(or perhaps I was looking in the wrong place). I decided instead to host my own challenges and create an opportunity for others where there was not one for me. I went to the Processing subreddit\cite{RPROCESSING} to ask getting started questions and decided that this group would be where I would start a weekly challenge to help me improve my skills, as well as the community. This was a direct inspiration for my project in that it made me more confident in my Processing ability, but also made me want to help others in the Digital Art community learn Processing and my project is a realization of this.
+
 \section{SAKBOT}
+Early on in the project I was introduced to the SAKBOT architecture \cite{SAKBOT}, which uses Image Processing to isolate MVOs(Moving Visual Objects) in a scene. It uses advanced techniques such as Optical Flow and Blob Detection in order to separately Classify the following:
+\begin{enumerate}
+  \item MVO: Moving Visual objects that we are interested in, for example if we were looking to detect cars in a scene then the MVO would be the car itself.
+  \item Ghost: A Ghost is a "change" in a scene which does not represent the location of an MVO. For example the reflection of the car in a nearby shop window would be considered a Ghost as although there is a clear change, it is not an MVO that we would be interested in.
+  \item MVO-shadows:
+  \item Ghost-shadows:
+\end{enumerate}
+
 
 \chapter{Change Detection Basics}
 \section{Thresholding}
