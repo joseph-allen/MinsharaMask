@@ -89,14 +89,23 @@ Early on in the project I was introduced to the SAKBOT architecture \cite{SAKBOT
 \begin{enumerate}
   \item MVO: Moving Visual objects that we are interested in, for example if we were looking to detect cars in a scene then the MVO would be the car itself.
   \item Ghost: A Ghost is a "change" in a scene which does not represent the location of an MVO. For example the reflection of the car in a nearby shop window would be considered a Ghost as although there is a clear change, it is not an MVO that we would be interested in.
-  \item MVO-shadows:
-  \item Ghost-shadows:
+  \item MVO-shadows: A Moving Visual Object shadow is a shadow which is connected to a Moving visual object, a shadow can simply be identified as a change in Brightness without a change in color.
+  \item Ghost-shadows: A Ghost shadow is any shadow not connected to a moving visual object, over time shadows in a scene may move due to the sun changing position, we do not want to count these as a "change".
 \end{enumerate}
 
 
 \chapter{Change Detection Basics}
+In this section I will discuss the fundamentals of change detection and move up onto more complex techniques used to increase accuracy. Change Detection is the process of finding the changes in a scene over any period of time, in this case we will use live video as this leads to better interaction.
+
 \section{Thresholding}
-\section{Euclidean Distance between two points}
+Thresholding is a very trivial method of segmenting any image into two parts. It involves selecting a value and assigning any pixel value below that value to one segment, and any pixel equal or above that value is assigned to the other segment.
+
+One issue with thresholding is you need to choose a threshold value to compare each pixel with. One method for doing this is finding the average value of all pixels and choosing this as you can expect about half of the pixels to be in each segment.
+
+I chose a threshold value of 20 as this simply looked good in most well lit scenes, the user also has the ability to change this value in the default change detection algorithm.
+\section{Euclidean Distance}
+Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large enough "change" in a pixel. While I started with this method I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change.
+
 \section{Color Normalization}
 \section{HSB Color Space}
 
