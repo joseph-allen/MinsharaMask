@@ -104,10 +104,18 @@ One issue with thresholding is you need to choose a threshold value to compare e
 
 I chose a threshold value of 20 as this simply looked good in most well lit scenes, the user also has the ability to change this value in the default change detection algorithm.
 \section{Euclidean Distance}
-Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large enough "change" in a pixel. While I started with this method I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change.
+Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large enough "change" in a pixel. While I started with this method for RGB color I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change.
 
 \section{Color Normalization}
+Color Normalization is a good way to ignore changes in brightness in RGB color space. if a shadow is cast over a white object although we would register a change because white and black are different colors, however we don't want to consider shadows to be a change, or even slight changes in scene lighting could register changes. Given $L_R,L_G,L_B$ are respectively the red, green and blue color channels and we have some $\theta$ as our comparison value then $\frac{L_R + L_G}{L_R + L_G + L_B}$ should give us a value to compare with $\theta$ which is no longer dependent on the brightness of the change and only the hue and saturation. This means that pure white and pure black are not considered a change from one another.
+
 \section{HSB Color Space}
+The HSB color space is a different way of representing colors, I started using RGB, which has a separate channel for Red,Green and Blue colors. I moved to HSB (Hue,Saturation,Brightness) as then I do not have to worry about using color normalization as discussed in the previous section so this became the natural progression of my work. Ignoring changes in brightness when performing euclidean distance on any two points means that shadows will be ignored successfully solving one of the problems of trivial change detection.
+\section{Problems with Basic Change Detection}
+\subsection{Brightness Changes}
+\subsection{Noise}
+\subsection{Background}
+\subsection{Shadows}
 
 \chapter{Change Detection Advanced}
 \section{OpenCV}
