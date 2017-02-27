@@ -82,7 +82,7 @@ void setup() {
   foregroundMovie.loop();
   foregroundMovie.stop();
   //mute movie?
-  //foregroundMovie.volume(0);
+  foregroundMovie.volume(0);
   
   backgroundMovie = new Movie(this, "Video/Back.mov");
   backgroundMovie.loop();
@@ -346,61 +346,4 @@ public enum Foreground {
 
 public enum Background {
   COLOR, IMAGE, VIDEO, CODE, CAMERA
-}
-
-public void handleSliderEvents(GValueControl slider, GEvent event) { 
-  if (slider == sdr)  // The slider being configured?
-    comparVal = sdr.getValueF();    
-}
-
-public void btnFGColorClick(GButton source, GEvent event) {
-  foregroundChoice = Foreground.COLOR;
-}
-
-public void btnFGImageClick(GButton source, GEvent event) {
-  foregroundChoice = Foreground.IMAGE;
-}
-
-public void btnFGVideoClick(GButton source, GEvent event) {
-  foregroundChoice = Foreground.VIDEO;
-}
-
-public void btnFGCodeClick(GButton source, GEvent event) {
-  foregroundChoice = Foreground.CODE;
-}
-
-public void btnFGCameraClick(GButton source, GEvent event) {
-  foregroundChoice = Foreground.CAMERA;
-}
-
-public void btnBGColorClick(GButton source, GEvent event) {
-  backgroundChoice = Background.COLOR;
-}
-
-public void btnBGImageClick(GButton source, GEvent event) {
-  backgroundChoice = Background.IMAGE;
-}
-
-public void btnBGVideoClick(GButton source, GEvent event) {
-  backgroundChoice = Background.VIDEO;
-}
-
-public void btnBGCodeClick(GButton source, GEvent event) {
-  backgroundChoice = Background.CODE;
-}
-
-public void btnBGCameraClick(GButton source, GEvent event) {
-  backgroundChoice = Background.CAMERA;
-}
-
-public void btnMinsharaClick(GButton source, GEvent event) {
-  algorithmChoice = Algorithm.MINSHARA;
-}
-
-public void btnOpenCVClick(GButton source, GEvent event) {
-  algorithmChoice = Algorithm.OPENCV;
-}
-
-public void btnOpenCVDiffClick(GButton source, GEvent event) {
-  algorithmChoice = Algorithm.OPENCVBACKGROUND;
 }

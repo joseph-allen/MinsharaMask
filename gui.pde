@@ -3,6 +3,7 @@ GSlider sdr;
 GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera; 
 GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera; 
 GButton btnMinshara, btnOpenCV, btnOpenCVDiff;
+GCheckbox chkFGVideoAudio, chkBGVideoAudio; 
 
 public void createGUI() {
   //set up GUI
@@ -59,4 +60,89 @@ public void createGUI() {
   btnOpenCVDiff = new GButton(this, 320, 190, 110, 20);
   btnOpenCVDiff.setText("OpenCVDiff");
   btnOpenCVDiff.addEventHandler(this, "btnOpenCVDiffClick");
+  
+  chkFGVideoAudio = new GCheckbox(this, 55, 220, 120, 20);
+  chkFGVideoAudio.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkFGVideoAudio.setText("FG Audio");
+  chkFGVideoAudio.setSelected(true);
+  chkFGVideoAudio.addEventHandler(this, "chkFGVideoAudioClick");
+  
+  chkBGVideoAudio = new GCheckbox(this, 180, 220, 120, 20);
+  chkBGVideoAudio.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkBGVideoAudio.setText("BG Audio");
+  chkBGVideoAudio.setSelected(true);
+  chkBGVideoAudio.addEventHandler(this, "chkBGVideoAudioClick");
+}
+
+public void handleSliderEvents(GValueControl slider, GEvent event) { 
+  if (slider == sdr)  // The slider being configured?
+    comparVal = sdr.getValueF();    
+}
+
+public void btnFGColorClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.COLOR;
+}
+
+public void btnFGImageClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.IMAGE;
+}
+
+public void btnFGVideoClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.VIDEO;
+}
+
+public void btnFGCodeClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.CODE;
+}
+
+public void btnFGCameraClick(GButton source, GEvent event) {
+  foregroundChoice = Foreground.CAMERA;
+}
+
+public void btnBGColorClick(GButton source, GEvent event) {
+  backgroundChoice = Background.COLOR;
+}
+
+public void btnBGImageClick(GButton source, GEvent event) {
+  backgroundChoice = Background.IMAGE;
+}
+
+public void btnBGVideoClick(GButton source, GEvent event) {
+  backgroundChoice = Background.VIDEO;
+}
+
+public void btnBGCodeClick(GButton source, GEvent event) {
+  backgroundChoice = Background.CODE;
+}
+
+public void btnBGCameraClick(GButton source, GEvent event) {
+  backgroundChoice = Background.CAMERA;
+}
+
+public void btnMinsharaClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.MINSHARA;
+}
+
+public void btnOpenCVClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.OPENCV;
+}
+
+public void btnOpenCVDiffClick(GButton source, GEvent event) {
+  algorithmChoice = Algorithm.OPENCVBACKGROUND;
+}
+
+public void chkFGVideoAudioClick(GCheckbox source, GEvent event) {
+  if (chkFGVideoAudio.isSelected() == false) {
+   foregroundMovie.volume(0);
+  } else {
+   foregroundMovie.volume(1); 
+  }
+}
+
+public void chkBGVideoAudioClick(GCheckbox source, GEvent event) {
+  if (chkBGVideoAudio.isSelected() == false) {
+   backgroundMovie.volume(0);
+  } else {
+   backgroundMovie.volume(1); 
+  }
 }
