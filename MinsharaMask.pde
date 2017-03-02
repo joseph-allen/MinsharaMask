@@ -133,6 +133,9 @@ void generateOutput(){
   
   if(isSavingOutput)
     saveFrame("Output/output-#####.tif");
+    
+  //output the frameRate to help with movie making
+  text(frameRate, 10, 10); 
 }
 
 void saveLayers(){
