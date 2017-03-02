@@ -4,6 +4,7 @@ GButton btnFGColor, btnFGImage, btnFGVideo, btnFGCode, btnFGCamera;
 GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera; 
 GButton btnMinshara, btnOpenCV, btnOpenCVDiff;
 GCheckbox chkFGVideoAudio, chkBGVideoAudio; 
+GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput; 
 
 public void createGUI() {
   //set up GUI
@@ -72,6 +73,31 @@ public void createGUI() {
   chkBGVideoAudio.setText("BG Audio");
   chkBGVideoAudio.setSelected(true);
   chkBGVideoAudio.addEventHandler(this, "chkBGVideoAudioClick");
+  
+  chkSaveAll = new GCheckbox(this, 55, 250, 120, 20);
+  chkSaveAll.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkSaveAll.setText("Save All");
+  chkSaveAll.addEventHandler(this, "chkSaveAllClick");
+  
+  chkSaveCamera = new GCheckbox(this, 55, 280, 120, 20);
+  chkSaveCamera.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkSaveCamera.setText("Save Camera");
+  chkSaveCamera.addEventHandler(this, "chkSaveCameraClick");
+
+  chkSaveFG = new GCheckbox(this, 180, 280, 120, 20);
+  chkSaveFG.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkSaveFG.setText("Save FG");
+  chkSaveFG.addEventHandler(this, "chkSaveFGClick");
+
+  chkSaveBG = new GCheckbox(this, 305, 280, 120, 20);
+  chkSaveBG.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkSaveBG.setText("Save BG");
+  chkSaveBG.addEventHandler(this, "chkSaveBGClick");
+
+  chkSaveOutput = new GCheckbox(this, 430, 280, 120, 20);
+  chkSaveOutput.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
+  chkSaveOutput.setText("Save Output");
+  chkSaveOutput.addEventHandler(this, "chkSaveOutputClick");
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
@@ -144,5 +170,51 @@ public void chkBGVideoAudioClick(GCheckbox source, GEvent event) {
    backgroundMovie.volume(0);
   } else {
    backgroundMovie.volume(1); 
+  }
+}
+
+public void chkSaveAllClick(GCheckbox source, GEvent event) {
+  if (chkSaveAll.isSelected() == true) {
+   chkSaveCamera.setSelected(true);
+   chkSaveFG.setSelected(true);
+   chkSaveBG.setSelected(true);
+   chkSaveOutput.setSelected(true);
+  } else {
+   chkSaveCamera.setSelected(false);
+   chkSaveFG.setSelected(false);
+   chkSaveBG.setSelected(false);
+   chkSaveOutput.setSelected(false);
+  }
+}
+
+public void chkSaveCameraClick(GCheckbox source, GEvent event) {
+  if (chkSaveCamera.isSelected() == true) {
+    isSavingCamera = true;
+  } else {
+    isSavingCamera = false;
+  }
+}
+
+public void chkSaveFGClick(GCheckbox source, GEvent event) {
+  if (chkSaveFG.isSelected() == true) {
+    isSavingForeground = true;
+  } else {
+    isSavingForeground = false;
+  }
+}
+
+public void chkSaveBGClick(GCheckbox source, GEvent event) {
+  if (chkSaveBG.isSelected() == true) {
+    isSavingBackground = true;
+  } else {
+    isSavingBackground = false;
+  }
+}
+
+public void chkSaveOutputClick(GCheckbox source, GEvent event) {
+  if (chkSaveCamera.isSelected() == true) {
+    isSavingCamera = true;
+  } else {
+    isSavingCamera = false;
   }
 }

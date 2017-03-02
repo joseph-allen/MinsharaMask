@@ -26,7 +26,7 @@ float comparVal = 0.25;
 int saveCount = 0;
 
 //flags for saving
-boolean isSavingCamera, isSavingForgeound, isSavingBackground, isSavingOutput;
+boolean isSavingCamera, isSavingForeground, isSavingBackground, isSavingOutput;
 
 Algorithm algorithmChoice;
 Foreground foregroundChoice;
@@ -103,7 +103,7 @@ void setup() {
   liveCam.start();
   
   isSavingCamera = false;
-  isSavingForgeound = false;
+  isSavingForeground = false;
   isSavingBackground = false;
   isSavingOutput = false;
   
@@ -136,17 +136,18 @@ void generateOutput(){
 }
 
 void saveLayers(){
-  if(isSavingCamera)
-    camCapture.save("Camera/camera-" + saveCount);
-    
-  if(isSavingForgeound)
-    foregroundMask.save("Foreground/foreground-" + saveCount);
-    
-  if(isSavingBackground)
-    backgroundMask.save("Background/background-" + saveCount);
-    
-  if(isSavingBackground || isSavingForgeound || isSavingCamera)
+  if(isSavingBackground || isSavingForeground || isSavingCamera){
+    if(isSavingCamera)
+      camCapture.save("Camera/camera-" + saveCount);
+      
+    if(isSavingForeground)
+      foregroundMask.save("Foreground/foreground-" + saveCount);
+      
+    if(isSavingBackground)
+      backgroundMask.save("Background/background-" + saveCount);
+      
     saveCount++;
+  }
 }
 
 void handleAlgorithmChoice(){
