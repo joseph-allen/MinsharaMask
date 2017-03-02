@@ -23,6 +23,8 @@ PImage foregroundColorMask, backgroundColorMask;
 color foregroundColor, backgroundColor;
 float comparVal = 0.25;
 
+int saveCount = 0;
+
 Algorithm algorithmChoice;
 Foreground foregroundChoice;
 Background backgroundChoice;
@@ -109,6 +111,8 @@ void draw() {
   handleForegroundChoice();
   handleBackgroundChoice();
 
+  saveLayers();
+  
   generateOutput();
 }
 
@@ -118,6 +122,12 @@ void generateOutput(){
   
   //output both masks
   image(foregroundMask,0,0);
+}
+
+void saveLayers(){
+  foregroundMask.save("Foreground/foreground-" + saveCount + "png");
+  backgroundMask.save("Background/background-" + saveCount + "png");
+  saveCount++;
 }
 
 void handleAlgorithmChoice(){
