@@ -25,6 +25,9 @@ float comparVal = 0.25;
 
 int saveCount = 0;
 
+//flags for saving
+boolean isSavingCamera, isSavingForgeound, isSavingBackground, isSavingOutput;
+
 Algorithm algorithmChoice;
 Foreground foregroundChoice;
 Background backgroundChoice;
@@ -99,6 +102,11 @@ void setup() {
   //live Camera start
   liveCam.start();
   
+  isSavingCamera = false;
+  isSavingForgeound = false;
+  isSavingBackground = false;
+  isSavingOutput = false;
+  
   createGUI();
 }
 
@@ -114,7 +122,6 @@ void draw() {
   saveLayers();
   
   generateOutput();
-  println(frameRate);
 }
 
 void generateOutput(){
@@ -124,14 +131,20 @@ void generateOutput(){
   //output both masks
   image(foregroundMask,0,0);
   
-  //save output? need some logic here
-  saveFrame("Output/output-#####.tif");
+  if(isSavingOutput)
+    saveFrame("Output/output-#####.tif");
 }
 
 void saveLayers(){
-  camCapture.save("Camera/camera-" + saveCount + "tif");
-  foregroundMask.save("Foreground/foreground-" + saveCount);
-  backgroundMask.save("Background/background-" + saveCount);
+  if(isSavingCamera)
+    camCapture.save("Camera/camera-" + saveCount);
+    
+  if(isSavingForgeound)
+    foregroundMask.save("Foreground/foreground-" + saveCount);
+    
+  if(isSavingBackground)
+    backgroundMask.save("Background/background-" + saveCount);
+    
   saveCount++;
 }
 
