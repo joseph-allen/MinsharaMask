@@ -145,7 +145,8 @@ void saveLayers(){
   if(isSavingBackground)
     backgroundMask.save("Background/background-" + saveCount);
     
-  saveCount++;
+  if(isSavingBackground || isSavingForgeound || isSavingCamera)
+    saveCount++;
 }
 
 void handleAlgorithmChoice(){
