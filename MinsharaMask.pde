@@ -114,6 +114,7 @@ void draw() {
   saveLayers();
   
   generateOutput();
+  println(frameRate);
 }
 
 void generateOutput(){
@@ -122,11 +123,15 @@ void generateOutput(){
   
   //output both masks
   image(foregroundMask,0,0);
+  
+  //save output? need some logic here
+  saveFrame("Output/output-#####.tif");
 }
 
 void saveLayers(){
-  foregroundMask.save("Foreground/foreground-" + saveCount + "png");
-  backgroundMask.save("Background/background-" + saveCount + "png");
+  camCapture.save("Camera/camera-" + saveCount + "tif");
+  foregroundMask.save("Foreground/foreground-" + saveCount);
+  backgroundMask.save("Background/background-" + saveCount);
   saveCount++;
 }
 
