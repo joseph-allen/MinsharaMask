@@ -176,14 +176,28 @@ public void chkBGVideoAudioClick(GCheckbox source, GEvent event) {
 public void chkSaveAllClick(GCheckbox source, GEvent event) {
   if (chkSaveAll.isSelected() == true) {
    chkSaveCamera.setSelected(true);
+   isSavingCamera = true;
+   
    chkSaveFG.setSelected(true);
+   isSavingForeground = true;
+   
    chkSaveBG.setSelected(true);
+   isSavingBackground = true;
+   
    chkSaveOutput.setSelected(true);
+   isSavingOutput = true;
   } else {
    chkSaveCamera.setSelected(false);
+   isSavingCamera = false;
+   
    chkSaveFG.setSelected(false);
+   isSavingForeground = false;
+   
    chkSaveBG.setSelected(false);
+   isSavingBackground = false;
+   
    chkSaveOutput.setSelected(false);
+   isSavingOutput = false;
   }
 }
 
