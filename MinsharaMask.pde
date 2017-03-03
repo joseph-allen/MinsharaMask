@@ -135,7 +135,7 @@ void generateOutput(){
     saveFrame("Output/output-#####.tif");
     
   //output the frameRate to help with movie making
-  text(frameRate, 10, 10); 
+  lblFrameRate.setText("frame Rate: " + String.valueOf(frameRate)); 
 }
 
 void saveLayers(){

@@ -5,6 +5,7 @@ GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera;
 GButton btnMinshara, btnOpenCV, btnOpenCVDiff;
 GCheckbox chkFGVideoAudio, chkBGVideoAudio; 
 GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput; 
+GLabel lblFrameRate;
 
 public void createGUI() {
   //set up GUI
@@ -98,6 +99,8 @@ public void createGUI() {
   chkSaveOutput.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveOutput.setText("Save Output");
   chkSaveOutput.addEventHandler(this, "chkSaveOutputClick");
+  
+  lblFrameRate = new GLabel(this, 55, 10, 100, 20);
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
