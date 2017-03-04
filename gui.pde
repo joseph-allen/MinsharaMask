@@ -100,7 +100,7 @@ public void createGUI() {
   chkSaveOutput.setText("Save Output");
   chkSaveOutput.addEventHandler(this, "chkSaveOutputClick");
   
-  lblFrameRate = new GLabel(this, 55, 10, 100, 20);
+  lblFrameRate = new GLabel(this, 55, 10, 200, 20);
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 

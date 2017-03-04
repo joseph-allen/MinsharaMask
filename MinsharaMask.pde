@@ -132,7 +132,7 @@ void generateOutput(){
   image(foregroundMask,0,0);
   
   if(isSavingOutput)
-    saveFrame("Output/output-#####.tif");
+    saveFrame("Output/output-#####.jpg");
     
   //output the frameRate to help with movie making
   lblFrameRate.setText("frame Rate: " + String.valueOf(frameRate)); 
@@ -141,13 +141,13 @@ void generateOutput(){
 void saveLayers(){
   if(isSavingBackground || isSavingForeground || isSavingCamera){
     if(isSavingCamera)
-      camCapture.save("Camera/camera-" + saveCount);
+      camCapture.save("Camera/camera-" + saveCount + ".jpg");
       
     if(isSavingForeground)
-      foregroundMask.save("Foreground/foreground-" + saveCount);
+      foregroundMask.save("Foreground/foreground-" + saveCount + ".jpg");
       
     if(isSavingBackground)
-      backgroundMask.save("Background/background-" + saveCount);
+      backgroundMask.save("Background/background-" + saveCount + ".jpg");
       
     saveCount++;
   }
