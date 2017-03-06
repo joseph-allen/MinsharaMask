@@ -235,3 +235,28 @@ public void chkSaveOutputClick(GCheckbox source, GEvent event) {
     isSavingCamera = false;
   }
 }
+
+public void setGUI(boolean setVisibleTo){
+sdr.setVisible(setVisibleTo);
+  btnFGColor.setVisible(setVisibleTo);
+  btnFGImage.setVisible(setVisibleTo);
+  btnFGVideo.setVisible(setVisibleTo);
+  btnFGCode.setVisible(setVisibleTo);
+  btnFGCamera.setVisible(setVisibleTo); 
+  btnBGColor.setVisible(setVisibleTo);
+  btnBGImage.setVisible(setVisibleTo);
+  btnBGVideo.setVisible(setVisibleTo);
+  btnBGCode.setVisible(setVisibleTo);
+  btnBGCamera.setVisible(setVisibleTo);
+  btnMinshara.setVisible(setVisibleTo);
+  btnOpenCV.setVisible(setVisibleTo);
+  btnOpenCVDiff.setVisible(setVisibleTo);
+  chkFGVideoAudio.setVisible(setVisibleTo);
+  chkBGVideoAudio.setVisible(setVisibleTo);
+  chkSaveAll.setVisible(setVisibleTo);
+  chkSaveCamera.setVisible(setVisibleTo);
+  chkSaveFG.setVisible(setVisibleTo);
+  chkSaveBG.setVisible(setVisibleTo);
+  chkSaveOutput.setVisible(setVisibleTo); 
+  lblFrameRate.setVisible(setVisibleTo);
+}

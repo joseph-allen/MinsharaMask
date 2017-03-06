@@ -120,7 +120,6 @@ void draw() {
   handleBackgroundChoice();
 
   saveLayers();
-  
   generateOutput();
 }
 
@@ -379,4 +378,13 @@ public enum Foreground {
 
 public enum Background {
   COLOR, IMAGE, VIDEO, CODE, CAMERA
+}
+
+void keyPressed() {
+  //G for GUI, H for Hide
+  if (key == 'g') {
+    setGUI(true);
+  } else if (key == 'h') {
+    setGUI(false);
+  }
 }
