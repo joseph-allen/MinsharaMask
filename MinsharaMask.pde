@@ -354,10 +354,6 @@ PImage codeBackgroundDraw(PImage previousImage){
   return newImage;
 }
 
-void mouseClicked() {
-  screenshot.set(0,0,liveCam);
-}
-
 // Called every time a new frame is available to read
 void movieEvent(Movie m) {
   m.read();
@@ -386,5 +382,10 @@ void keyPressed() {
     setGUI(true);
   } else if (key == 'h') {
     setGUI(false);
+  };
+  
+  //C to Capture Scene
+  if (key == 'c') {
+    screenshot.set(0,0,liveCam);  
   }
 }
