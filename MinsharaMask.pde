@@ -31,6 +31,7 @@ boolean isSavingCamera, isSavingForeground, isSavingBackground, isSavingOutput;
 Algorithm algorithmChoice;
 Foreground foregroundChoice;
 Background backgroundChoice;
+Filter filterChoice;
 
 OpenCV opencvBackgroundSubtraction,opencv;
 
@@ -73,6 +74,9 @@ void setup() {
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.COLOR;
   backgroundChoice = Background.CAMERA;
+  
+  //Set Filter choice to None
+  filterChoice = Filter.NONE;
   
   //load images
   foregroundImage = loadImage("data/Image/Front.png");
@@ -118,9 +122,10 @@ void draw() {
   handleAlgorithmChoice();
   handleForegroundChoice();
   handleBackgroundChoice();
-
+  
   saveLayers();
   generateOutput();
+  handleFilterChoice();
 }
 
 void generateOutput(){
@@ -165,6 +170,25 @@ void handleAlgorithmChoice(){
    default:
      //case MINSHARA
      changeDetection1();
+  }
+}
+
+void handleFilterChoice(){
+  switch(filterChoice) {
+    case GRAY:
+      filter(GRAY);
+      break;
+    case INVERT:
+      filter(INVERT);
+      break;
+    case POSTERIZE:
+      filter(POSTERIZE, 4);
+      break;
+    case BLUR:
+      filter(BLUR, 4);
+      break;
+    default:
+      //apply no Filter
   }
 }
 
@@ -374,6 +398,10 @@ public enum Foreground {
 
 public enum Background {
   COLOR, IMAGE, VIDEO, CODE, CAMERA
+}
+
+public enum Filter {
+  NONE, GRAY, INVERT, POSTERIZE, BLUR 
 }
 
 void keyPressed() {

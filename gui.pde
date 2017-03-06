@@ -7,6 +7,7 @@ GCheckbox chkFGVideoAudio, chkBGVideoAudio;
 GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput; 
 GLabel lblFrameRate, lblToggleGUIInfo;
 GButton btnHideGUI;
+GButton btnFilterNone, btnFilterGray, btnFilterInvert, btnFilterPosterize, btnFilterBlur; 
 
 public void createGUI() {
   //set up GUI
@@ -109,6 +110,26 @@ public void createGUI() {
   btnHideGUI = new GButton(this, 55, 340, 120, 20);
   btnHideGUI.setText("Hide GUI");
   btnHideGUI.addEventHandler(this, "btnHideGUIClick");
+  
+  btnFilterNone = new GButton(this, 55, 370, 120, 20);
+  btnFilterNone.setText("None");
+  btnFilterNone.addEventHandler(this, "btnFilterNoneClick");
+  
+  btnFilterGray = new GButton(this, 55, 400, 120, 20);
+  btnFilterGray.setText("Gray");
+  btnFilterGray.addEventHandler(this, "btnFilterGrayClick");
+  
+  btnFilterInvert = new GButton(this, 55, 430, 120, 20);
+  btnFilterInvert.setText("Invert");
+  btnFilterInvert.addEventHandler(this, "btnFilterInvertClick");
+  
+  btnFilterPosterize = new GButton(this, 55, 460, 120, 20);
+  btnFilterPosterize.setText("Posterize");
+  btnFilterPosterize.addEventHandler(this, "btnFilterPosterizeClick");
+  
+  btnFilterBlur = new GButton(this, 55, 490, 120, 20);
+  btnFilterBlur.setText("Blur");
+  btnFilterBlur.addEventHandler(this, "btnFilterBlurClick");
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
@@ -251,6 +272,25 @@ public void btnHideGUIClick(GButton source, GEvent event) {
   setGUI(false);
 }
 
+public void btnFilterNoneClick(GButton source, GEvent event) {
+  filterChoice = Filter.NONE;
+}
+
+public void btnFilterGrayClick(GButton source, GEvent event) {
+  filterChoice = Filter.GRAY;
+}
+
+public void btnFilterInvertClick(GButton source, GEvent event) {
+  filterChoice = Filter.INVERT;
+}
+
+public void btnFilterPosterizeClick(GButton source, GEvent event) {
+  filterChoice = Filter.POSTERIZE;
+}
+
+public void btnFilterBlurClick(GButton source, GEvent event) {
+  filterChoice = Filter.BLUR;
+}
 public void setGUI(boolean setVisibleTo){
   sdr.setVisible(setVisibleTo);
   btnFGColor.setVisible(setVisibleTo);
