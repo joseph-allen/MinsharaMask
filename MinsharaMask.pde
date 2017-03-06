@@ -68,7 +68,7 @@ void setup() {
   opencvBackgroundSubtraction.startBackgroundSubtraction(5, 3, 0.5);
   
   //Set Alogirthm Choice default
-  algorithmChoice = Algorithm.OPENCVBACKGROUND;
+  algorithmChoice = Algorithm.MINSHARA;
   
   //Set Foreground and Background choice defaults
   foregroundChoice = Foreground.COLOR;

@@ -5,10 +5,13 @@ GButton btnBGColor, btnBGImage, btnBGVideo, btnBGCode, btnBGCamera;
 GButton btnMinshara, btnOpenCV, btnOpenCVDiff;
 GCheckbox chkFGVideoAudio, chkBGVideoAudio; 
 GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput; 
-GLabel lblFrameRate;
+GLabel lblFrameRate, lblToggleGUIInfo;
+GButton btnHideGUI;
 
 public void createGUI() {
   //set up GUI
+  lblFrameRate = new GLabel(this, 55, 10, 200, 20);
+    
   sdr = new GSlider(this, 55, 20, 100, 50, 25);
   
   btnFGColor = new GButton(this, 55, 70, 110, 20);
@@ -99,8 +102,13 @@ public void createGUI() {
   chkSaveOutput.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveOutput.setText("Save Output");
   chkSaveOutput.addEventHandler(this, "chkSaveOutputClick");
+ 
+  lblToggleGUIInfo = new GLabel(this, 55, 310, 300, 20);
+  lblToggleGUIInfo.setText("Hide GUI with 'H' and show GUI with 'G'");
   
-  lblFrameRate = new GLabel(this, 55, 10, 200, 20);
+  btnHideGUI = new GButton(this, 55, 340, 120, 20);
+  btnHideGUI.setText("Hide GUI");
+  btnHideGUI.addEventHandler(this, "btnHideGUIClick");
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
@@ -150,14 +158,17 @@ public void btnBGCameraClick(GButton source, GEvent event) {
 
 public void btnMinsharaClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.MINSHARA;
+  sdr.setVisible(true);
 }
 
 public void btnOpenCVClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.OPENCV;
+  sdr.setVisible(false);
 }
 
 public void btnOpenCVDiffClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.OPENCVBACKGROUND;
+  sdr.setVisible(false);
 }
 
 public void chkFGVideoAudioClick(GCheckbox source, GEvent event) {
@@ -236,8 +247,12 @@ public void chkSaveOutputClick(GCheckbox source, GEvent event) {
   }
 }
 
+public void btnHideGUIClick(GButton source, GEvent event) {
+  setGUI(false);
+}
+
 public void setGUI(boolean setVisibleTo){
-sdr.setVisible(setVisibleTo);
+  sdr.setVisible(setVisibleTo);
   btnFGColor.setVisible(setVisibleTo);
   btnFGImage.setVisible(setVisibleTo);
   btnFGVideo.setVisible(setVisibleTo);
@@ -259,4 +274,6 @@ sdr.setVisible(setVisibleTo);
   chkSaveBG.setVisible(setVisibleTo);
   chkSaveOutput.setVisible(setVisibleTo); 
   lblFrameRate.setVisible(setVisibleTo);
+  btnHideGUI.setVisible(setVisibleTo);
+  lblToggleGUIInfo.setVisible(setVisibleTo);
 }
