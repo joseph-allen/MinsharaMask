@@ -1,0 +1,5 @@
+#!/bin/bash
+rm -rf Camera/* 
+rm -rf Background/* 
+rm -rf Foreground/* 
+rm -rf Output/* 
