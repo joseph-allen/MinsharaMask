@@ -8,6 +8,7 @@ GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput;
 GLabel lblFrameRate, lblToggleGUIInfo;
 GButton btnHideGUI;
 GButton btnFilterNone, btnFilterGray, btnFilterInvert, btnFilterPosterize, btnFilterBlur; 
+GButton btnPlayPause;
 
 public void createGUI() {
   //set up GUI
@@ -130,6 +131,10 @@ public void createGUI() {
   btnFilterBlur = new GButton(this, 55, 490, 120, 20);
   btnFilterBlur.setText("Blur");
   btnFilterBlur.addEventHandler(this, "btnFilterBlurClick");
+ 
+  btnPlayPause = new GButton(this, 55, 520, 120, 20);
+  btnPlayPause.setText("Play/Pause");
+  btnPlayPause.addEventHandler(this, "btnPlayPauseClick");
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
@@ -291,6 +296,11 @@ public void btnFilterPosterizeClick(GButton source, GEvent event) {
 public void btnFilterBlurClick(GButton source, GEvent event) {
   filterChoice = Filter.BLUR;
 }
+
+public void btnPlayPauseClick(GButton source, GEvent event) {
+  isPlaying = !isPlaying; 
+}
+
 public void setGUI(boolean setVisibleTo){
   sdr.setVisible(setVisibleTo);
   btnFGColor.setVisible(setVisibleTo);
@@ -316,4 +326,10 @@ public void setGUI(boolean setVisibleTo){
   lblFrameRate.setVisible(setVisibleTo);
   btnHideGUI.setVisible(setVisibleTo);
   lblToggleGUIInfo.setVisible(setVisibleTo);
+  btnFilterNone.setVisible(setVisibleTo);
+  btnFilterGray.setVisible(setVisibleTo);
+  btnFilterInvert.setVisible(setVisibleTo);
+  btnFilterPosterize.setVisible(setVisibleTo);
+  btnFilterBlur.setVisible(setVisibleTo);
+  btnPlayPause.setVisible(setVisibleTo);
 }
