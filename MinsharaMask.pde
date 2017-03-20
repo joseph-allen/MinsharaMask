@@ -416,5 +416,6 @@ void keyPressed() {
   //C to Capture Scene
   if (key == 'c') {
     screenshot.set(0,0,liveCam);  
+    rect(0,0,width,height);
   }
 }
