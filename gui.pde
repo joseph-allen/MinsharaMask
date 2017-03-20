@@ -8,133 +8,145 @@ GCheckbox chkSaveAll, chkSaveCamera, chkSaveFG, chkSaveBG, chkSaveOutput;
 GLabel lblFrameRate, lblToggleGUIInfo;
 GButton btnHideGUI;
 GButton btnFilterNone, btnFilterGray, btnFilterInvert, btnFilterPosterize, btnFilterBlur; 
-GButton btnPlayPause;
+
+GLabel lblForeground,lblBackground,lblAlgoChoice,lblSave,lblFilter;
 
 public void createGUI() {
   //set up GUI
-  lblFrameRate = new GLabel(this, 55, 10, 200, 20);
+  lblFrameRate = new GLabel(this, 10, 10, 200, 20);
     
-  sdr = new GSlider(this, 55, 20, 100, 50, 25);
+  lblToggleGUIInfo = new GLabel(this, 10, 40, 300, 20);
+  lblToggleGUIInfo.setText("Hide GUI with 'H' and show GUI with 'G'");
   
-  btnFGColor = new GButton(this, 55, 70, 110, 20);
-  btnFGColor.setText("Color");
-  btnFGColor.addEventHandler(this, "btnFGColorClick");
+  btnHideGUI = new GButton(this, 250, 40, 120, 20);
+  btnHideGUI.setText("Hide GUI");
+  btnHideGUI.addEventHandler(this, "btnHideGUIClick");
   
-  btnFGImage = new GButton(this, 55, 100, 110, 20);
-  btnFGImage.setText("Image");
-  btnFGImage.addEventHandler(this, "btnFGImageClick");
-    
-  btnFGVideo = new GButton(this, 55, 130, 110, 20);
-  btnFGVideo.setText("Video");
-  btnFGVideo.addEventHandler(this, "btnFGVideoClick");
-    
-  btnFGCode = new GButton(this, 55, 160, 110, 20);
-  btnFGCode.setText("Code");
-  btnFGCode.addEventHandler(this, "btnFGCodeClick");
-    
-  btnFGCamera = new GButton(this, 55, 190, 110, 20);
-  btnFGCamera.setText("Camera");
-  btnFGCamera.addEventHandler(this, "btnFGCameraClick");
+  lblAlgoChoice = new GLabel(this, 10, 70, 300, 20);
+  lblAlgoChoice.setText("Algorithm Choice:");
   
-  btnBGColor = new GButton(this, 180, 70, 110, 20);
-  btnBGColor.setText("Color");
-  btnBGColor.addEventHandler(this, "btnBGColorClick");
-  
-  btnBGImage = new GButton(this, 180, 100, 110, 20);
-  btnBGImage.setText("Image");
-  btnBGImage.addEventHandler(this, "btnBGImageClick");
-    
-  btnBGVideo = new GButton(this, 180, 130, 110, 20);
-  btnBGVideo.setText("Video");
-  btnBGVideo.addEventHandler(this, "btnBGVideoClick");
-    
-  btnBGCode = new GButton(this, 180, 160, 110, 20);
-  btnBGCode.setText("Code");
-  btnBGCode.addEventHandler(this, "btnBGCodeClick");
-    
-  btnBGCamera = new GButton(this, 180, 190, 110, 20);
-  btnBGCamera.setText("Camera");
-  btnBGCamera.addEventHandler(this, "btnBGCameraClick");
-
-  btnMinshara = new GButton(this, 320, 130, 110, 20);
+  btnMinshara = new GButton(this, 120, 70, 65, 20);
   btnMinshara.setText("Minshara");
   btnMinshara.addEventHandler(this, "btnMinsharaClick");
     
-  btnOpenCV = new GButton(this, 320, 160, 110, 20);
+  btnOpenCV = new GButton(this, 190, 70, 65, 20);
   btnOpenCV.setText("OpenCV");
   btnOpenCV.addEventHandler(this, "btnOpenCVClick");
     
-  btnOpenCVDiff = new GButton(this, 320, 190, 110, 20);
+  btnOpenCVDiff = new GButton(this, 260, 70, 85, 20);
   btnOpenCVDiff.setText("OpenCVDiff");
   btnOpenCVDiff.addEventHandler(this, "btnOpenCVDiffClick");
   
-  chkFGVideoAudio = new GCheckbox(this, 55, 220, 120, 20);
+  sdr = new GSlider(this, 350, 70, 100, 20, 25);
+  
+  lblForeground = new GLabel(this, 10, 100, 300, 20);
+  lblForeground.setText("Foreground Mask:");
+  
+  btnFGColor = new GButton(this, 120, 100, 65, 20);
+  btnFGColor.setText("Color");
+  btnFGColor.addEventHandler(this, "btnFGColorClick");
+  
+  btnFGImage = new GButton(this, 190, 100, 65, 20);
+  btnFGImage.setText("Image");
+  btnFGImage.addEventHandler(this, "btnFGImageClick");
+    
+  btnFGVideo = new GButton(this, 260, 100, 65, 20);
+  btnFGVideo.setText("Video");
+  btnFGVideo.addEventHandler(this, "btnFGVideoClick");
+    
+  btnFGCode = new GButton(this, 330, 100, 65, 20);
+  btnFGCode.setText("Code");
+  btnFGCode.addEventHandler(this, "btnFGCodeClick");
+    
+  btnFGCamera = new GButton(this, 400, 100, 65, 20);
+  btnFGCamera.setText("Camera");
+  btnFGCamera.addEventHandler(this, "btnFGCameraClick");
+    
+  chkFGVideoAudio = new GCheckbox(this, 470, 100, 100, 20);
   chkFGVideoAudio.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkFGVideoAudio.setText("FG Audio");
   chkFGVideoAudio.setSelected(true);
   chkFGVideoAudio.addEventHandler(this, "chkFGVideoAudioClick");
   
-  chkBGVideoAudio = new GCheckbox(this, 180, 220, 120, 20);
+  lblBackground = new GLabel(this, 10, 130, 120, 20);
+  lblBackground.setText("Background Mask:");
+  
+  btnBGColor = new GButton(this, 120, 130, 65, 20);
+  btnBGColor.setText("Color");
+  btnBGColor.addEventHandler(this, "btnBGColorClick");
+  
+  btnBGImage = new GButton(this, 190, 130, 65, 20);
+  btnBGImage.setText("Image");
+  btnBGImage.addEventHandler(this, "btnBGImageClick");
+    
+  btnBGVideo = new GButton(this, 260, 130, 65, 20);
+  btnBGVideo.setText("Video");
+  btnBGVideo.addEventHandler(this, "btnBGVideoClick");
+    
+  btnBGCode = new GButton(this, 330, 130, 65, 20);
+  btnBGCode.setText("Code");
+  btnBGCode.addEventHandler(this, "btnBGCodeClick");
+    
+  btnBGCamera = new GButton(this, 400, 130, 65, 20);
+  btnBGCamera.setText("Camera");
+  btnBGCamera.addEventHandler(this, "btnBGCameraClick");
+  
+  chkBGVideoAudio = new GCheckbox(this, 470, 130, 100, 20);
   chkBGVideoAudio.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkBGVideoAudio.setText("BG Audio");
   chkBGVideoAudio.setSelected(true);
   chkBGVideoAudio.addEventHandler(this, "chkBGVideoAudioClick");
   
-  chkSaveAll = new GCheckbox(this, 55, 250, 120, 20);
+  lblSave = new GLabel(this, 10, 160, 300, 20);
+  lblSave.setText("Save Choice:");
+  
+  chkSaveAll = new GCheckbox(this, 120, 160, 100, 20);
   chkSaveAll.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveAll.setText("Save All");
   chkSaveAll.addEventHandler(this, "chkSaveAllClick");
   
-  chkSaveCamera = new GCheckbox(this, 55, 280, 120, 20);
+  chkSaveCamera = new GCheckbox(this, 120, 190, 100, 40);
   chkSaveCamera.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveCamera.setText("Save Camera");
   chkSaveCamera.addEventHandler(this, "chkSaveCameraClick");
 
-  chkSaveFG = new GCheckbox(this, 180, 280, 120, 20);
+  chkSaveFG = new GCheckbox(this, 220, 190, 100, 40);
   chkSaveFG.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveFG.setText("Save FG");
   chkSaveFG.addEventHandler(this, "chkSaveFGClick");
 
-  chkSaveBG = new GCheckbox(this, 305, 280, 120, 20);
+  chkSaveBG = new GCheckbox(this, 290, 190, 100, 40);
   chkSaveBG.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveBG.setText("Save BG");
   chkSaveBG.addEventHandler(this, "chkSaveBGClick");
 
-  chkSaveOutput = new GCheckbox(this, 430, 280, 120, 20);
+  chkSaveOutput = new GCheckbox(this, 360, 190, 100, 40);
   chkSaveOutput.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
   chkSaveOutput.setText("Save Output");
   chkSaveOutput.addEventHandler(this, "chkSaveOutputClick");
- 
-  lblToggleGUIInfo = new GLabel(this, 55, 310, 300, 20);
-  lblToggleGUIInfo.setText("Hide GUI with 'H' and show GUI with 'G'");
   
-  btnHideGUI = new GButton(this, 55, 340, 120, 20);
-  btnHideGUI.setText("Hide GUI");
-  btnHideGUI.addEventHandler(this, "btnHideGUIClick");
+  lblFilter = new GLabel(this, 10, 220, 300, 20);
+  lblFilter.setText("Filter Choice:");
   
-  btnFilterNone = new GButton(this, 55, 370, 120, 20);
+  btnFilterNone = new GButton(this, 120, 220, 65, 20);
   btnFilterNone.setText("None");
   btnFilterNone.addEventHandler(this, "btnFilterNoneClick");
   
-  btnFilterGray = new GButton(this, 55, 400, 120, 20);
+  btnFilterGray = new GButton(this, 190, 220, 65, 20);
   btnFilterGray.setText("Gray");
   btnFilterGray.addEventHandler(this, "btnFilterGrayClick");
   
-  btnFilterInvert = new GButton(this, 55, 430, 120, 20);
+  btnFilterInvert = new GButton(this, 260, 220, 65, 20);
   btnFilterInvert.setText("Invert");
   btnFilterInvert.addEventHandler(this, "btnFilterInvertClick");
   
-  btnFilterPosterize = new GButton(this, 55, 460, 120, 20);
+  btnFilterPosterize = new GButton(this, 330, 220, 65, 20);
   btnFilterPosterize.setText("Posterize");
   btnFilterPosterize.addEventHandler(this, "btnFilterPosterizeClick");
   
-  btnFilterBlur = new GButton(this, 55, 490, 120, 20);
+  btnFilterBlur = new GButton(this, 400, 220, 65, 20);
   btnFilterBlur.setText("Blur");
   btnFilterBlur.addEventHandler(this, "btnFilterBlurClick");
- 
-  btnPlayPause = new GButton(this, 55, 520, 120, 20);
-  btnPlayPause.setText("Play/Pause");
-  btnPlayPause.addEventHandler(this, "btnPlayPauseClick");
 }
 
 public void handleSliderEvents(GValueControl slider, GEvent event) { 
@@ -297,10 +309,6 @@ public void btnFilterBlurClick(GButton source, GEvent event) {
   filterChoice = Filter.BLUR;
 }
 
-public void btnPlayPauseClick(GButton source, GEvent event) {
-  isPlaying = !isPlaying; 
-}
-
 public void setGUI(boolean setVisibleTo){
   sdr.setVisible(setVisibleTo);
   btnFGColor.setVisible(setVisibleTo);
@@ -331,5 +339,9 @@ public void setGUI(boolean setVisibleTo){
   btnFilterInvert.setVisible(setVisibleTo);
   btnFilterPosterize.setVisible(setVisibleTo);
   btnFilterBlur.setVisible(setVisibleTo);
-  btnPlayPause.setVisible(setVisibleTo);
+  lblForeground.setVisible(setVisibleTo);
+  lblBackground.setVisible(setVisibleTo);
+  lblAlgoChoice.setVisible(setVisibleTo);
+  lblSave.setVisible(setVisibleTo);
+  lblFilter.setVisible(setVisibleTo);
 }

@@ -28,8 +28,6 @@ int saveCount = 0;
 //flags for saving
 boolean isSavingCamera, isSavingForeground, isSavingBackground, isSavingOutput;
 
-boolean isPlaying = true;
-
 Algorithm algorithmChoice;
 Foreground foregroundChoice;
 Background backgroundChoice;
@@ -120,8 +118,7 @@ void draw() {
   if (liveCam.available()) {
     liveCam.read();
   }
-  
-  if(isPlaying){
+
     handleAlgorithmChoice();
     handleForegroundChoice();
     handleBackgroundChoice();
@@ -129,7 +126,7 @@ void draw() {
     saveLayers();
     generateOutput();
     handleFilterChoice();
-  }
+  
 }
 
 void generateOutput(){
