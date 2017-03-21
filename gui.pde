@@ -28,6 +28,7 @@ public void createGUI() {
   btnMinshara = new GButton(this, 120, 70, 65, 20);
   btnMinshara.setText("Minshara");
   btnMinshara.addEventHandler(this, "btnMinsharaClick");
+  btnMinshara.setLocalColorScheme(G4P.GREEN_SCHEME);
     
   btnOpenCV = new GButton(this, 190, 70, 65, 20);
   btnOpenCV.setText("OpenCV");
@@ -45,6 +46,7 @@ public void createGUI() {
   btnFGColor = new GButton(this, 120, 100, 65, 20);
   btnFGColor.setText("Color");
   btnFGColor.addEventHandler(this, "btnFGColorClick");
+  btnFGColor.setLocalColorScheme(G4P.GREEN_SCHEME);
   
   btnFGImage = new GButton(this, 190, 100, 65, 20);
   btnFGImage.setText("Image");
@@ -90,6 +92,7 @@ public void createGUI() {
   btnBGCamera = new GButton(this, 400, 130, 65, 20);
   btnBGCamera.setText("Camera");
   btnBGCamera.addEventHandler(this, "btnBGCameraClick");
+  btnBGCamera.setLocalColorScheme(G4P.GREEN_SCHEME);
   
   chkBGVideoAudio = new GCheckbox(this, 470, 130, 100, 20);
   chkBGVideoAudio.setTextAlign(GAlign.LEFT, GAlign.MIDDLE);
@@ -131,6 +134,7 @@ public void createGUI() {
   btnFilterNone = new GButton(this, 120, 220, 65, 20);
   btnFilterNone.setText("None");
   btnFilterNone.addEventHandler(this, "btnFilterNoneClick");
+  btnFilterNone.setLocalColorScheme(G4P.GREEN_SCHEME);
   
   btnFilterGray = new GButton(this, 190, 220, 65, 20);
   btnFilterGray.setText("Gray");
@@ -156,56 +160,115 @@ public void handleSliderEvents(GValueControl slider, GEvent event) {
 
 public void btnFGColorClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.COLOR;
+  btnFGColor.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFGImageClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.IMAGE;
+  btnFGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGImage.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFGVideoClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.VIDEO;
+  btnFGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGVideo.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFGCodeClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.CODE;
+  btnFGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCode.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFGCameraClick(GButton source, GEvent event) {
   foregroundChoice = Foreground.CAMERA;
+  btnFGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFGCamera.setLocalColorScheme(G4P.GREEN_SCHEME);
 }
 
 public void btnBGColorClick(GButton source, GEvent event) {
   backgroundChoice = Background.COLOR;
+  btnBGColor.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnBGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnBGImageClick(GButton source, GEvent event) {
   backgroundChoice = Background.IMAGE;
+  btnBGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGImage.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnBGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnBGVideoClick(GButton source, GEvent event) {
   backgroundChoice = Background.VIDEO;
+  btnBGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGVideo.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnBGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnBGCodeClick(GButton source, GEvent event) {
   backgroundChoice = Background.CODE;
+  btnBGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCode.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnBGCamera.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnBGCameraClick(GButton source, GEvent event) {
   backgroundChoice = Background.CAMERA;
+  btnBGColor.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGImage.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGVideo.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCode.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnBGCamera.setLocalColorScheme(G4P.GREEN_SCHEME);
 }
 
 public void btnMinsharaClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.MINSHARA;
+  btnMinshara.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnOpenCV.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnOpenCVDiff.setLocalColorScheme(G4P.BLUE_SCHEME);
   sdr.setVisible(true);
 }
 
 public void btnOpenCVClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.OPENCV;
+  btnMinshara.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnOpenCV.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnOpenCVDiff.setLocalColorScheme(G4P.BLUE_SCHEME);
   sdr.setVisible(false);
 }
 
 public void btnOpenCVDiffClick(GButton source, GEvent event) {
   algorithmChoice = Algorithm.OPENCVBACKGROUND;
+  btnMinshara.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnOpenCV.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnOpenCVDiff.setLocalColorScheme(G4P.GREEN_SCHEME);
   sdr.setVisible(false);
 }
 
@@ -291,22 +354,47 @@ public void btnHideGUIClick(GButton source, GEvent event) {
 
 public void btnFilterNoneClick(GButton source, GEvent event) {
   filterChoice = Filter.NONE;
+  btnFilterNone.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFilterGray.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterInvert.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterPosterize.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterBlur.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFilterGrayClick(GButton source, GEvent event) {
   filterChoice = Filter.GRAY;
+  btnFilterNone.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterGray.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFilterInvert.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterPosterize.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterBlur.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFilterInvertClick(GButton source, GEvent event) {
   filterChoice = Filter.INVERT;
+  btnFilterNone.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterGray.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterInvert.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFilterPosterize.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterBlur.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFilterPosterizeClick(GButton source, GEvent event) {
   filterChoice = Filter.POSTERIZE;
+  btnFilterNone.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterGray.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterInvert.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterPosterize.setLocalColorScheme(G4P.GREEN_SCHEME);
+  btnFilterBlur.setLocalColorScheme(G4P.BLUE_SCHEME);
 }
 
 public void btnFilterBlurClick(GButton source, GEvent event) {
   filterChoice = Filter.BLUR;
+  btnFilterNone.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterGray.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterInvert.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterPosterize.setLocalColorScheme(G4P.BLUE_SCHEME);
+  btnFilterBlur.setLocalColorScheme(G4P.GREEN_SCHEME);
 }
 
 public void setGUI(boolean setVisibleTo){
