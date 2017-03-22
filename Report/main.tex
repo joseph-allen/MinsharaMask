@@ -193,24 +193,109 @@ Through classical methods requirements are much easier to implement, however in 
 There are three different types of interviews used.
 
 \begin{itemize}
-\item Structured Interview -
-\item Semi-structured Interview -
-\item Unstructured Interview -
+\item Structured Interview - The goal here is to make sure every person interviewed is given the exact same set of questions, the benefit here is that there are easily comparable answers and you can come up with meaningful statistics to validate your product.
+
+\item Unstructured Interview - The goal here is to find an interviewee who has a better grasp of the knowledge space than those making the product, to hope that they will reveal the true desires they have for the product. We do this by presenting the product and then trying to provoke discussion
 \end{itemize}
 
-\subsection{decision and justification}
+What I choose is a semi-structured interview, this allows me to lead the interviewees to discussions which I felt are important and then later allow them to go off in their own direction once they are familiar with the prototype I will show them after their initial impressions. I used this method for both the Focus groups and the individual questionnaires to three different groups:
+
+\begin{itemize}
+\item Student artists - These are all students from third year at the MMU Art School. They focus more on academia and abide by more rigorous research processes and deadlines. Three of these such students were part of my focus group and my final client is one of these students.
+\item Professional Technical artists - These are artists who specifically focus on using programming to create their artwork and performances, this type of artists is generally very fluent with many types of programming language and are in general already familiar with Processing\cite{PROCESSING}.
+\item Professional Non-Technical artists - These are artists who are professionally artists, they use their free time to create art and sell prints and work for events and exhibits.
+\end{itemize}
+
+\subsection{Focus group}
+I asked 3 student artists to meet me in their art studio, I chose this location so that they would feel comfortable as there is an effect called Obtrusive Observation, where "The act of observation changes the observed in some way"\cite{UX}. First I asked them the following questions to gain an understanding of how art is achieved:
+
+\begin{itemize}
+\item What is Art to you?
+\item What is the process to create art?
+\item What tasks do you always do to achieve art?
+\item Are there any digital Products you use?
+\item What Features do you like or dislike?
+\end{itemize}
+
+I then showed the group a very basic version of my project which showed white pixels for the foreground mask and black for the background mask and no other features. I then asked for any initial impressions and feature requests.
+
+\subsection{Decision and Justification}
+Again I re-iterate the difficulty in creating a product for artists, I need a way to create requirements which will give me a long-term project goal.
 \section{Codification}
+Codifying is the process of converting a real world problem or solution into a system with fixed rules so that it can be implemented in a program. 
+
+the first step here is try to figure out what artists do to achieve Art. The Focus group was very helpful for solving this, first I grouped all meaningful comments from the focus group and interviews into their relevant question groups and they are also color-coded by the different persona's answering them. From here we can notice any repeat comments and understand a generic solution to our question of "What is Art?" and "How is Art achieved?". I found in general that the artists start out looking for "Nothing to achieve in particular", the main focus is to elicit themes and explorations using "Trial and error" which lead me to the realization that as successful product for these artists needs to encourage this playful mentality whilst also allowing for curiosity to lead to mastery of technical skills in an attempt to transition the non-technical persona's to the technical ones. 
+
 \section{Requirements}
+From this I created a collection of functional and non-functional requirements:
+
+\begin{enumerate}
+\item The User can have a solid color Background and Foreground.
+\item The User can have a picture as a Background or Foreground.
+\item The User can have a video as a Background or Foreground.
+\item The User can have a coded example as a Background or Foreground.
+\item The User can have the Current Camera as a Background or Foreground.
+\item The User can easily decide what the Background Mask is.
+\item The User can easily decide what the Foreground Mask is.
+\item The System will make sure the User only has one active Background or Foreground.
+\item The User can adjust the tolerance of the Change Detection algorithm.
+\item The System should Allow the separate Masks to be saved.
+\item The System should Allow the user to generate movies.
+\item The System should have a high frame rate.
+\item The System should be responsive.
+\item The System should perform “good” change detection.
+\item The System should be easy for a user to download and understand.
+\end{enumerate}
+
+Requirements 1 to 11 are Functional and can be completed, 12-15 are non-functional and hence can continually be improved on, they are not so much requirements as they are goals to strive for.
 
 \chapter{Functionality}
-\section{Camera}
+This chapter will focus specifically on the functional requirements of teh project and how they are archived.
 \section{Color}
+The functionality here is allowing the User to select the Foreground and Background mask colors, while there is a function within G4P\cite{G4P} that uses the built in Color picker, I chose to intentionally leave this as something which must be changed in the Code, this is because it is a trivial change to lead the artists using the project to look into the code.
+
+
 \section{Image}
+The functionality here is allowing the User to select the Foreground and Background mask Images, these images will be resized to fit the current monitor, this means that the artists will need to choose images of the correct resolution, however I believe it will be more common to have a user try to use a small image and so rather than have the image not be big enough I force this re-sizing, again since the code is open-source the artist can turn this off themselves if they wish.
+
+Some examples of use here is that the Artist can set the Foreground and background to be an annotated and unannotated diagram to allow the people in the scene to reveal aspects of the underlying image.
+
 \section{Video}
+The functionality here is allowing the User to select the Foreground and Background mask Videos, these videos are also resized to fit the current monitor. there is an extra layer here as the audio is also playable so the users also need to be able to mute and unmute the video.
+
 \section{Code}
+The functionality here is allowing the User to select the Foreground and Background mask Coded examples. Processing \cite{PROCESSING} works by having a 
+\verb|setup()| function which runs once at the start of the program followed by a \verb|draw()| loop which runs on every individual frames generation. In order to have coded examples we replicate this behavior, encouraging artists to learn the fundamentals of Processing before proceeding.
+
+\section{Camera}
+The functionality here is allowing the User to select the Foreground and Background mask as the live camera.
+
+\section{User Interface}
+The User Interface is designed to let the artist quickly take control of the layers, while any Color,Image,Video or Code change must happen before each run, the user can control which layer is currently being shown can be changed at any moment. The User also need to be able to control the save options at any moment.
+
 \section{Saving and Movie making}
+The User has the following Save options:
+
+\begin{itemize}
+\item Save All - Sets all of the other save options to the same as this one. Allows the user to save all possible layers at once should they need them for their comparison.
+\item Save Camera - Saves the entire Camera input per frame.
+\item Save Foreground - Saves only the Foreground layer, saves black where there is no Foreground.
+\item Save Background - Saves only the Background layer, saves black where there is no Background.
+\item Save Output - Saves the addition of both the Foreground and Background.
+\end{itemize}
 
 \chapter{Usability}
+Usability is about helping the user use the product, this chapter will focus on that?
+
+\section{User Experience}
+User Experience is a more recent iteration of the ideas surrounding HCI, where there is not yet a consistent definition across academia and industry the field itself is an amalgamation of HCI, psychology and many other fields. My personal definition is that User Experience is about pre-empting user expectations and aiding the user in learning new behaviors. A good User Experience is a pleasure to use. 
+
+I will quickly work through some User Experience design here by answering the question "How does the user know they have captured their calibration image?". In order for the system to perform change detection it needs an image to compare against, we need a way for the user to capture the scene and a way to give feedback to let the user know that the screenshot was taken.
+
+In standard HCI examples, you would expect something like an alert, a text message or a console message to let the user know this screenshot has successfully been taken. I believe that none of these are appropriate solutions, an alert is invasive and have negative associations. A text message may appear but may be difficult to notice. A console message is even less likely to be noticed, especially if the program is running full screen.
+
+So we have some issues, we need something noticeable, non-invasive and something that is in alignment with with the users current thinking. I asked myself "how would I capture an image outside of my system?", the trivial answer is I would take out my phone or camera, and take a photo triggering a flash. Use of metaphor is a common fundamental method of creating familiarity within a system. My simple solution is that when the user attempts to capture the screen the screen flashes white, just like a camera giving a satisfying method of feedback using behaviors the user already knows from the real world. 
+
 \section{Read Me}
 \section{Tutorials}
 
