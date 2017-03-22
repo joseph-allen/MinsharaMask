@@ -13,6 +13,7 @@
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{listings}
 
 \title{Change Detection for Digital Art}
 \author{Joseph Allen}
@@ -135,34 +136,68 @@ In this section I will specifically discuss Greg Borensteins library OpenCV for 
 \subsection{Built in diff}
 the OpenCV for Processing Library comes with a simple \verb|diff()| function which finds the absolute difference between each element in the compared object, in this case it compares every pixel in the OpenCV object to the corresponding pixel in the PImage.
 
-NEED BETTER CODE 
-\begin{verbatim}
-	public void diff(PImage img){
-		Mat imgMat = imitate(getColor());
-		toCv(img, imgMat);
+\begin{lstlisting}
+public void diff(PImage img){
+	Mat imgMat = imitate(getColor());
+	toCv(img, imgMat);
 
-		Mat dst = imitate(getCurrentMat());
+	Mat dst = imitate(getCurrentMat());
 
-		if(useColor){
-			ARGBtoBGRA(imgMat, imgMat);
-			Core.absdiff(getCurrentMat(), imgMat, dst);
-		} else {
-			Core.absdiff(getCurrentMat(), OpenCV.gray(imgMat), dst);
-		}
-		
-		dst.assignTo(getCurrentMat());
+	if(useColor){
+		ARGBtoBGRA(imgMat, imgMat);
+		Core.absdiff(getCurrentMat(), imgMat, dst);
+	} else {
+		Core.absdiff(getCurrentMat(), OpenCV.gray(imgMat), dst);
 	}
-\end{verbatim}
+		
+	dst.assignTo(getCurrentMat());
+}
+\end{lstlisting}
 
 \subsection{Built in background subtraction}
+the OpenCV for Processing Library comes with a background subtraction function \verb|startBackgroundSubtraction()|. We have to set up the background subtraction before we start and then the must call \verb|updateBackground()| with the drawing of each frame
+
+\begin{lstlisting}
+public void startBackgroundSubtraction(int history, int nMixtures, double backgroundRatio){
+		backgroundSubtractor = new BackgroundSubtractorMOG(history, nMixtures, backgroundRatio);
+}
+	
+public void updateBackground(){
+		Mat foreground = imitate(getCurrentMat());
+		backgroundSubtractor.apply(getCurrentMat(), foreground, 0.05);
+		setGray(foreground);
+}
+\end{lstlisting}
+
 \subsection{Erosion}
+in layman's terms erosion "removes the outer layer" from the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the minimum of the values in the structuring element. This gives the effect of "shrinking" the objects in the image.
+
 \subsection{Dilation}
+in layman's terms dilation "increases the outer layer" of the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the maximum of the values in the structuring element. This gives the effect of expanding the objects in the image.
+
+The use of Erosion followed by Dilation is called Opening, Opening gives the effect of increases the size of holes within regions, this can also be used to remove noise from an image which is how I use it in my project.
+
 \subsection{Optical Flow}
+Optical flow is the relative motion between two frames, this was going to be useful to spot the motion taking place in my scene, however I found that it was too computationally intense to be used for my project.
+
 \subsection{Blob Detection}
+Blob Detection is about finding areas of similar properties such as color or brightness, the idea here is to find some important objects and hopefully I could use this to detect blobs that also contained changes.
 
 \chapter{Building an Artistic Product}
+The difficulty in this project comes from the client, as a Computer Scientist I want to create a long-term project with a fixed goal whereas the client lacks understanding of the complexity and time requirements of the project with rapid changes coming in each week. The resolution I came to was trying to create a "Digital playground" to help artists explore and get through the "Trial and Error" stage of their research.
+
 \section{Requirements Elicitation}
+Through classical methods requirements are much easier to implement, however in this case we need some form of validation in the work.
+
 \subsection{Types of Interview}
+There are three different types of interviews used.
+
+\begin{itemize}
+\item Structured Interview -
+\item Semi-structured Interview -
+\item Unstructured Interview -
+\end{itemize}
+
 \subsection{decision and justification}
 \section{Codification}
 \section{Requirements}
@@ -173,6 +208,7 @@ NEED BETTER CODE
 \section{Image}
 \section{Video}
 \section{Code}
+\section{Saving and Movie making}
 
 \chapter{Usability}
 \section{Read Me}
