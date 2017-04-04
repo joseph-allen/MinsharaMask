@@ -15,64 +15,384 @@
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 \usepackage{listings}
 
-\title{Audrey Jean Elliott}
+\title{Change Detection for Digital Art}
 \author{Joseph Allen}
 
 \begin{document}
 
 \begin{titlepage}
 	\centering
-	{\scshape\LARGE Audrey Jean Elliott \par}
+	{\scshape\LARGE University of Manchester School of Computer Science \par}
 	\vspace{1cm}
-	{\scshape\Large 1931-2017\par}
+	{\scshape\Large Project Report 2017\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Change Detection in Live Video\par}
+	\vspace{2cm}
+	{\Large\itshape Author: Joseph Allen\par}
+	supervised by\par
+	Tim Morris
+
 	\vfill
 
 % Bottom of the page
 	{\large \today\par}
 \end{titlepage}
 
+\begin{abstract}
+In Computer Science we are used to collaboration, it is a fundamental aspect of programming careers to apply technical skills with a real world problem to create a useful application or system. Art and Computer Science are almost as far apart as possible, where Art strives to create arguably meaningless products with no use or application other than to convey or elicit emotion. 
+
+The outcome of this project will be the creation of a product which will allow artists to trivially perform basic change detection with the sole purpose of artistic play. This project will help introduce non-technical artists to programming, inspire a sense of curiosity to delve deeper into the code, and hopefully transition them into mastery of a language.
+
+I started out with a practical focus of creating an algorithm with high accuracy and implementing powerful architecture, but through interviews discovered that artists would rather have a digital playground over high accuracy.
+
+My goal here is to create a project the encourages Artists to be more like Computer Scientist, and vice-versa. The success of the project is defined by the joy the artists feel using the product and the encouragement they feel to continue with Digital Art.
+
+REMOVE
+It should summarize the topic area of the report, the main achievements, the results and the conclusions. Note, the focus of the abstract is the contents of the report and not the project.
+\end{abstract}
+
+\renewcommand{\abstractname}{Acknowledgements}
+\begin{abstract}
+Thanks to my Family for carrying me, Georgina for holding my hand, and my friends for making me smile.
+
+
+Thank you for Tim Morris for all your support and guidance throughout this project.
+\end{abstract}
+
 \tableofcontents
 \clearpage
 
-\section*{Word List}
+\chapter{Context}
+\section{Introduction}
+What is Image Processing? Where does this project fit in Image Processing. Why am I doing this? What do I hope to Achieve? REMOVE.
+
+\subsection{The Current Problem}
+This Project is split into two separate problems. First we have the Image Processing problem of change detection in live video. Second we have the software engineering problem of creating a product for an artist.
+
+In Image Processing change detection is the process of splitting an image up into two separate masks:
+\begin{enumerate}
+  \item The foreground mask, one consisting of objects that are considered to be a change of interest such as objects,shadows and reflections.
+  \item The background mask , consisting of the unchanged or unimportant environment of the scene, this mask can be simply considered the NOT of the foreground mask.
+\end{enumerate}
+
+The other problem lies in creating a usable product for my client, an artist. In this there are problems of over-ambitious goals and requirement changes. While I started the project focusing on the accuracy of my change detection, over time I came to realise that artists do not care about the robustness of the change detection, they care more about the visuals and ease of use of the system with a very experimental way of thinking.
+
+\subsection{Proposed Solution}
+I propose creation of a digital playground in the Processing\cite{PROCESSING} IDE, in a form that is easy to use and install for both technical and non-technical artists. I wish to create a product which will give non-technical artists an introduction to Processing, and at the same time other aspects of programming to guide them to curiosity and then mastery of my tool as well as the Java Programming language. The plan was originally to implement the SAKBOT architecture\cite{SAKBOT}, however I later discovered that this advantageous architecture did not serve the purpose of this project.
+
+\subsection{What is Processing?}
+Processing is, by their own definition, "a flexible software sketchbook and a language for learning how to code within the context of the visual arts."\cite{PROCESSING}. Processing is open source and exists to give artists a simple introduction to using programming to create digital art. I took this project as a source of inspiration for my own, deciding to build my project in Processing and also follow their ethos of inspiring and teaching artists to be more comfortable with digital art and programming.
+
+Daniel Shiffman \cite{SHIFFMAN} is a project lead at the Processing foundation, and he creates some very impressive video tutorials to help get artist started with programming and their use of Processing, I am inspired to do the same and create video tutorials on how to use my project to help overcome the difficulties associated with Processing setup and setting up the project itself.
+
+\subsection{How do we currently do things?}
+Collaboration is a common technique to merge two different creative fields together to create something relevant to both fields. This collaboration can occur between two artists but also between two completely unrelated fields to create something meaningful. 
+
+An example I discovered while researching with my client was from a show called Sk-interfaces \cite{SKIN}. We met the scientist who created the living skin coat and the piece itself provoked controversial discussions about whether or not the coat itself was "alive". When the exhibit came to its end the artist felt too attached to the project and believed in turning off she was killing a living thing. It is interesting to reflect on this dichotomy between an artistic and emotional approach in contrast to the cold and functional approach of the scientist.
+
+\subsection{Aims}
+By the end of this project I hope to have created a product which will help artists introduce themselves to code, inspire a curiosity to do more, and give a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.
+
+\subsection{Methodology}
+The Project started out with a Cowboy Coding approach where each week was a spike to see what was possible and help understand the possibilities, in a way fitting the "Trial and Error" approach that artists take, the main focus of this early stage was to gain a more in depth understanding of the trade-offs between frame-rate and increased accuracy of the change detection itself.
+
+The second half of the project pivoted to a more structured approach, I now knew what functionality was possible and I used a Kanban\cite{KANBAN} approach since there is only one developer working on this project(myself) and this gave me much needed visualization of the tasks that needed to be completed to make the project a success. This period was one of focusing on Usability and the clients needs over what I ,as a computer scientist, deemed important. I elicited the requirements necessary here through a semi-structured focus group and a structured questionnaire which I sent to relevant artists.
+
+\section{Apprehension}
+\subsection{Conception}
+The thought of somehow creating Digital Art came to me whilst working in my year in industry at a web development agency, I found that the work was intense, but there were long periods of inactivity. In these periods of inactivity I tried to find more personal use of the web language CSS, normally used to style web pages. I focused heavily on using built in transitions to make interesting animations which I later applied to my job in client-work. I made a goal to try to create a CSS only art gallery and went on to give a talk at my job about CSS-only artwork. To understand more about the art world I talked to my good friend Sarah.
+
+\subsubsection{Sarah (Client)}
+Sarah is a third year Interactive Art student at the Manchester Metropolitan University.Sarah was looking at how nature is the perfect designer, and she looked to programming to design artwork to remove the human hand from her work and thought writing algorithms would be an interesting way to do this, which is why she contacted me. For the artist it is more about finding something that can be experimented with rather than an instant decision for what the final product will look like. She spent a lot more time researching programming for Digital Art and introduced me to Processing \cite{PROCESSING}. I would also occasionally try to help her with what she was working on by creating quick and short code demos, from here I realized that programming for an artist would be an interesting topic for my third year project. My main concern was that the over-ambitious and experimental work of an artist would clash with a long-term project that Computer Science anticipates. My goal then became to try to offer something generic for artists that would utilize Image Processing. 
+
+\subsubsection{Processing as inspiration}
+After my introduction to Processing I decided to try to find a simple list of challenges to hone my skills, what I discovered was that such a list did not exist(or perhaps I was looking in the wrong place). I decided instead to host my own challenges and create an opportunity for others where there was not one for me. I went to the Processing subreddit\cite{RPROCESSING} to ask getting started questions and decided that this group would be where I would start a weekly challenge to help me improve my skills, as well as the community. This was a direct inspiration for my project in that it made me more confident in my Processing ability, but also made me want to help others in the Digital Art community learn Processing and my project is a realization of this.
+
+\subsection{SAKBOT}
+Early on in the project I was introduced to the SAKBOT architecture \cite{SAKBOT}, which uses Image Processing to isolate MVOs(Moving Visual Objects) in a scene. It uses advanced techniques such as Optical Flow and Blob Detection in order to separately Classify the following:
+\begin{enumerate}
+  \item MVO: Moving Visual objects that we are interested in, for example if we were looking to detect cars in a scene then the MVO would be the car itself.
+  \item Ghost: A Ghost is a "change" in a scene which does not represent the location of an MVO. For example the reflection of the car in a nearby shop window would be considered a Ghost as although there is a clear change, it is not an MVO that we would be interested in.
+  \item MVO-shadows: A Moving Visual Object shadow is a shadow which is connected to a Moving visual object, a shadow can simply be identified as a change in Brightness without a change in color.
+  \item Ghost-shadows: A Ghost shadow is any shadow not connected to a moving visual object, over time shadows in a scene may move due to the sun changing position, we do not want to count these as a "change".
+\end{enumerate}
+
+\chapter{Development}
+\section{Change Detection Basics}
+In this section I will discuss the fundamentals of change detection and move up onto more complex techniques used to increase accuracy. Change Detection is the process of finding the changes in a scene over any period of time, in this case we will use live video as this leads to better interaction.
+
+\subsection{Thresholding}
+Thresholding is a very trivial method of segmenting any image into two parts. It involves selecting a value and assigning any pixel value below that value to one segment, and any pixel equal or above that value is assigned to the other segment.
+
+One issue with thresholding is you need to choose a threshold value to compare each pixel with. One method for doing this is finding the average value of all pixels and choosing this as you can expect about half of the pixels to be in each segment.
+
+I chose a threshold value of 20 as this simply looked good in most well lit scenes, the user also has the ability to change this value in the default change detection algorithm.
+\subsection{Euclidean Distance}
+Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large enough "change" in a pixel. While I started with this method for RGB color I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change.
+
+\subsection{Color Normalization}
+Color Normalization is a good way to ignore changes in brightness in RGB color space. if a shadow is cast over a white object although we would register a change because white and black are different colors, however we don't want to consider shadows to be a change, or even slight changes in scene lighting could register changes. Given $L_R,L_G,L_B$ are respectively the red, green and blue color channels and we have some $\theta$ as our comparison value then $\frac{L_R + L_G}{L_R + L_G + L_B}$ should give us a value to compare with $\theta$ which is no longer dependent on the brightness of the change and only the hue and saturation. This means that pure white and pure black are not considered a change from one another.
+
+\subsection{HSB Color Space}
+The HSB color space is a different way of representing colors, I started using RGB, which has a separate channel for Red,Green and Blue colors. I moved to HSB (Hue,Saturation,Brightness) as then I do not have to worry about using color normalization as discussed in the previous section so this became the natural progression of my work. Ignoring changes in brightness when performing euclidean distance on any two points means that shadows will be ignored successfully solving one of the problems of trivial change detection.
+\subsection{Problems with Basic Change Detection}
+Change detection can be solved very trivially with the euclidean distance model, this generally gives quite a high mask accuracy, however it has a collection of problems which require more advanced techniques to overcome which are as follows:
+
+\subsubsection{Brightness Changes}
+The initial issue is brightness change, this can occur naturally in an outdoor scene for example if it is a sunny day when the comparison image is taken and then a cloud blocks out the sun for a few minutes we will have a few minutes where every pixel in the scene is significantly darker, in trivial euclidean distance this darkness could be enough to register as a change if the comparison value is low. In order to overcome this a method is needed to detect is there has been a brightness change over a color change.
+
+Methods for dealing with this include the Color Normalization and HSB Color spaces I discussed in the previous section. One issue with Color Normalization is that all greyscale colors are considered the same color so if you try to demonstrate a trivial example of holding a solid black piece of paper in front of a white wall it is possible that no change will be registered. I have personally chosen to use the HSB color space because in my opinion it makes the code much more readable, for example it is clear when the brightness is being ignored in the algorithm and if one of my goals is to have the artists begin to understand the programming elements then readability is key.
+
+\subsubsection{Noise}
+Noise in an image is randomness which alters the image, this can come from the camera itself or the wiring connecting the camera to the computer. Noise can cause small but sharp changes in individual pixels, since my algorithm looks at individual pixels this is a big problem as we don't want random pixels to register changes. The possible solutions for this involve either looking at areas larger than individual pixels, or a clever use of opening (erosion followed by dilation). While looking at areas larger than individual pixels may have been effective, I didn't want to move away from the individual pixel way of thinking that most people are familiar with. I went with several rounds of opening in the end as this is considered common practice in Image Processing and it gave the most reliable outputs after several experiments. (HAVE IMAGE?)
+
+\subsubsection{Background Change}
+Consider the example of a boat in the ocean , we calibrate the scene before the boat appears so we have some stage of the turbulent ocean captured, in the next frame the ocean will look different where the peaks of the waves have moved. In order to compensate for this we need some method of doing background updates. We have a \verb|backgroundUpdate()| function in OpenCV for Processing library\cite{OPENCV} which utilizes the Mixture of Gaussians method of background subtraction, I have used this as one of the options artists can use but have not attempted a full implementation of the SAKBOT architecture\cite{SAKBOT} because it is too intensive to run within Processing\cite{PROCESSING}.
+
+\subsubsection{Shadows}
+Shadows are essentially a small region of brightness change, and so in this our solutions to brightness change also solve the issue of shadows being picked up in change detection. In the SAKBOT architecture\cite{SAKBOT} we treat shadows differently from the background subtraction which would deal with background updates, we instead look for local shadow regions which are nearby to MVOs and classify these specifically as shadows, this would be a great addition to the project as it would allow me to have a third mask of shadow locations which I am sure artists would love to play with, however attempts at identifying shadows became too computationally intense for Processing\cite{PROCESSING}.
+
+\section{Change Detection Advanced}
+\subsection{OpenCV}
+In this section I will specifically discuss Greg Borensteins library OpenCV for Processing \cite{OPENCV} and the more complex image processing techniques which it helped me to implement.
+
+\subsubsection{Built in diff}
+the OpenCV for Processing Library comes with a simple \verb|diff()| function which finds the absolute difference between each element in the compared object, in this case it compares every pixel in the OpenCV object to the corresponding pixel in the PImage.
+
+\begin{lstlisting}
+public void diff(PImage img){
+	Mat imgMat = imitate(getColor());
+	toCv(img, imgMat);
+
+	Mat dst = imitate(getCurrentMat());
+
+	if(useColor){
+		ARGBtoBGRA(imgMat, imgMat);
+		Core.absdiff(getCurrentMat(), imgMat, dst);
+	} else {
+		Core.absdiff(getCurrentMat(), OpenCV.gray(imgMat), dst);
+	}
+		
+	dst.assignTo(getCurrentMat());
+}
+\end{lstlisting}
+
+\subsubsection{Built in background subtraction}
+the OpenCV for Processing Library comes with a background subtraction function \verb|startBackgroundSubtraction()|. We have to set up the background subtraction before we start and then the must call \verb|updateBackground()| with the drawing of each frame
+
+\begin{lstlisting}
+public void startBackgroundSubtraction(int history, int nMixtures, double backgroundRatio){
+		backgroundSubtractor = new BackgroundSubtractorMOG(history, nMixtures, backgroundRatio);
+}
+	
+public void updateBackground(){
+		Mat foreground = imitate(getCurrentMat());
+		backgroundSubtractor.apply(getCurrentMat(), foreground, 0.05);
+		setGray(foreground);
+}
+\end{lstlisting}
+
+\subsubsection{Erosion}
+in layman's terms erosion "removes the outer layer" from the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the minimum of the values in the structuring element. This gives the effect of "shrinking" the objects in the image.
+
+\subsection{Dilation}
+in layman's terms dilation "increases the outer layer" of the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the maximum of the values in the structuring element. This gives the effect of expanding the objects in the image.
+
+The use of Erosion followed by Dilation is called Opening, Opening gives the effect of increases the size of holes within regions, this can also be used to remove noise from an image which is how I use it in my project.
+
+\subsection{Optical Flow}
+Optical flow is the relative motion between two frames, this was going to be useful to spot the motion taking place in my scene, however I found that it was too computationally intense to be used for my project.
+
+\subsection{Blob Detection}
+Blob Detection is about finding areas of similar properties such as color or brightness, the idea here is to find some important objects and hopefully I could use this to detect blobs that also contained changes.
+
+\subsection{Background Update}
+
+\subsection{My Algorithm}
+
+\section{Building an Artistic Product}
+The difficulty in this project comes from the client, as a Computer Scientist I want to create a long-term project with a fixed goal whereas the client lacks understanding of the complexity and time requirements of the project with rapid changes coming in each week. The resolution I came to was trying to create a "Digital playground" to help artists explore and get through the "Trial and Error" stage of their research.
+
+There were two main requirements going into this project, the personal requirement was needing some long-term product I could work towards producing. For my Client the requirement was that she had some sort of fun tool she could use.
+
+\subsection{Requirements Elicitation}
+Through classical methods requirements are much easier to implement, however in this case we need some form of validation in the work.
+
+\subsubsection{Types of Interview}
+There are three different types of interviews used.
+
 \begin{itemize}
-\item ARP - Air Raid Patrol
-\item ARW - Air Raid Wardens
-\item ATS - Army Training Services, womens corp.
-\item WRENs - Womens Royal Naval
+\item Structured Interview - The goal here is to make sure every person interviewed is given the exact same set of questions, the benefit here is that there are easily comparable answers and you can come up with meaningful statistics to validate your product.
+
+\item Unstructured Interview - The goal here is to find an interviewee who has a better grasp of the knowledge space than those making the product, to hope that they will reveal the true desires they have for the product. We do this by presenting the product and then trying to provoke discussion
 \end{itemize}
 
-\section*{Family}
-\subsection*{Parents}
-Herbert Edwin Weeks - Dorothy May Worley \newline
+What I choose is a semi-structured interview, this allows me to lead the interviewees to discussions which I felt are important and then later allow them to go off in their own direction once they are familiar with the prototype I will show them after their initial impressions. I used this method for both the Focus groups and the individual questionnaires to three different groups:
 
-Father was Metropolitan Police, London Dalston Station, mother was a housewife.\newline
+\begin{itemize}
+\item Student artists - These are all students from third year at the MMU Art School. They focus more on academia and abide by more rigorous research processes and deadlines. Three of these such students were part of my focus group and my final client is one of these students.
+\item Professional Technical artists - These are artists who specifically focus on using programming to create their artwork and performances, this type of artists is generally very fluent with many types of programming language and are in general already familiar with Processing\cite{PROCESSING}.
+\item Professional Non-Technical artists - These are artists who are professionally artists, they use their free time to create art and sell prints and work for events and exhibits.
+\end{itemize}
 
-Both parents came from West Country. Dad - Gloucester. Mum - Flax Bourton Somerset.
+\subsubsection{Focus group}
+I asked 3 student artists to meet me in their art studio, I chose this location so that they would feel comfortable as there is an effect called Obtrusive Observation, where "The act of observation changes the observed in some way"\cite{UX}. First I asked them the following questions to gain an understanding of how art is achieved:
 
-Dads family moved to 245 Henleaze road Bristol.
+\begin{itemize}
+\item What is Art to you?
+\item What is the process to create art?
+\item What tasks do you always do to achieve art?
+\item Are there any digital Products you use?
+\item What Features do you like or dislike?
+\end{itemize}
 
-\subsection*{Grandparents}
-Grandma weeks lived in washing and ironing, and brought up 7 boys and 1 girl, Henrietta.
+I then showed the group a very basic version of my project which showed white pixels for the foreground mask and black for the background mask and no other features. I then asked for any initial impressions and feature requests.
 
-Grandad weeks was a stone mason building bridges,walls etc.
+\subsubsection{Decision and Justification}
+Again I re-iterate the difficulty in creating a product for artists, I need a way to create requirements which will give me a long-term project goal.
 
-all the boys except the youngest were in the police, eldest was a ????? at avonmouth the youngest was awarded a medal for bravery in the war recovering people from bombed buildings.
+\subsection{Codification}
+Codifying is the process of converting a real world problem or solution into a system with fixed rules so that it can be implemented in a program. 
 
-When Dad moved to London they didn't like it so when he was ????? we spent 6 months at grandma Weeks house on Henledge road.
+the first step here is try to figure out what artists do to achieve Art. The Focus group was very helpful for solving this, first I grouped all meaningful comments from the focus group and interviews into their relevant question groups and they are also color-coded by the different persona's answering them. From here we can notice any repeat comments and understand a generic solution to our question of "What is Art?" and "How is Art achieved?". I found in general that the artists start out looking for "Nothing to achieve in particular", the main focus is to elicit themes and explorations using "Trial and error" which lead me to the realization that as successful product for these artists needs to encourage this playful mentality whilst also allowing for curiosity to lead to mastery of technical skills in an attempt to transition the non-technical persona's to the technical ones. 
 
-Dull traspere from dalsta, whethome Police station and lol high barnet he lived at trent??? no idea about any of this
+\subsection{Requirements}
+From this I created a collection of functional and non-functional requirements:
 
-\chapter{My Life 19/12/1931}
-Audrey Jean Elliott(Weeks)
+\begin{enumerate}
+\item The User can have a solid color Background and Foreground.
+\item The User can have a picture as a Background or Foreground.
+\item The User can have a video as a Background or Foreground.
+\item The User can have a coded example as a Background or Foreground.
+\item The User can have the Current Camera as a Background or Foreground.
+\item The User can easily decide what the Background Mask is.
+\item The User can easily decide what the Foreground Mask is.
+\item The System will make sure the User only has one active Background or Foreground.
+\item The User can adjust the tolerance of the Change Detection algorithm.
+\item The System should Allow the separate Masks to be saved.
+\item The System should Allow the user to generate movies.
+\item The System should have a high frame rate.
+\item The System should be responsive.
+\item The System should perform “good” change detection.
+\item The System should be easy for a user to download and understand.
+\end{enumerate}
 
-I was born in a nursing home in Dalston???. mum was ????? to St Marys Hospital High ???. as develops breast abcess and was in hospital for a few months. we lived in Balmes road Hackney N.
-The neighbours next door, mr and mrs Golledge (the aunty Julie; Uncle Bert) took me from the hospitals as we had no relatives in london and had not been there long. They bought all my needs, cot,pram, clothes and looked after me ( they had no children), they were a wonderful couple and adored me.
-When Mum came out of Hospital I was about 3 months old, so it was difficult for me to adjust to my mother.
-We moved to several other flats around the highway area. The last was AVENHALL??? road, route if Arsenal football ground you could watch matches from the Scullery Window.
-I want to a nursing school there, but we then moved to IGO bonnet.
-I remember my first impression of Barnet when we were viewing houses.
-We stood at the top of Manor road and overlooked fields (In view with 7 tree stumps nicknamed 7 sisters).I loved it. I couldn't wait to move. We looked at 5 houses. But liked 1 Brookside Close best. All new houses,then were mostly all moved in by railmen??? (nicknamed - bluebottle valley) I was 5 and a half. We moved in. I had a lovely room with electric lights and a gas cooker(We always had gas manres??? to cook in london). The back garden was still here a fields the grass taller than me. but Dad had his first maintain gradening with my help we both liked it and soon had a flower. I loved a vey ???.
+Requirements 1 to 11 are Functional and can be completed, 12-15 are non-functional and hence can continually be improved on, they are not so much requirements as they are goals to strive for.
 
+\section{Functionality}
+This chapter will focus specifically on the functional requirements of teh project and how they are archived.
+\subsection{Color}
+The functionality here is allowing the User to select the Foreground and Background mask colors, while there is a function within G4P\cite{G4P} that uses the built in Color picker, I chose to intentionally leave this as something which must be changed in the Code, this is because it is a trivial change to lead the artists using the project to look into the code.
+
+
+\subsection{Image}
+The functionality here is allowing the User to select the Foreground and Background mask Images, these images will be resized to fit the current monitor, this means that the artists will need to choose images of the correct resolution, however I believe it will be more common to have a user try to use a small image and so rather than have the image not be big enough I force this re-sizing, again since the code is open-source the artist can turn this off themselves if they wish.
+
+Some examples of use here is that the Artist can set the Foreground and background to be an annotated and unannotated diagram to allow the people in the scene to reveal aspects of the underlying image.
+
+\subsection{Video}
+The functionality here is allowing the User to select the Foreground and Background mask Videos, these videos are also resized to fit the current monitor. there is an extra layer here as the audio is also playable so the users also need to be able to mute and unmute the video.
+
+\subsection{Code}
+The functionality here is allowing the User to select the Foreground and Background mask Coded examples. Processing \cite{PROCESSING} works by having a 
+\verb|setup()| function which runs once at the start of the program followed by a \verb|draw()| loop which runs on every individual frames generation. In order to have coded examples we replicate this behavior, encouraging artists to learn the fundamentals of Processing before proceeding.
+
+\subsection{Camera}
+The functionality here is allowing the User to select the Foreground and Background mask as the live camera.
+
+\subsection{User Interface}
+The User Interface is designed to let the artist quickly take control of the layers, while any Color,Image,Video or Code change must happen before each run, the user can control which layer is currently being shown can be changed at any moment. The User also need to be able to control the save options at any moment.
+
+\subsection{Saving and Movie making}
+The User has the following Save options:
+
+\begin{itemize}
+\item Save All - Sets all of the other save options to the same as this one. Allows the user to save all possible layers at once should they need them for their comparison.
+\item Save Camera - Saves the entire Camera input per frame.
+\item Save Foreground - Saves only the Foreground layer, saves black where there is no Foreground.
+\item Save Background - Saves only the Background layer, saves black where there is no Background.
+\item Save Output - Saves the addition of both the Foreground and Background.
+\end{itemize}
+
+\section{Usability}
+Usability is about helping the user use the product, this chapter will focus on that?
+
+\subsection{User Experience}
+User Experience is a more recent iteration of the ideas surrounding HCI, where there is not yet a consistent definition across academia and industry the field itself is an amalgamation of HCI, psychology and many other fields. My personal definition is that User Experience is about pre-empting user expectations and aiding the user in learning new behaviors. A good User Experience is a pleasure to use. 
+
+I will quickly work through some User Experience design here by answering the question "How does the user know they have captured their calibration image?". In order for the system to perform change detection it needs an image to compare against, we need a way for the user to capture the scene and a way to give feedback to let the user know that the screenshot was taken.
+
+In standard HCI examples, you would expect something like an alert, a text message or a console message to let the user know this screenshot has successfully been taken. I believe that none of these are appropriate solutions, an alert is invasive and have negative associations. A text message may appear but may be difficult to notice. A console message is even less likely to be noticed, especially if the program is running full screen.
+
+So we have some issues, we need something noticeable, non-invasive and something that is in alignment with with the users current thinking. I asked myself "how would I capture an image outside of my system?", the trivial answer is I would take out my phone or camera, and take a photo triggering a flash. Use of metaphor is a common fundamental method of creating familiarity within a system. My simple solution is that when the user attempts to capture the screen the screen flashes white, just like a camera giving a satisfying method of feedback using behaviors the user already knows from the real world. 
+
+\subsection{Availability}
+The Project is made available on a public Github repository\cite{GITHUB}, I choose this because one of the aims of the project is to help artists become more like programmers so an early exposure to Git useful. The project is Open Source and Github has an excellent interface for dealing with Open Source pull requests again making Github a good choice for distribution. A downside is that there are easier methods of distribution so I am hoping that it is trivial enough to download a ZIP file from Github itself, I tried to get around this by making the ReadMe file as obvious as possible. I could have written the project in p5.js which allows the project to run in browser, however I wasn't sure Javescript was the right choice for an Image Processing project and this distribution would not encourage the artists to look into the code themselves.
+
+\subsection{Learning}
+In order to encourage the curiosity and mastery stages of the project I attempt to remove all difficulties of setting up the project and get the source code into the hands of the artists as simply as possible.
+
+\subsubsection{README}
+A README file is a simple text file which gives basic information about the contents of the project, GitHub supports markdown making this a little more interesting to read. In the README I give the basic instructions to install and set up the project and dependencies. The benefits of the README is that it is a small and trivial addition to the project which may massively aid understanding, however there is also the downside that README files are generally ignored.
+
+\subsubsection{Video Tutorials}
+The purpose of these videos is to relieve the pain points of getting the project, these are the following:
+
+\begin{itemize}
+\item Downloading Processing.
+\item Downloading the Project from GitHub.
+\item Downloading the additional Libraries.
+\end{itemize}
+
+In order to make sure it is as trivial as possible for the users to set up the project I have created the four videos as listed:
+
+\begin{itemize}
+\item How to Download Processing? \url{https://youtu.be/VQdCIbRJZGU}
+\item How to Download the Project? \url{https://youtu.be/5WOhYDDejkw}
+\item How to Set Up the Project? \url{https://youtu.be/qB2NxJeCd7w}
+\item How to Change the Masks? \url{https://youtu.be/H9fSh-QFq9U}
+\end{itemize}
+
+\chapter{Evaluation}
+Introduction to Evaluation?
+
+\section{Expectations}
+I expected to focus on accuracy, spiking out blob detection and optical flow.
+
+I expected my clients to be overly ambitious and not understand the complexity of the project and request additional features hugely outside the scope.
+
+I expected the Project to perform at a much higher frame-rate.
+
+\section{Evolution of project}
+The main change experienced over the course of the project was the main effect of collaboration between two different fields, I found myself acting more like an artist focusing more on the creative and "fluffy" User Experience approaches to development over a more standard waterfall approach. In the meantime I found that the client became more aware of things that were trivial to implement in a short amount of time and explored programming in her own time.
+
+A big change was my approach to the project, for the first 8 weeks I focused intensely on creating the most accurate change detection I could and attempted to implement the Sakbot architecture\cite{SAKBOT}, It was only when the project had bugs and I showed them to my client because they were interesting did I realized that the client would be more delighted with a strange bug than with a more accurate mask. This meant that moving forward my goal should not focus so heavily on accuracy and more on speed and flexibility in use, I had imposed my own requirements onto the project which my client never cared about in the first place. I resolved this by running a focus group and semi-structured interviews with a variety of artists and found that those artists focused on "Trial and Error" and are looking for "nothing to achieve in particular", this validated these thoughts and pivoted the project whilst also indirectly making me realize that I should think like an artist and not a computer scientist.
+
+\section{Testing}
+creating tests for this kind of project would have been a large undertaking. I had a brief look at ViPER\cite{VIPER} but decided that painting frames to compare against was not worth the time, instead I opted to validate the project through user interviews, as the project evolved this became relevant as the goal shifted from accuracy to delight and exploration which is not something so trivial to test.
+
+\section{What I have learned}
+My main knowledge of Image Processing as a field was a use of convolution matrices and edge detection, beyond that I had a very simple understanding of Processing and have been running a weekly Processing Challenge online now for over a year.
+
+over the year I have gained exposure to many more Image Processing techniques and terminology including:
+
+\begin{itemize}
+\item Erosion and Dilation
+\item Opening and Closing
+\item Blob Detection
+\item Optical Flow
+\item Background Updating
+\end{itemize}
+
+\chapter{Reflection and Conclusion}
+\section{What Changed?}
+how the timing and number of milestones changed from those originally planned, and why this happened.  
+\section{Knowledge gained}
+what new knowledge have you gained from both the viewpoint of the context within which your project sits and particular technical knowledge needed to complete your project.
+
+Finish the chapter with a conclusion that reflects on what you have achieved in your project. HAS ANYBODY DOWNLOADED IT? HAS ANYBODY WATCHED IT?
+
+\bibliographystyle{alpha}
+\bibliography{sample}
 
 \end{document}
