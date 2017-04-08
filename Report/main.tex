@@ -415,10 +415,29 @@ A big change was my approach to the project, for the first 8 weeks I focused int
 \section{Testing}
 creating tests for this kind of project would have been a large undertaking. I had a brief look at ViPER\cite{VIPER} but decided that painting frames to compare against was not worth the time, as the project evolved this became relevant as the goal shifted from accuracy to delight and exploration which is not something so trivial to test. I attempted validation here through focus groups, interviews and user testing instead.
 
-\section{What I have learned}
-My main knowledge of Image Processing as a field was a use of convolution matrices and edge detection, beyond that I had a very simple understanding of Processing and have been running a weekly Processing Challenge online now for over a year.
+For the final round of interviews I performed basic user testing with three artists from the Manchester Metropolitan University. I again performed these interviews in the art department so that the interviewees would feel comfortable. The first interviewee compared my project to a Digital Art piece by Daniel Rozen which was featured in the library \cite{ROZEN} and described my project as being "Not as mature as that stuff" which I take as a fair criticism, as the purpose of the project is to enable artists to make digital art. Another comment was about features beyond the basic segmentation such as having snow fall onto the foreground changes, this is clearly beyond the scope of my project and seen as a possible addition to the project.
 
-over the year I have gained exposure to many more Image Processing techniques and terminology including:
+My second interviewee was my client, Sarah. The goal of the project was to delight the artist and throughout her use of the product she was laughing and smiling at the various features. She commented that it "Could be good for Educational projects" which shows she has started thinking about use of the project beyond the research phase. Upon my explanation of how the coded Foreground and Background masks work she commented "I didn't know you could do two things at once" which shows an element of mastery, Sarah was learning new things about Processing through the use of the project. She also commented "when you first started doing it you had ideas straight away but you have to develop them" which shows that over time I have acted more like an artist, at the start of the project I would simply state uses for the project whereas now I put more artistic thought behind them. Sarah also suggested that this project was relevant to another artist she knew and asked if she could go get her, this shows that my client is already eager to share the project with other people. This feedback validates the entire project, Sarah has shown curiosity and mastery over the product and an eagerness to share the project.
+    
+My final interview was with an artist how focuses on creating visuals for live events, so my project which looks at live video should be a great fit for her. She immediately started asking questions like "Can you use external cameras?", "What do these Algorithms do?" which puts her in the curiosity phase of the project. She also suggested a new feature where you have a folder of videos and it iterates over those many videos so that it can be used with live playlists, this is a feature I did not uncover in my early stages and didn't think there was a need for it. It is great to have an interviewee grasp the project so quickly and start suggesting basic features.
+
+\section{Conclusion}
+The project focus pivoted from accuracy to delight and exploration and HCI to UX, in my mind an apt metaphor for a computer scientist behaving like an artist. The next steps for the project are spreading awareness to both distribute to artists and improve the feature set through being open source.
+
+The interviewees fit the three stages of the project, the first interviewee was newly introduced to Processing and was still overly ambitious like the non-technical persona. My client Sarah was at the beginnings of the mastery stage, she grasped the concepts and gained a greater understanding of Processing. The final interviewee was very relevant to the project and exhibited the curiosity stage, I didn't have to explain how much worked and she immediately started thinking about possible applications and trying to understand. These showed great validation for the project and shows that I have achieved my goals.  
+
+\chapter{Reflection and Conclusion}
+This chapter focuses on what changes happened over the course of the project. Over the course of the project I have learned many advanced image processing techniques, the Kanban methodology and a greater exposure to Processing. 
+
+\section{What Changed?}
+The largest and most unexpected change over the course of the project was the focus shift from accuracy as a key metric to the goal of delight as a metric. Through User Experience requirements gathering I elicited that artists did not care for the accuracy of the change detection as long as it makes a decent attempt. Artists are not impressed when you spend a week improving your accuracy and find more delight in the glitches or the mistakes which made me realize I needed to run some sort of validation. This change came from my early goals of making an achievable long-term project and I realized a need to focus on the client needs over my own.
+
+By approaching the project through focus groups and interviews I was able to elicit requirements I normally would not have considered important to the project. These interviews gave me validation and motivation over the course of the project and were of great benefit as the project proceeded as I could justify decisions as I made them.
+
+I started the project with a belief I had to implement everything myself. I discovered a completed change detection example in the OpenCV for Processing \cite{OPENCV} library, and was wondering if I should focus on this implementation. In the end I decided to include the OpenCV methods as well as my own algorithm as more options encourages that play mentality artists are used to.
+
+\section{Knowledge gained}
+Before this project my main knowledge of Image Processing as a field was a use of convolution matrices and edge detection from first year. Over the year I have gained exposure to many more Image Processing techniques and terminology including:
 
 \begin{itemize}
 \item Erosion and Dilation
@@ -428,23 +447,19 @@ over the year I have gained exposure to many more Image Processing techniques an
 \item Background Updating
 \end{itemize}
 
-I have learnt
-	Image Processing Theory
-    To rely on pre-existing libraries, OpenCV,G4p
-    How to manage a large project, Kanban
-    In depth understanding of Processing and it's community.
-    
-\section{conclusion}
-The project focus pivoted from accuracy to delight and exploration and HCI to UX, in my mind an apt metaphor for a computer scientist behaving like an artist. The next steps for the project are spreading awareness to both distribute to artists and improve the feature set through being open source.
+In an early discussion with my supervisor I questioned whether or not we were allowed to use external libraries as I had discovered OpenCV shipped with a change detection example. Before this project I was generally hesitant to use external libraries but after exposure to OpenCV for Processing \cite{PROCESSING}, GUI for Processing \cite{G4P} and Blob Detection \cite{BLOB} I realized the time-saving benefits of using these external libraries over writing my own implementations.
 
-\chapter{Reflection and Conclusion}
-\section{What Changed?}
-how the timing and number of milestones changed from those originally planned, and why this happened.  
-\section{Knowledge gained}
-what new knowledge have you gained from both the viewpoint of the context within which your project sits and particular technical knowledge needed to complete your project.
+Before this project I had only ever used waterfall and scrum to manage projects. Waterfall was inappropriate for this project since it required all of the analysis to be done before we started, and also due to the changing requirements from the client it is clear that an agile methodology is the correct choice. I chose Kanban since it allowed me to learn a new methodology and it focuses on priorities which is great for a single person project.
 
-Finish the chapter with a conclusion that reflects on what you have achieved in your project. HAS ANYBODY DOWNLOADED IT? HAS ANYBODY WATCHED IT?
+Over a year ago when I was first exposed to Processing I was eager to find a list of challenges to improve my skills, but sadly there were none. I took it upon myself to create some challenges for the community. I had never used Processing for image processing before so this was a great exposure to aspects of Processing I had never used before.
 
+\section{Conclusion}
+So to reflect the aim stated at the start of this report,
+"By the end of this project I hope to have created a product which will help artists introduce themselves to code, inspire a curiosity to do more, and give a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.". The three interviews validate that the introduction, curiosity and mastery cases for the project have been filled.
+
+Another goal of the project was for the collaboration between myself and Sarah to cause an osmosis of skills making me think more like an artist and helping Sarah think more like a computer scientist and this has also been achieved. 
+
+The next steps for the project are to continue sharing it on relevant social media and by word of mouth and if any artists pick it up I hope they will get in touch so I can assist them if they have any feature ideas. As of the time of writing 45 have viewed the code and the videos have 178 total views.
 \bibliographystyle{alpha}
 \bibliography{sample}
 
