@@ -41,7 +41,7 @@
 \begin{abstract}
 In Computer Science we are used to working with other fields, it is a fundamental aspect of programming careers to apply technical skills with a real world problem to create a useful application or system. art and computer science are can be seen as opposite, art strives to create products with no use or application other than to convey or elicit emotion, whereas computer science historically has not concerned itself with emotion(until more recent additions to the field such as User Experience). 
 
-The outcome of this project will be the creation of a product which will allow artists to trivially perform basic change detection with the sole purpose of artistic play. This project will help introduce non-technical artists to programming, inspire a sense of curiosity to delve deeper, and hopefully transition them into mastery of a language.
+The outcome of this project is the creation of a product which allows artists to trivially perform basic change detection with the sole purpose of artistic play. This project will help introduce non-technical artists to programming, inspire a sense of curiosity to delve deeper, and hopefully transition them into mastery of a language.
 
 I started out with a practical focus of creating an algorithm with high accuracy and implementing the SAKBOT architecture, but through interviews discovered that artists would rather have a digital playground over high accuracy change detection.
 
@@ -62,7 +62,7 @@ Thank you for Tim Morris for all your support and guidance throughout this proje
 \section{Introduction}
 Image Processing is applying algorithms to Images to generate some output.
 
-Change Detection is the process of finding the changes in a scene over any period of time, in this case we will use live video as this leads to better interaction.
+Change Detection is the process of finding the changes in a scene over any period of time, in this case we use live video as this leads to instant visual feedback for the viewer.
 
 In the past I have had a handful of artists approach me and ask if I can create an ambitious products in a short period of time. My goal here was to create something that artists could use in their research stages of projects to introduce them to programming, inspire curiosity and lead to mastery.
 
@@ -101,7 +101,7 @@ Collaboration is a common technique to merge two different creative fields toget
 An example I discovered while researching with my client was from a show called Sk-interfaces \cite{SKIN}. We met the scientist who created the living skin coat and the piece itself provoked controversial discussions about whether or not the coat itself was "alive". When the exhibit came to its end the artist felt too attached to the project and believed in turning off she was killing a living thing. It is interesting to reflect on this dichotomy between an artistic and emotional approach in contrast to the cold and functional approach of the scientist.
 
 \subsection{Aims}
-By the end of this project I hope to have created a product which will help artists introduce themselves to code, inspire a curiosity to do more, and give a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.
+The goals of the project are to help artists introduce themselves to code, inspire a curiosity to do more, and provide a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.
 
 \subsection{Methodology}
 The Project started out with a Cowboy Coding approach where each week was a spike of a more advanced Image Processing technique to see what was possible, the main focus of this early stage was to gain a more in depth understanding of the trade-offs between frame-rate and increased accuracy of the change detection itself.
@@ -143,9 +143,9 @@ Thresholding is a the simplest method of segmenting any image into two parts. It
 
 One issue with thresholding is you need to choose a threshold value to compare each pixel with. One method for doing this is finding the average value of all pixels and choosing this, you can expect an even split in each segment.
 
-I chose a threshold value of 20 as this simply looked good in most well lit scenes, the user also has the ability to change this value in the default change detection algorithm.
-\clearpage
+In my project the user has the ability to change this thresholding value in the default change detection algorithm.
 
+\clearpage
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.5\textwidth]{Images/Doughnut-with-Hole.jpg}
@@ -159,13 +159,23 @@ I chose a threshold value of 20 as this simply looked good in most well lit scen
 \end{figure}
 
 \subsection{Euclidean Distance}
-Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large change in a pixel. While I started with this method for RGB color I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change. This is what the standard OpenCV \verb|diff()| function performs, we will discuss this later.
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{Images/BW.png}
+\caption{\label{fig:BW} greyscale color space}
+\end{figure}
+Euclidean distance is the distance between two points in a space. The trivial example here is in greyscale color given points $x$ and $y$ the euclidean distance between the two points is $\sqrt{(x-y)^2}$. For example as shown in the image above we have all possible colors that can be stored in greyscale color, with 0 representing black and 255 representing white, A large change in this space is from black to white so performing $\sqrt{(0-255)^2}$ gives 255, the maximum euclidean distance in this space. This trivially extends as more color channels or different color spaces are added. We can use this to trivially decide what is considered a large change in a pixel. While I started with this method for RGB color I quickly moved away as this would consider shadows to be a change and changing the lighting in the room would also register as a change. This is what the standard OpenCV \verb|diff()| function performs, we will discuss this later.
 
 \subsection{Color Normalization}
-Color normalization is a good way to ignore changes in brightness in RGB color space. if a shadow is cast over a white object although we would register a change in euclidean distance because white and black are the largest possible difference, we don't want to consider shadows to be a change. Slight changes in scene lighting could register changes and we want to avoid this. Given $L_R,L_G,L_B$ are respectively the red, green and blue color channels and we have some $\theta$ as our comparison value then $\frac{L_R + L_G}{L_R + L_G + L_B}$ should give us a value to compare with $\theta$ which is no longer dependent on the brightness of the change and only the hue and saturation. This means that pure white and pure black are not considered a change from one another, and is a disadvantage.
+Color normalization is a good way to ignore changes in brightness in RGB color space. if a shadow is cast over a white object although we would register a change in euclidean distance because white and black are the largest possible difference, we don't want to consider shadows to be a change. Slight changes in scene lighting could register changes and we want to avoid this. Given $L_R,L_G,L_B$ are respectively the red, green and blue color channels and we have some $\theta$ as our comparison value then $\frac{L_R + L_G}{L_R + L_G + L_B}$ this is called chromaticity which means color regardless of luminance, this gives us a value to compare with $\theta$ which is no longer dependent on the brightness of the change. This means that pure white and pure black are not considered a change from one another, and is a disadvantage.
 
 \subsection{HSB Color Space}
-The HSB color space is a different way of representing colors, I started using RGB, which has a separate channel for Red, Green and Blue colors. I moved to HSB (Hue,Saturation,Brightness) as then I do not have to worry about using color normalization as discussed in the previous section so this became the natural progression of my work. Ignoring changes in brightness when performing euclidean distance on any two points means that shadows will be ignored successfully solving one of the problems of naive change detection.
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=0.5\textwidth]{Images/hsb.jpg}
+\caption{\label{fig:Doughnut}HSB Color Space}
+\end{figure}
+The HSB color space is a different way of representing colors, I started using RGB, which has a separate channel for Red, Green and Blue colors. I moved to HSB (Hue,Saturation,Brightness) as then I do not have to worry about using color normalization as discussed in the previous section so this became the natural progression of my work.As shown in the above image the Hue is the orientation as an angle about the center, saturation is the distance from this point and brightness is the depth of the space. Ignoring changes in brightness when performing euclidean distance on any two points means we only look at the very top layer of this space, shadows are ignored successfully solving one of the problems of naive change detection.
 
 \subsection{Problems with Naive Change Detection}
 Change detection can be solved very trivially with the euclidean distance model, this generally gives quite a high mask accuracy, however it has a collection of problems which require more advanced techniques to overcome which are as follows:
@@ -181,6 +191,8 @@ Noise in an image is randomness which alters the image, this can come from the c
 \subsubsection{Background Change}
 Consider the example of a boat in the ocean , we calibrate the scene before the boat appears so we have some stage of the turbulent ocean captured, in the next frame the ocean will look different where the peaks of the waves have moved. In order to compensate for this we need some method of doing background updates. We have a \verb|backgroundUpdate()| function in OpenCV for Processing library\cite{OPENCV} which utilizes the Mixture of Gaussians method of background subtraction, I have used this as one of the options artists can use but have not attempted a full implementation of the SAKBOT architecture\cite{SAKBOT} because it is too intensive to run within Processing\cite{PROCESSING}.
 
+One important point here is that accurate background updates require a high framerate, if the algorithm is too intensive we won't find utility in updating the background as there will be too large a change to simply ignore. This is an issue which caused my optical flow spike to be ineffective.
+
 \subsubsection{Shadows}
 Shadows are essentially a small region of brightness change, and so our solutions to brightness change also solve the issue of shadows being picked up in change detection. In the SAKBOT architecture\cite{SAKBOT} we treat shadows differently from the background subtraction which would deal with background updates, we instead look for local shadow regions which are nearby to MVOs and classify these specifically as shadows, this would be a great addition to the project as it would allow me to have a third mask of shadow locations which I am sure artists would love to play with, however attempts at identifying shadows became too computationally intense for Processing\cite{PROCESSING}.
 
@@ -191,51 +203,24 @@ In this section I will discuss some external libraries I have used to save time 
 \subsubsection{Built in diff}
 the OpenCV for Processing Library comes with a simple \verb|diff()| function which finds the absolute difference between each pixel in the compared object, in this case it compares every pixel in the Live image to the corresponding pixel in the comparison image, sometimes this will outperform my algorithm so I also included this in my product.
 
-\begin{lstlisting}
-public void diff(PImage img){
-	Mat imgMat = imitate(getColor());
-	toCv(img, imgMat);
-
-	Mat dst = imitate(getCurrentMat());
-
-	if(useColor){
-		ARGBtoBGRA(imgMat, imgMat);
-		Core.absdiff(getCurrentMat(), imgMat, dst);
-	} else {
-		Core.absdiff(getCurrentMat(), OpenCV.gray(imgMat), dst);
-	}
-		
-	dst.assignTo(getCurrentMat());
-}
-\end{lstlisting}
-
 \subsubsection{Built in background subtraction}
 the OpenCV for Processing Library comes with a background subtraction function \verb|startBackgroundSubtraction()|. We have to set up the background subtraction before we start and then the must call \verb|updateBackground()| with the drawing of each frame. This is also one option for algorithm choice in my product.
 
-\begin{lstlisting}
-public void startBackgroundSubtraction(int history, int nMixtures, double backgroundRatio){
-		backgroundSubtractor = new BackgroundSubtractorMOG(history, nMixtures, backgroundRatio);
-}
-	
-public void updateBackground(){
-		Mat foreground = imitate(getCurrentMat());
-		backgroundSubtractor.apply(getCurrentMat(), foreground, 0.05);
-		setGray(foreground);
-}
-\end{lstlisting}
-
 \subsubsection{Erosion}
-in layman's terms erosion "removes the outer layer" from the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the minimum of the values in the structuring element. This gives the effect of "shrinking" the objects in the image.
+in layman's terms erosion "removes the outer layer" from the objects in the image.
 
-\clearpage
+Erosion works by applying a structuring element over all pixels in an image. For explanation assume the structuring element is a 3 by 1 matrix of 1s, when applied we set the minimum of the pixel, the pixel to the left of it and the pixel to the right of it, shrinking the objects horizontally. In normal erosion we will use a 3 by 3 matrix instead, This gives the effect of "shrinking" the objects in the image.
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=0.5\textwidth]{Images/erode.png}
 \caption{\label{fig:Doughnut} Eroded Thresholded Image of a Doughnut}
 \end{figure}
 
-\subsection{Dilation}
-in layman's terms dilation "adds an outer layer" to the objects in the image. It does this by applying a structuring element to each pixel and setting the pixel to the maximum of the values in the structuring element. This gives the effect of expanding the objects in the image.
+\subsubsection{Dilation}
+in layman's terms dilation "adds an outer layer" to the objects in the image.
+
+Dilation works by applying a structuring element over all pixels in an image. For explanation assume the structuring element is a 3 by 1 matrix of 1s, when applied we set the maximum of the pixel, the pixel to the left of it and the pixel to the right of it, shrinking the objects horizontally. In normal erosion we will use a 3 by 3 matrix instead, This gives the effect of "shrinking" the objects in the image.
 
 The use of Erosion followed by Dilation is called Opening, Opening gives the effect of increases the size of holes within regions, hence the name, this can also be used to remove noise from an image which is how I use it in my project.
 
@@ -375,7 +360,7 @@ From this I created a collection of functional and non-functional requirements:
 Requirements 1 to 11 are Functional and can be completed, 12-15 are non-functional and hence can continually be improved on, they are not so much requirements as they are goals to strive for.
 
 \section{Functionality}
-This section will focus specifically on the functional requirements of the project and how they are achieved.
+This section will focus specifically on the functional requirements of the project and how they are achieved. A breakdown of these features is shown at \url{https://youtu.be/H9fSh-QFq9U}.
 
 \subsection{Color}
 The functionality here is allowing the User to select the Foreground and Background mask colors, while there is a function within G4P\cite{G4P} that uses the built in Color picker, I chose to intentionally leave this as something which must be changed in the Code, this is because it is a simple change to lead the artists using the project to look into the code. I have created a video tutorial to help make this easier.
@@ -539,7 +524,7 @@ Over a year ago when I was first exposed to Processing I was eager to find a lis
 
 \section{Conclusion}
 So to reflect the aim stated at the start of this report,
-"By the end of this project I hope to have created a product which will help artists introduce themselves to code, inspire a curiosity to do more, and give a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.". The three interviews validate that the introduction, curiosity and mastery cases for the project have been filled.
+"The goals of the project are to help artists introduce themselves to code, inspire a curiosity to do more, and provide a tool that leads to mastery in a similar way to Processing\cite{PROCESSING} does itself.". The three interviews validate that the introduction, curiosity and mastery cases for the project have been filled.
 
 Another goal of the project was for the collaboration between myself and Sarah to cause an osmosis of skills making me think more like an artist and helping Sarah think more like a computer scientist and this has also been achieved. 
 
